@@ -1,0 +1,34 @@
+.main-div mat-card{
+    padding: 0px;
+}
+
+.panelform{
+    padding:20px;
+}
+
+.buttonadmin{
+    width: 300px;
+    height: 100px;
+    /*background-image: url('/assets/images/collage1.jpg');*/
+    background-color:darkturquoise;
+    font-size: 35px;
+    margin: 10px;
+    color: white;
+    font-family: "Century Gothic";
+    font-weight: bold
+}
+
+.main-div{
+    background-size: 150px;  
+    background-size: 150px; 
+}
+
+.card{
+    background-color: cornflowerblue;;
+}
+
+.titulo{
+    background-color: darkturquoise;
+    color: white;
+    font-size: 25px;
+}

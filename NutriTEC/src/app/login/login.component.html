@@ -1,0 +1,22 @@
+<div [style.background-image]="'url(/assets/images/zanahoria.png)'" fxLayoutAlign = "center center" fxFlexFill class="main-div">
+    <mat-card fxFlex = "25">
+        <mat-toolbar color="warn">NutriTEC</mat-toolbar>
+        <form fxLayoutAlign="stretch" fxLayout="column" class="login-form">
+            <mat-form-field>
+                <input matInput placeholder="Usuario">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput type="password" placeholder="Contraseña">
+            </mat-form-field>
+
+            <form fxLayoutAlign="stretch" fxLayout="column" class="button-form">
+                <button color="warn" style="margin: 10px" mat-raised-button>Iniciar</button>
+                <button color="accent" (click) = "navToRegistrationPanel()" style="margin: 10px" mat-raised-button>Registrarse</button>
+                <button color="warn" (click) = "getData()" style="margin: 10px" mat-raised-button>Test</button>
+
+            </form>
+        </form>
+          
+    </mat-card>
+</div>
