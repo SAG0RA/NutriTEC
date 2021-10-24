@@ -7,5 +7,12 @@
 }
 
 .button-form{
-    padding:10px;
+    padding: 10px;
+}
+
+.button-nutri{
+    margin: 10px;
+    background-color: red;
+    height: 40px;
+    width: 100px;
 }

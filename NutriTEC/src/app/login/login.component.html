@@ -11,12 +11,11 @@
             </mat-form-field>
 
             <form fxLayoutAlign="stretch" fxLayout="column" class="button-form">
-                <button color="warn" style="margin: 10px" mat-raised-button>Iniciar</button>
-                <button color="accent" (click) = "navToRegistrationPanel()" style="margin: 10px" mat-raised-button>Registrarse</button>
-                <button color="warn" (click) = "getData()" style="margin: 10px" mat-raised-button>Test</button>
-
+                <button color="warn" style="background-color: aqua;" mat-raised-button>Iniciar</button>
+                <button (click)="navToRegistrationNutri()" mat-raised-button class = "button-nutri">Registrarse como Nutricionista</button>
+                <button (click)="getData()" mat-raised-button class = "button-nutri">Registrarse como Cliente</button>
+            
             </form>
-        </form>
-          
+        </form>    
     </mat-card>
 </div>

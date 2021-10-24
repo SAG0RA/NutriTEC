@@ -13,27 +13,38 @@ import {MatCardModule} from '@angular/material/card';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {HttpClientModule} from '@angular/common/http'
 import { MatIconModule } from '@angular/material/icon'
+import {MatMenuModule} from '@angular/material/menu';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
+
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RegistroComponent } from './registro/registro.component';
-import { AdminRegistrationComponent } from './admin-registration/admin-registration.component';
+import { NutriRegistroComponent } from './nutri-registro/nutri-registro.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { AlertaNutriComponent } from './alerta-nutri/alerta-nutri.component';
+
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistroComponent,
-    AdminRegistrationComponent,
+    NutriRegistroComponent,
+    AlertaNutriComponent,
   ],
   imports: [
     BrowserModule,
+    MatRadioModule,
+    MatCheckboxModule,
     AppRoutingModule,
     FlexLayoutModule,
     MatFormFieldModule,
+    MatMenuModule,
     MatInputModule,
     MatButtonModule,
+    MatDialogModule,
     MatCardModule,
     MatToolbarModule,
     MatIconModule,

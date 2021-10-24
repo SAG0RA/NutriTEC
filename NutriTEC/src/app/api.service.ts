@@ -9,7 +9,11 @@ export class APIService {
 
   constructor(private http:HttpClient) { }
 
-  public get(url:string){
+  public GET(url:string){
     return this.http.get(url);
+  }
+
+  public POST(url:string,body: any){
+    return this.http.post(url,body)
   }
 }
