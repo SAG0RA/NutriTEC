@@ -452,3 +452,6 @@ $RECYCLE.BIN/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+NutriTEC/package-lock.json
+NutriTEC/package.json
+NutriTEC/src/styles.css
