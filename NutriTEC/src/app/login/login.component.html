@@ -1,6 +1,6 @@
-<div [style.background-image]="'url(/assets/images/zanahoria.png)'" fxLayoutAlign = "center center" fxFlexFill class="main-div">
+<div fxLayoutAlign = "center center" fxFlexFill class="main-div">
     <mat-card fxFlex = "25">
-        <mat-toolbar color="warn">NutriTEC</mat-toolbar>
+        <mat-toolbar class="titulo">NutriTEC</mat-toolbar>
         <form fxLayoutAlign="stretch" fxLayout="column" class="login-form">
             <mat-form-field>
                 <input matInput placeholder="Usuario">
@@ -11,9 +11,10 @@
             </mat-form-field>
 
             <form fxLayoutAlign="stretch" fxLayout="column" class="button-form">
-                <button color="warn" style="background-color: aqua;" mat-raised-button>Iniciar</button>
-                <button (click)="navToRegistrationNutri()" mat-raised-button class = "button-nutri">Registrarse como Nutricionista</button>
-                <button (click)="getData()" mat-raised-button class = "button-nutri">Registrarse como Cliente</button>
+                <button color="warn" style="background-color:coral" mat-raised-button>Iniciar</button>
+                <mat-label class="label">Registrate como:</mat-label>
+                <button (click)="navToRegistroNutri()" mat-raised-button style="margin-top: 10px;" class = "button-registro">Nutricionista</button>
+                <button (click)="navToRegistroCliente()" mat-raised-button class = "button-registro">Cliente</button>
             
             </form>
         </form>    

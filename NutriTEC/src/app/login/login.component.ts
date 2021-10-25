@@ -22,8 +22,12 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  navToRegistrationNutri(){
+  navToRegistroNutri(){
     this.router.navigate(['/registro/nutri'])
+  }
+
+  navToRegistroCliente(){
+    this.router.navigate(['/registro/cliente'])
   }
 
   

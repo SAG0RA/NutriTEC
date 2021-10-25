@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { APIService } from '../api.service';
-import { AlertaNutriComponent } from '../alerta-nutri/alerta-nutri.component';
+import { AlertaComponent } from '../alerta/alerta.component';
+import {Md5} from 'ts-md5/dist/md5';
+
 
 @Component({
   selector: 'app-nutri-registro',
@@ -33,7 +35,9 @@ export class NutriRegistroComponent implements OnInit {
 
 
   Registrar() {
-    console.log(this.tipo_cobro)
+    const md5 = new Md5();
+    const encrypt = md5.appendStr(this.contrasena).end();
+    
     var lista_datos =
     {
       cedula: this.cedula,
@@ -52,7 +56,7 @@ export class NutriRegistroComponent implements OnInit {
     }
 
     if (!this.cedula || !this.nombre || !this.apellido1 || !this.apellido2 || !this.edad || !this.fecha_nacimiento || !this.peso || !this.imc || !this.direccion || !this.tarjeta) {
-       this.dialog.open(AlertaNutriComponent)
+       this.dialog.open(AlertaComponent)
     } else {
       this.API.POST('https://6175c7c203178d00173da9e1.mockapi.io/nutricionistas', lista_datos).subscribe(response => {
         console.log(response)

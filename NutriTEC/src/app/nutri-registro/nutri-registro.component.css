@@ -1,11 +1,14 @@
 .maindiv{
     background-image: url('/assets/images/banano.png');
-    background-size: 100px;   
+    background-color: goldenrod;
+    background-size: 100px;
+       
 }
 
 .maindiv mat-card{
     padding: 0px;
 }
+
 
 .maindiv input mat-form-field{
     font-size: 10px;
@@ -27,14 +30,14 @@
 }
 
 .titulo{
-    background-color:goldenrod;
+    background-color:orange;
     color:white;
     font-family:Verdana, Geneva, Tahoma, sans-serif
 }
 
 .menu{
 
-    background-color: goldenrod;
+    background-color: peru;
     width: 120px;
     height: 50px;
     margin: 0 auto;
