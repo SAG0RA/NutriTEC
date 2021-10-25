@@ -22,7 +22,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NutriRegistroComponent } from './nutri-registro/nutri-registro.component';
 import {MatDialogModule} from '@angular/material/dialog';
-import { AlertaNutriComponent } from './alerta-nutri/alerta-nutri.component';
+import { AlertaComponent } from './alerta/alerta.component';
+import { ClienteRegistroComponent } from './cliente-registro/cliente-registro.component';
 
 
 
@@ -32,7 +33,8 @@ import { AlertaNutriComponent } from './alerta-nutri/alerta-nutri.component';
     AppComponent,
     LoginComponent,
     NutriRegistroComponent,
-    AlertaNutriComponent,
+    AlertaComponent,
+    ClienteRegistroComponent,
   ],
   imports: [
     BrowserModule,

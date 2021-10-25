@@ -1,0 +1,18 @@
+.maindiv{
+    background-image: url('/assets/images/manzana.png');
+    background-color: brown;
+    background-size: 150px;   
+}
+
+.maindiv mat-card{
+    padding: 0px;
+}
+
+.titulo{
+    background-color: rgb(209, 6, 6);
+    color: white;
+}
+
+.registration-form{
+    padding:20px;
+}

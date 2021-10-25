@@ -1,3 +1,9 @@
+.main-div{
+    background-image: url('/assets/images/zanahoria.png');
+    background-color:blanchedalmond;
+}
+
+
 .main-div mat-card{
     padding: 0px;
 }
@@ -10,9 +16,23 @@
     padding: 10px;
 }
 
-.button-nutri{
-    margin: 10px;
-    background-color: red;
+.button-registro{
+    margin: 5px;
+    background-color:darkolivegreen;
+    color: white;
     height: 40px;
-    width: 100px;
+    width: 200px;
+    margin-left: 35px;
+    font-size: 12px;
+}
+
+.label{
+    margin-left: 50px;
+    margin-top: 40px;
+    color:gray;
+}
+
+.titulo{
+    background-color:coral;
+    color:white;
 }

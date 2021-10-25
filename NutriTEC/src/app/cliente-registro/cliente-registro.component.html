@@ -1,0 +1,86 @@
+
+<router-outlet></router-outlet>
+<div fxLayoutAlign = "center center" class="maindiv">
+    <mat-card fxFlex = "30">
+        <mat-toolbar class="titulo">Registro de Cliente</mat-toolbar>
+
+        <form fxLayoutAlign="stretch" fxLayout="column" class="registration-form">
+
+            <mat-form-field>
+                <input matInput name="cedula" [(ngModel)]="cedula" type="number" placeholder="Cedula">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput name="nombre" [(ngModel)]="nombre" type="text" placeholder="Primer nombre">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput name="1erApellido" [(ngModel)]="apellido1" type="text" placeholder="1er Apellido">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput name="2doApellido" [(ngModel)]="apellido2" type="text" placeholder="2do Apellido">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput name="edad" [(ngModel)]="edad" type="number" placeholder="Edad">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput name="fecha_nacimiento" [(ngModel)]="fecha_nacimiento" type="date" placeholder="Fecha de nacimiento">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput name="peso" [(ngModel)]="peso" type="number" placeholder="Peso (kg)">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput name="imc" [(ngModel)]="imc" type="number" placeholder="IMC">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput name="pais" [(ngModel)]="pais" placeholder="Pais">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput name="cintura" [(ngModel)]="cintura" type="number" placeholder="Cintura">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput name="cuello" [(ngModel)]="cuello" type="number" placeholder="Cuello">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput name="caderas" [(ngModel)]="caderas" type="number" placeholder="Caderas">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput name="musculo" [(ngModel)]="musculo" type="number" placeholder="Musculo %">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput name="grasa" [(ngModel)]="grasa" type="number" placeholder="Grasa %">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput name="csmcalorias" [(ngModel)]="csmcalorias" type="number" placeholder="Consumo diario de calorias">
+            </mat-form-field>
+            
+            <mat-form-field>
+                <input matInput name="correo" [(ngModel)]="correo" placeholder="Correo electronico">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput name="contrasena" [(ngModel)]="contrasena" type="password" placeholder="Contraseña">
+            </mat-form-field>
+
+            <form fxLayoutAlign="stretch" fxLayout="column">
+                <button (click)="Registrar()" style="margin: 10px" mat-icon-button class="button-form">
+                    <mat-icon>check_circle_outline</mat-icon>
+                </button>
+            </form>
+
+        </form>
+    </mat-card>
+
+</div>
