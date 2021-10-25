@@ -1,0 +1,42 @@
+.maindiv{
+    background-image: url('/assets/images/banano.png');
+    background-size: 100px;   
+}
+
+.maindiv mat-card{
+    padding: 0px;
+}
+
+.maindiv input mat-form-field{
+    font-size: 10px;
+}
+
+.registration-form{
+    padding:20px;
+}
+
+.example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+  
+.example-margin {
+  margin: 5px;
+}
+
+.titulo{
+    background-color:goldenrod;
+    color:white;
+    font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+
+.menu{
+
+    background-color: goldenrod;
+    width: 120px;
+    height: 50px;
+    margin: 0 auto;
+    color:white;
+}

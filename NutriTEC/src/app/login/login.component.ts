@@ -16,14 +16,14 @@ export class LoginComponent implements OnInit {
   }
 
   getData(){
-    this.API.get('http://192.168.18.4/api/cliente')
+    this.API.GET('http://192.168.18.4/api/cliente')
     .subscribe(response =>{
       console.log(response)
     })
   }
 
-  navToRegistrationPanel(){
-    this.router.navigate(['/registro'])
+  navToRegistrationNutri(){
+    this.router.navigate(['/registro/nutri'])
   }
 
   
