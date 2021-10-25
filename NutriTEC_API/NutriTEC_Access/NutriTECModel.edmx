@@ -1,0 +1,390 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="NutriTECModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="cedula" />
+          </Key>
+          <Property Name="cedula" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="p_apellido" Type="varchar" MaxLength="50" />
+          <Property Name="s_apellido" Type="varchar" MaxLength="50" />
+          <Property Name="edad" Type="int" />
+          <Property Name="fecha_nac" Type="date" />
+          <Property Name="peso" Type="varchar" MaxLength="50" />
+          <Property Name="IMC" Type="float" />
+          <Property Name="pais" Type="varchar" MaxLength="50" />
+          <Property Name="cintura" Type="int" />
+          <Property Name="cuello" Type="int" />
+          <Property Name="caderas" Type="int" />
+          <Property Name="porc_musculo" Type="int" />
+          <Property Name="porc_grasa" Type="int" />
+          <Property Name="cdm_calorias" Type="int" />
+          <Property Name="correo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="passw" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cliente_nutricionista">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id_nutricionista" Type="int" />
+          <Property Name="id_cliente" Type="int" />
+        </EntityType>
+        <EntityType Name="cuentas">
+          <Key>
+            <PropertyRef Name="correo" />
+          </Key>
+          <Property Name="correo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="passw" Type="varchar" MaxLength="50" />
+          <Property Name="rol" Type="int" />
+        </EntityType>
+        <EntityType Name="meta_calorica">
+          <Key>
+            <PropertyRef Name="id_meta" />
+          </Key>
+          <Property Name="id_meta" Type="int" Nullable="false" />
+          <Property Name="fecha_meta" Type="date" Nullable="false" />
+          <Property Name="meta_calorias_dia" Type="int" Nullable="false" />
+          <Property Name="calorias_logradas" Type="int" />
+          <Property Name="cliente_cedula" Type="int" />
+          <Property Name="nutricionista_cedula" Type="int" />
+        </EntityType>
+        <EntityType Name="nutricionista">
+          <Key>
+            <PropertyRef Name="n_cedula" />
+          </Key>
+          <Property Name="n_cedula" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="p_apellido" Type="varchar" MaxLength="50" />
+          <Property Name="s_apellido" Type="varchar" MaxLength="50" />
+          <Property Name="codigo" Type="varchar" MaxLength="50" />
+          <Property Name="edad" Type="int" />
+          <Property Name="fecha_nac" Type="date" />
+          <Property Name="peso" Type="varchar" MaxLength="50" />
+          <Property Name="IMC" Type="float" />
+          <Property Name="direccion" Type="varchar" MaxLength="100" />
+          <Property Name="foto" Type="varchar" MaxLength="200" />
+          <Property Name="tarjetacredito" Type="int" />
+          <Property Name="tipo_cobro" Type="varchar" MaxLength="50" />
+          <Property Name="correo" Type="varchar" MaxLength="100" />
+          <Property Name="passw" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="producto">
+          <Key>
+            <PropertyRef Name="codigo_barras" />
+          </Key>
+          <Property Name="codigo_barras" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="porcion" Type="int" />
+          <Property Name="energia" Type="int" />
+          <Property Name="grasa" Type="int" />
+          <Property Name="sodio" Type="int" />
+          <Property Name="carbohidratos" Type="int" />
+          <Property Name="proteina" Type="int" />
+          <Property Name="vitaminas" Type="varchar" MaxLength="50" />
+          <Property Name="calcio" Type="int" />
+          <Property Name="hierro" Type="int" />
+          <Property Name="lista_espera" Type="int" />
+        </EntityType>
+        <Association Name="FK__meta_calo__clien__14270015">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="0..1" />
+          <End Role="meta_calorica" Type="Self.meta_calorica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="meta_calorica">
+              <PropertyRef Name="cliente_cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__meta_calo__nutri__151B244E">
+          <End Role="nutricionista" Type="Self.nutricionista" Multiplicity="0..1" />
+          <End Role="meta_calorica" Type="Self.meta_calorica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nutricionista">
+              <PropertyRef Name="n_cedula" />
+            </Principal>
+            <Dependent Role="meta_calorica">
+              <PropertyRef Name="nutricionista_cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NutriTECModelStoreContainer">
+          <EntitySet Name="cliente" EntityType="Self.cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cliente_nutricionista" EntityType="Self.cliente_nutricionista" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cuentas" EntityType="Self.cuentas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="meta_calorica" EntityType="Self.meta_calorica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="nutricionista" EntityType="Self.nutricionista" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="producto" EntityType="Self.producto" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__meta_calo__clien__14270015" Association="Self.FK__meta_calo__clien__14270015">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="meta_calorica" EntitySet="meta_calorica" />
+          </AssociationSet>
+          <AssociationSet Name="FK__meta_calo__nutri__151B244E" Association="Self.FK__meta_calo__nutri__151B244E">
+            <End Role="nutricionista" EntitySet="nutricionista" />
+            <End Role="meta_calorica" EntitySet="meta_calorica" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NutriTECModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="cedula" />
+          </Key>
+          <Property Name="cedula" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="p_apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="s_apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="edad" Type="Int32" />
+          <Property Name="fecha_nac" Type="DateTime" Precision="0" />
+          <Property Name="peso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IMC" Type="Double" />
+          <Property Name="pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cintura" Type="Int32" />
+          <Property Name="cuello" Type="Int32" />
+          <Property Name="caderas" Type="Int32" />
+          <Property Name="porc_musculo" Type="Int32" />
+          <Property Name="porc_grasa" Type="Int32" />
+          <Property Name="cdm_calorias" Type="Int32" />
+          <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="passw" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="meta_calorica" Relationship="Self.FK__meta_calo__clien__14270015" FromRole="cliente" ToRole="meta_calorica" />
+        </EntityType>
+        <EntityType Name="cliente_nutricionista">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id_nutricionista" Type="Int32" />
+          <Property Name="id_cliente" Type="Int32" />
+        </EntityType>
+        <EntityType Name="cuentas">
+          <Key>
+            <PropertyRef Name="correo" />
+          </Key>
+          <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="passw" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="rol" Type="Int32" />
+        </EntityType>
+        <EntityType Name="meta_calorica">
+          <Key>
+            <PropertyRef Name="id_meta" />
+          </Key>
+          <Property Name="id_meta" Type="Int32" Nullable="false" />
+          <Property Name="fecha_meta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="meta_calorias_dia" Type="Int32" Nullable="false" />
+          <Property Name="calorias_logradas" Type="Int32" />
+          <Property Name="cliente_cedula" Type="Int32" />
+          <Property Name="nutricionista_cedula" Type="Int32" />
+          <NavigationProperty Name="cliente" Relationship="Self.FK__meta_calo__clien__14270015" FromRole="meta_calorica" ToRole="cliente" />
+          <NavigationProperty Name="nutricionista" Relationship="Self.FK__meta_calo__nutri__151B244E" FromRole="meta_calorica" ToRole="nutricionista" />
+        </EntityType>
+        <EntityType Name="nutricionista">
+          <Key>
+            <PropertyRef Name="n_cedula" />
+          </Key>
+          <Property Name="n_cedula" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="p_apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="s_apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="edad" Type="Int32" />
+          <Property Name="fecha_nac" Type="DateTime" Precision="0" />
+          <Property Name="peso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IMC" Type="Double" />
+          <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="foto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="tarjetacredito" Type="Int32" />
+          <Property Name="tipo_cobro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="passw" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="meta_calorica" Relationship="Self.FK__meta_calo__nutri__151B244E" FromRole="nutricionista" ToRole="meta_calorica" />
+        </EntityType>
+        <EntityType Name="producto">
+          <Key>
+            <PropertyRef Name="codigo_barras" />
+          </Key>
+          <Property Name="codigo_barras" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="porcion" Type="Int32" />
+          <Property Name="energia" Type="Int32" />
+          <Property Name="grasa" Type="Int32" />
+          <Property Name="sodio" Type="Int32" />
+          <Property Name="carbohidratos" Type="Int32" />
+          <Property Name="proteina" Type="Int32" />
+          <Property Name="vitaminas" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="calcio" Type="Int32" />
+          <Property Name="hierro" Type="Int32" />
+          <Property Name="lista_espera" Type="Int32" />
+        </EntityType>
+        <Association Name="FK__meta_calo__clien__14270015">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="0..1" />
+          <End Role="meta_calorica" Type="Self.meta_calorica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="meta_calorica">
+              <PropertyRef Name="cliente_cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__meta_calo__nutri__151B244E">
+          <End Role="nutricionista" Type="Self.nutricionista" Multiplicity="0..1" />
+          <End Role="meta_calorica" Type="Self.meta_calorica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nutricionista">
+              <PropertyRef Name="n_cedula" />
+            </Principal>
+            <Dependent Role="meta_calorica">
+              <PropertyRef Name="nutricionista_cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NutriTECEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cliente" EntityType="Self.cliente" />
+          <EntitySet Name="cliente_nutricionista" EntityType="Self.cliente_nutricionista" />
+          <EntitySet Name="cuentas" EntityType="Self.cuentas" />
+          <EntitySet Name="meta_calorica" EntityType="Self.meta_calorica" />
+          <EntitySet Name="nutricionista" EntityType="Self.nutricionista" />
+          <EntitySet Name="producto" EntityType="Self.producto" />
+          <AssociationSet Name="FK__meta_calo__clien__14270015" Association="Self.FK__meta_calo__clien__14270015">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="meta_calorica" EntitySet="meta_calorica" />
+          </AssociationSet>
+          <AssociationSet Name="FK__meta_calo__nutri__151B244E" Association="Self.FK__meta_calo__nutri__151B244E">
+            <End Role="nutricionista" EntitySet="nutricionista" />
+            <End Role="meta_calorica" EntitySet="meta_calorica" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NutriTECModelStoreContainer" CdmEntityContainer="NutriTECEntities">
+          <EntitySetMapping Name="cliente">
+            <EntityTypeMapping TypeName="NutriTECModel.cliente">
+              <MappingFragment StoreEntitySet="cliente">
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="p_apellido" ColumnName="p_apellido" />
+                <ScalarProperty Name="s_apellido" ColumnName="s_apellido" />
+                <ScalarProperty Name="edad" ColumnName="edad" />
+                <ScalarProperty Name="fecha_nac" ColumnName="fecha_nac" />
+                <ScalarProperty Name="peso" ColumnName="peso" />
+                <ScalarProperty Name="IMC" ColumnName="IMC" />
+                <ScalarProperty Name="pais" ColumnName="pais" />
+                <ScalarProperty Name="cintura" ColumnName="cintura" />
+                <ScalarProperty Name="cuello" ColumnName="cuello" />
+                <ScalarProperty Name="caderas" ColumnName="caderas" />
+                <ScalarProperty Name="porc_musculo" ColumnName="porc_musculo" />
+                <ScalarProperty Name="porc_grasa" ColumnName="porc_grasa" />
+                <ScalarProperty Name="cdm_calorias" ColumnName="cdm_calorias" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="passw" ColumnName="passw" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cliente_nutricionista">
+            <EntityTypeMapping TypeName="NutriTECModel.cliente_nutricionista">
+              <MappingFragment StoreEntitySet="cliente_nutricionista">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_nutricionista" ColumnName="id_nutricionista" />
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cuentas">
+            <EntityTypeMapping TypeName="NutriTECModel.cuentas">
+              <MappingFragment StoreEntitySet="cuentas">
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="passw" ColumnName="passw" />
+                <ScalarProperty Name="rol" ColumnName="rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="meta_calorica">
+            <EntityTypeMapping TypeName="NutriTECModel.meta_calorica">
+              <MappingFragment StoreEntitySet="meta_calorica">
+                <ScalarProperty Name="id_meta" ColumnName="id_meta" />
+                <ScalarProperty Name="fecha_meta" ColumnName="fecha_meta" />
+                <ScalarProperty Name="meta_calorias_dia" ColumnName="meta_calorias_dia" />
+                <ScalarProperty Name="calorias_logradas" ColumnName="calorias_logradas" />
+                <ScalarProperty Name="cliente_cedula" ColumnName="cliente_cedula" />
+                <ScalarProperty Name="nutricionista_cedula" ColumnName="nutricionista_cedula" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nutricionista">
+            <EntityTypeMapping TypeName="NutriTECModel.nutricionista">
+              <MappingFragment StoreEntitySet="nutricionista">
+                <ScalarProperty Name="n_cedula" ColumnName="n_cedula" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="p_apellido" ColumnName="p_apellido" />
+                <ScalarProperty Name="s_apellido" ColumnName="s_apellido" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="edad" ColumnName="edad" />
+                <ScalarProperty Name="fecha_nac" ColumnName="fecha_nac" />
+                <ScalarProperty Name="peso" ColumnName="peso" />
+                <ScalarProperty Name="IMC" ColumnName="IMC" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="foto" ColumnName="foto" />
+                <ScalarProperty Name="tarjetacredito" ColumnName="tarjetacredito" />
+                <ScalarProperty Name="tipo_cobro" ColumnName="tipo_cobro" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="passw" ColumnName="passw" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="producto">
+            <EntityTypeMapping TypeName="NutriTECModel.producto">
+              <MappingFragment StoreEntitySet="producto">
+                <ScalarProperty Name="codigo_barras" ColumnName="codigo_barras" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="porcion" ColumnName="porcion" />
+                <ScalarProperty Name="energia" ColumnName="energia" />
+                <ScalarProperty Name="grasa" ColumnName="grasa" />
+                <ScalarProperty Name="sodio" ColumnName="sodio" />
+                <ScalarProperty Name="carbohidratos" ColumnName="carbohidratos" />
+                <ScalarProperty Name="proteina" ColumnName="proteina" />
+                <ScalarProperty Name="vitaminas" ColumnName="vitaminas" />
+                <ScalarProperty Name="calcio" ColumnName="calcio" />
+                <ScalarProperty Name="hierro" ColumnName="hierro" />
+                <ScalarProperty Name="lista_espera" ColumnName="lista_espera" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
