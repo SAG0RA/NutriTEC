@@ -13,7 +13,7 @@ export class ClienteRegistroComponent implements OnInit {
 
   public lista_datos_recibidos: any = []
   private lista_usuarios: any = []
-  url = 'https://6175c7c203178d00173da9e1.mockapi.io/clientes'
+  url = 'https://localhost:44331/api/cliente'
 
   cedula: string;
   nombre: string;
