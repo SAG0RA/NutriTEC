@@ -13,7 +13,7 @@ export class ClienteRegistroComponent implements OnInit {
 
   public lista_datos_recibidos: any = []
   private lista_usuarios: any = []
-  url = 'https://localhost:44331/api/cliente'
+  url = '/api/cliente'
 
   cedula: string;
   nombre: string;
