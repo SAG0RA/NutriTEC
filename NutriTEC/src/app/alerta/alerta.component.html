@@ -1,5 +1,9 @@
 <h1 mat-dialog-title>Error en el registro</h1>
-<div mat-dialog-content>Revisa tus datos ingresados, las credenciales son inválidas</div>
+<div mat-dialog-content fxLayout="column"> || Revisa tus datos ingresados, las credenciales son inválidas ||
+  <mat-label style="color:brown">Razones:</mat-label>
+  <mat-label>1) El usuario ya ha sido registrado</mat-label>
+  <mat-label>2) Existen espacios sin rellenar en el formulario</mat-label>
+</div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Cerrar</button>
 </div>

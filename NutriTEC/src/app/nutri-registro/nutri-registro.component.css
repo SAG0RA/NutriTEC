@@ -30,13 +30,11 @@
 }
 
 .titulo{
-    background-color:orange;
+    background-color:coral;
     color:white;
-    font-family:Verdana, Geneva, Tahoma, sans-serif
 }
 
 .menu{
-
     background-color: peru;
     width: 120px;
     height: 50px;

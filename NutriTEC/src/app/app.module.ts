@@ -24,6 +24,7 @@ import { NutriRegistroComponent } from './nutri-registro/nutri-registro.componen
 import {MatDialogModule} from '@angular/material/dialog';
 import { AlertaComponent } from './alerta/alerta.component';
 import { ClienteRegistroComponent } from './cliente-registro/cliente-registro.component';
+import { AgregadoComponent } from './agregado/agregado.component';
 
 
 
@@ -35,6 +36,7 @@ import { ClienteRegistroComponent } from './cliente-registro/cliente-registro.co
     NutriRegistroComponent,
     AlertaComponent,
     ClienteRegistroComponent,
+    AgregadoComponent,
   ],
   imports: [
     BrowserModule,
