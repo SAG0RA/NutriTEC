@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriTEC_Access", "NutriTEC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriTEC_SQL_API", "NutriTEC_SQL_API\NutriTEC_SQL_API.csproj", "{700D9401-88B1-418B-BB03-51F105F52EBD}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NutriTECMongoDB", "NutriTECMongoDB\NutriTECMongoDB.csproj", "{2256660F-012B-4FC0-AA72-15D9F03022F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{700D9401-88B1-418B-BB03-51F105F52EBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{700D9401-88B1-418B-BB03-51F105F52EBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{700D9401-88B1-418B-BB03-51F105F52EBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2256660F-012B-4FC0-AA72-15D9F03022F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2256660F-012B-4FC0-AA72-15D9F03022F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2256660F-012B-4FC0-AA72-15D9F03022F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2256660F-012B-4FC0-AA72-15D9F03022F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
