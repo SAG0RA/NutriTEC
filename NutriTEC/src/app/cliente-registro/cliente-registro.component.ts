@@ -15,12 +15,14 @@ export class ClienteRegistroComponent implements OnInit {
   private lista_usuarios: any = []
   url = '/api/cliente'
 
+  edad:number
+  data:any
+  fecha_nacimiento:any
+
   cedula: string;
   nombre: string;
   apellido1: string;
   apellido2: string;
-  edad: string;
-  fecha_nacimiento: string;
   peso: string;
   imc: string;
   pais: string;
@@ -32,7 +34,11 @@ export class ClienteRegistroComponent implements OnInit {
   csmcalorias: string;
   correo: string;
   contrasena: string;
-  constructor(public dialog: MatDialog, private API: APIService) { }
+
+  constructor(public dialog: MatDialog, private API: APIService) {
+    this.data = {}
+    this.data.edad = ''
+   }
 
   ngOnInit(): void {
 
@@ -43,9 +49,19 @@ export class ClienteRegistroComponent implements OnInit {
         this.lista_usuarios = []
         for (var i = 0; i < this.lista_datos_recibidos.length; i++) {
           this.lista_usuarios.push(this.lista_datos_recibidos[i]['correo'])
-          console.log(this.lista_usuarios)
         }
       })
+  }
+
+  getEdad(lbl:any){
+    const timeDiff =  Math.abs(Date.now() - new Date(this.fecha_nacimiento).getTime());
+    this.data.edad = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
+    if(!this.data.edad){
+      alert('Registra bien tu fecha de nacimiento')
+    }else{
+       document.getElementById(lbl)!.innerHTML = "Edad: " + this.data.edad.toString();
+    }
+    
   }
 
   Registrar() {
@@ -60,23 +76,24 @@ export class ClienteRegistroComponent implements OnInit {
 
       var lista_datos =
       {
+        IMC: this.imc,
+        caderas: this.caderas,
         cedula: this.cedula,
-        nombre: this.nombre,
-        apellido1: this.apellido1,
-        apellido2: this.apellido2,
-        edad: this.edad,
-        fecha_nacimiento: this.fecha_nacimiento,
-        peso: this.peso,
-        imc: this.imc,
-        pais: this.pais,
-        cuello:this.cuello,
-        cintura:this.cintura,
-        caderas:this.caderas,
-        musculo:this.musculo,
-        grasa:this.grasa,
-        csmcalorias:this.csmcalorias,
+        cintura: this.cintura,
         correo: this.correo,
-        contrasena: encrypt
+        cuello: this.cuello,
+        edad: this.data.edad,
+        fecha_nac: this.fecha_nacimiento,
+        meta_calorica: [],
+        nombre: this.nombre,
+        p_apellido: this.apellido1,
+        pais: this.pais,
+        passw: encrypt,
+        peso: this.peso,
+        porc_grasa: this.grasa,
+        porc_musculo: this.musculo,
+        s_apellido: this.apellido2,
+
       }
 
       this.API.POST(this.url, lista_datos).subscribe(response => {
@@ -87,11 +104,11 @@ export class ClienteRegistroComponent implements OnInit {
             console.log(this.lista_datos_recibidos)
             for (var i = 0; i < this.lista_datos_recibidos.length; i++) {
               this.lista_usuarios.push(this.lista_datos_recibidos[i]['correo'])
-              console.log(this.lista_usuarios)
             }
           })
         console.log(response)
       })
+      console.log(this.lista_usuarios)
 
       this.dialog.open(AgregadoComponent)
     }

@@ -22,12 +22,11 @@
                 <input matInput name="2doApellido" [(ngModel)]="apellido2" type="text" placeholder="2do Apellido">
             </mat-form-field>
 
-            <mat-form-field>
-                <input matInput name="edad" [(ngModel)]="edad" type="number" placeholder="Edad">
-            </mat-form-field>
+            <button color="warn" mat-raised-button (click)="getEdad(edad.id)">Edad</button>
+            <mat-label style = "padding:15px" name="edad" ngDefaultControl [(ngModel)]="data.edad" #edad id="edad"></mat-label>
 
             <mat-form-field>
-                <input matInput name="fecha_nacimiento" [(ngModel)]="fecha_nacimiento" type="date" placeholder="Fecha de nacimiento">
+                <input matInput name="fecha_nacimiento" [(ngModel)]="fecha_nacimiento" type="date" useValueAsDate placeholder="Fecha de nacimiento">
             </mat-form-field>
 
             <mat-form-field>
