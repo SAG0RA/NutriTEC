@@ -19,7 +19,6 @@ namespace NutriTEC_Access
             : base("name=NutriTECEntities")
         {
             Configuration.ProxyCreationEnabled = false;
-
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

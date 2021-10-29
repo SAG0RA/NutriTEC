@@ -61,7 +61,7 @@ export class ClienteRegistroComponent implements OnInit {
     }else{
        document.getElementById(lbl)!.innerHTML = "Edad: " + this.data.edad.toString();
     }
-    
+
   }
 
   Registrar() {
@@ -97,19 +97,19 @@ export class ClienteRegistroComponent implements OnInit {
       }
 
       console.log(this.cedula)
-      // this.API.POST(this.url, lista_datos).subscribe(response => {
+      this.API.POST(this.url, lista_datos).subscribe(response => {
 
-      //   this.API.GET(this.url)
-      //     .subscribe(response => {
-      //       this.lista_datos_recibidos = response
-      //       console.log(this.lista_datos_recibidos)
-      //       for (var i = 0; i < this.lista_datos_recibidos.length; i++) {
-      //         this.lista_usuarios.push(this.lista_datos_recibidos[i]['correo'])
-      //       }
-      //     })
-      //   console.log(response)
-      // })
-      // console.log(this.lista_usuarios)
+        this.API.GET(this.url)
+          .subscribe(response => {
+            this.lista_datos_recibidos = response
+            console.log(this.lista_datos_recibidos)
+            for (var i = 0; i < this.lista_datos_recibidos.length; i++) {
+              this.lista_usuarios.push(this.lista_datos_recibidos[i]['correo'])
+            }
+          })
+        console.log(response)
+      })
+      console.log(this.lista_usuarios)
 
       this.dialog.open(AgregadoComponent)
     }

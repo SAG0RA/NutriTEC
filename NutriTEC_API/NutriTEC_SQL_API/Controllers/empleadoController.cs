@@ -32,9 +32,6 @@ namespace NutriTEC_API.Controllers
                 {
                     cedula = el.cedula,
                     nombre = el.nombre,
-                    p_apellido = el.p_apellido,
-                    s_apellido = el.s_apellido,
-                    edad = el.edad,
                     correo = el.correo,
                     passw = el.passw,
                     rol = el.rol
@@ -57,9 +54,6 @@ namespace NutriTEC_API.Controllers
                 {
                     existingEmp.cedula = el.cedula;
                     existingEmp.nombre = el.nombre;
-                    existingEmp.p_apellido = el.p_apellido;
-                    existingEmp.s_apellido = el.s_apellido;
-                    existingEmp.edad = el.edad;
                     existingEmp.correo = el.correo;
                     existingEmp.passw = el.passw;
                     existingEmp.rol = el.rol;
@@ -76,7 +70,7 @@ namespace NutriTEC_API.Controllers
         }
         public IHttpActionResult Delete(int id)
         {
-            if (id <= 0)
+            if (id < 0)
                 return BadRequest("Not a valid employee id");
 
             using (NutriTECEntities entities = new NutriTECEntities())

@@ -13,7 +13,7 @@
         <EntityTypeShape EntityType="NutriTECModel.producto" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
         <AssociationConnector Association="NutriTECModel.FK__meta_calo__clien__14270015" ManuallyRouted="false" />
         <AssociationConnector Association="NutriTECModel.FK__meta_calo__nutri__151B244E" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="NutriTECModel.Empleado" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="NutriTECModel.Empleado" Width="1.5" PointX="7.75" PointY="1" />
         <EntityTypeShape EntityType="NutriTECModel.database_firewall_rules" Width="1.5" PointX="3.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>

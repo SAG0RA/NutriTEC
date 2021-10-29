@@ -16,10 +16,6 @@ namespace NutriTEC_Access
     {
         public int cedula { get; set; }
         public string nombre { get; set; }
-        public string p_apellido { get; set; }
-        public string s_apellido { get; set; }
-        public Nullable<int> edad { get; set; }
-        public Nullable<System.DateTime> fecha_nac { get; set; }
         public string correo { get; set; }
         public string passw { get; set; }
         public string rol { get; set; }

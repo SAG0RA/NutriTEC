@@ -49,10 +49,6 @@
           </Key>
           <Property Name="cedula" Type="int" Nullable="false" />
           <Property Name="nombre" Type="nchar" MaxLength="50" Nullable="false" />
-          <Property Name="p_apellido" Type="nchar" MaxLength="50" Nullable="false" />
-          <Property Name="s_apellido" Type="nchar" MaxLength="10" />
-          <Property Name="edad" Type="int" />
-          <Property Name="fecha_nac" Type="date" />
           <Property Name="correo" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="passw" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="rol" Type="nchar" MaxLength="50" Nullable="false" />
@@ -316,10 +312,6 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
           </Key>
           <Property Name="cedula" Type="Int32" Nullable="false" />
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="p_apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="s_apellido" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="edad" Type="Int32" />
-          <Property Name="fecha_nac" Type="DateTime" Precision="0" />
           <Property Name="correo" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="passw" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="rol" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
@@ -444,10 +436,6 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
                 <ScalarProperty Name="rol" ColumnName="rol" />
                 <ScalarProperty Name="passw" ColumnName="passw" />
                 <ScalarProperty Name="correo" ColumnName="correo" />
-                <ScalarProperty Name="fecha_nac" ColumnName="fecha_nac" />
-                <ScalarProperty Name="edad" ColumnName="edad" />
-                <ScalarProperty Name="s_apellido" ColumnName="s_apellido" />
-                <ScalarProperty Name="p_apellido" ColumnName="p_apellido" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="cedula" ColumnName="cedula" />
               </MappingFragment>
