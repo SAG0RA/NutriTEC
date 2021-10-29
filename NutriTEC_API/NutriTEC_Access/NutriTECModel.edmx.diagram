@@ -8,8 +8,8 @@
         <EntityTypeShape EntityType="NutriTECModel.cliente" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="NutriTECModel.cliente_nutricionista" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="NutriTECModel.cuentas" Width="1.5" PointX="3.875" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutriTECModel.meta_calorica" Width="1.5" PointX="2.875" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutriTECModel.nutricionista" Width="1.5" PointX="0.875" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutriTECModel.meta_calorica" Width="2.125" PointX="2.875" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutriTECModel.nutricionista" Width="1.5" PointX="0.875" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="NutriTECModel.producto" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
         <AssociationConnector Association="NutriTECModel.FK__meta_calo__clien__14270015" ManuallyRouted="false" />
         <AssociationConnector Association="NutriTECModel.FK__meta_calo__nutri__151B244E" ManuallyRouted="false" />

@@ -12,16 +12,13 @@ namespace NutriTEC_Access
     using System;
     using System.Collections.Generic;
     
-    public partial class Empleado
+    public partial class database_firewall_rules
     {
-        public int cedula { get; set; }
-        public string nombre { get; set; }
-        public string p_apellido { get; set; }
-        public string s_apellido { get; set; }
-        public Nullable<int> edad { get; set; }
-        public Nullable<System.DateTime> fecha_nac { get; set; }
-        public string correo { get; set; }
-        public string passw { get; set; }
-        public string rol { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public string start_ip_address { get; set; }
+        public string end_ip_address { get; set; }
+        public System.DateTime create_date { get; set; }
+        public System.DateTime modify_date { get; set; }
     }
 }

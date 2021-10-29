@@ -93,7 +93,7 @@ namespace NutriTEC_API.Controllers
         }
         public IHttpActionResult Delete(int id)
         {
-            if (id <= 0)
+            if (id < 0)
                 return BadRequest("Not a valid client id");
 
             using (NutriTECEntities entities = new NutriTECEntities())
