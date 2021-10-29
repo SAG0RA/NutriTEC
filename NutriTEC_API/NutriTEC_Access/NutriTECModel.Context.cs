@@ -18,9 +18,8 @@ namespace NutriTEC_Access
         public NutriTECEntities()
             : base("name=NutriTECEntities")
         {
-            Configuration.ProxyCreationEnabled = false;
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -32,5 +31,6 @@ namespace NutriTEC_Access
         public virtual DbSet<meta_calorica> meta_calorica { get; set; }
         public virtual DbSet<nutricionista> nutricionista { get; set; }
         public virtual DbSet<producto> producto { get; set; }
+        public virtual DbSet<Empleado> Empleado { get; set; }
     }
 }

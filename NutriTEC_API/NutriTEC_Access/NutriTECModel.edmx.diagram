@@ -7,12 +7,14 @@
       <Diagram DiagramId="d498095056174bb1b9f01a921e968889" Name="Diagram1">
         <EntityTypeShape EntityType="NutriTECModel.cliente" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="NutriTECModel.cliente_nutricionista" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutriTECModel.cuentas" Width="1.5" PointX="3.625" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutriTECModel.cuentas" Width="1.5" PointX="3.875" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="NutriTECModel.meta_calorica" Width="1.5" PointX="2.875" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutriTECModel.nutricionista" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutriTECModel.nutricionista" Width="1.5" PointX="0.875" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="NutriTECModel.producto" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
         <AssociationConnector Association="NutriTECModel.FK__meta_calo__clien__14270015" ManuallyRouted="false" />
         <AssociationConnector Association="NutriTECModel.FK__meta_calo__nutri__151B244E" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="NutriTECModel.Empleado" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="NutriTECModel.database_firewall_rules" Width="1.5" PointX="3.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

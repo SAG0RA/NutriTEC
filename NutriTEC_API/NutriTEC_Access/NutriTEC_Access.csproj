@@ -51,26 +51,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="cliente.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
     <Compile Include="cliente_nutricionista.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
     <Compile Include="cuentas.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>NutriTECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Empleado.cs">
+      <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
     <Compile Include="meta_calorica.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model1.Context.cs">
+    <Compile Include="NutriTECModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
+      <DependentUpon>NutriTECModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model1.cs">
+    <Compile Include="NutriTECModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
     <Compile Include="NutriTECModel.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -78,10 +81,10 @@
       <DependentUpon>NutriTECModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="nutricionista.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
     <Compile Include="producto.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -99,15 +102,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model1.Context.tt">
+    <Content Include="NutriTECModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <LastGenOutput>NutriTECModel.Context.cs</LastGenOutput>
       <DependentUpon>NutriTECModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Model1.tt">
+    <Content Include="NutriTECModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>NutriTECModel.cs</LastGenOutput>
       <DependentUpon>NutriTECModel.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

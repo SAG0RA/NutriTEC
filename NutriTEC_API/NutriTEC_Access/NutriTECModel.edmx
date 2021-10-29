@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="NutriTECModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="NutriTECModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="cliente">
           <Key>
             <PropertyRef Name="cedula" />
@@ -42,6 +42,20 @@
           <Property Name="correo" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="passw" Type="varchar" MaxLength="50" />
           <Property Name="rol" Type="int" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="cedula" />
+          </Key>
+          <Property Name="cedula" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="p_apellido" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="s_apellido" Type="nchar" MaxLength="10" />
+          <Property Name="edad" Type="nchar" MaxLength="50" />
+          <Property Name="fecha_nac" Type="date" />
+          <Property Name="correo" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="passw" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="rol" Type="nchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="meta_calorica">
           <Key>
@@ -119,6 +133,7 @@
           <EntitySet Name="cliente" EntityType="Self.cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cliente_nutricionista" EntityType="Self.cliente_nutricionista" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cuentas" EntityType="Self.cuentas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="meta_calorica" EntityType="Self.meta_calorica" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="nutricionista" EntityType="Self.nutricionista" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="producto" EntityType="Self.producto" Schema="dbo" store:Type="Tables" />
@@ -131,8 +146,7 @@
             <End Role="meta_calorica" EntitySet="meta_calorica" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NutriTECModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -265,7 +279,22 @@
             <End Role="nutricionista" EntitySet="nutricionista" />
             <End Role="meta_calorica" EntitySet="meta_calorica" />
           </AssociationSet>
+          <EntitySet Name="Empleado" EntityType="NutriTECModel.Empleado" />
         </EntityContainer>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="cedula" />
+          </Key>
+          <Property Name="cedula" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="p_apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="s_apellido" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="edad" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="fecha_nac" Type="DateTime" Precision="0" />
+          <Property Name="correo" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="passw" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="rol" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -361,6 +390,21 @@
                 <ScalarProperty Name="calcio" ColumnName="calcio" />
                 <ScalarProperty Name="hierro" ColumnName="hierro" />
                 <ScalarProperty Name="lista_espera" ColumnName="lista_espera" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleado">
+            <EntityTypeMapping TypeName="NutriTECModel.Empleado">
+              <MappingFragment StoreEntitySet="Empleado">
+                <ScalarProperty Name="rol" ColumnName="rol" />
+                <ScalarProperty Name="passw" ColumnName="passw" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="fecha_nac" ColumnName="fecha_nac" />
+                <ScalarProperty Name="edad" ColumnName="edad" />
+                <ScalarProperty Name="s_apellido" ColumnName="s_apellido" />
+                <ScalarProperty Name="p_apellido" ColumnName="p_apellido" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
