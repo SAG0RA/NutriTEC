@@ -66,7 +66,7 @@ export class ClienteRegistroComponent implements OnInit {
 
   Registrar() {
 
-    if (this.lista_usuarios.includes(this.correo) || !this.cedula || !this.nombre || !this.apellido1 || !this.apellido2 || !this.edad || !this.fecha_nacimiento || !this.peso || !this.imc || !this.correo || !this.contrasena) {
+    if (this.lista_usuarios.includes(this.correo) || !this.cedula || !this.nombre || !this.apellido1 || !this.apellido2 || !this.data.edad || !this.fecha_nacimiento || !this.peso || !this.imc || !this.correo || !this.contrasena) {
       this.dialog.open(AlertaComponent)
       console.log(this.lista_usuarios)
     } else {
@@ -96,19 +96,20 @@ export class ClienteRegistroComponent implements OnInit {
 
       }
 
-      this.API.POST(this.url, lista_datos).subscribe(response => {
+      console.log(this.cedula)
+      // this.API.POST(this.url, lista_datos).subscribe(response => {
 
-        this.API.GET(this.url)
-          .subscribe(response => {
-            this.lista_datos_recibidos = response
-            console.log(this.lista_datos_recibidos)
-            for (var i = 0; i < this.lista_datos_recibidos.length; i++) {
-              this.lista_usuarios.push(this.lista_datos_recibidos[i]['correo'])
-            }
-          })
-        console.log(response)
-      })
-      console.log(this.lista_usuarios)
+      //   this.API.GET(this.url)
+      //     .subscribe(response => {
+      //       this.lista_datos_recibidos = response
+      //       console.log(this.lista_datos_recibidos)
+      //       for (var i = 0; i < this.lista_datos_recibidos.length; i++) {
+      //         this.lista_usuarios.push(this.lista_datos_recibidos[i]['correo'])
+      //       }
+      //     })
+      //   console.log(response)
+      // })
+      // console.log(this.lista_usuarios)
 
       this.dialog.open(AgregadoComponent)
     }

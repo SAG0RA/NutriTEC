@@ -8,19 +8,16 @@ import { APIService } from '../api.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  
+  url_nutricionistas = '/api/nutri'
 
   constructor(private API:APIService,private router:Router) { }
 
   ngOnInit(): void {
 
+
   }
 
-  getData(){
-    this.API.GET('http://192.168.18.4/api/cliente')
-    .subscribe(response =>{
-      console.log(response)
-    })
-  }
 
   navToRegistroNutri(){
     this.router.navigate(['/registro/nutri'])

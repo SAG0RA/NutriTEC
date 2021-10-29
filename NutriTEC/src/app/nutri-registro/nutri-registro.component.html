@@ -6,7 +6,7 @@
         <form fxLayoutAlign="stretch" fxLayout="column" class="registration-form">
 
             <mat-form-field>
-                <input matInput name="cedula" [(ngModel)]="cedula" type="number" placeholder="Cedula">
+                <input matInput name="cedula" maxlength="9" [(ngModel)]="cedula" type="number" placeholder="Cedula">
             </mat-form-field>
 
             <mat-form-field>
@@ -21,12 +21,11 @@
                 <input matInput name="2doApellido" [(ngModel)]="apellido2" type="text" placeholder="2do Apellido">
             </mat-form-field>
 
-            <mat-form-field>
-                <input matInput name="edad" [(ngModel)]="edad" type="number" placeholder="Edad">
-            </mat-form-field>
+            <button color="warn" mat-raised-button (click)="getEdad(edad.id)">Edad</button>
+            <mat-label style = "padding:15px" name="edad" ngDefaultControl [(ngModel)]="data.edad" #edad id="edad"></mat-label>
 
             <mat-form-field>
-                <input matInput name="fecha_nacimiento" [(ngModel)]="fecha_nacimiento" type="date" placeholder="Fecha de nacimiento">
+                <input matInput name="fecha_nacimiento" [(ngModel)]="fecha_nacimiento" type="date" useValueAsDate placeholder="Fecha de nacimiento">
             </mat-form-field>
 
             <mat-form-field>
@@ -45,14 +44,16 @@
                 <input matInput name="tarjeta" [(ngModel)]="tarjeta" type="number" placeholder="Tarjeta de Credito" class = "tarjeta">
             </mat-form-field>
 
-            <section class="example-section" fxLayout="column">
-                <mat-label class="example-margin">Tipo de cobro</mat-label>
-                <mat-radio-group [(ngModel)]="tipo_cobro">
-                    <mat-radio-button style = "padding:10px" *ngFor="let cobro of cobros" [value]="cobro">
-                        {{cobro}}
-                      </mat-radio-button>
-                </mat-radio-group>
-              </section>
+            <div *ngFor = "let tipo of tipos">
+                <input 
+                type="radio"
+                name="tipo_cobro"
+                value="{{tipo}}"
+                (change)="radioChangeHandler($event)">
+                <i>{{tipo}}</i> 
+            </div>
+
+            <p><span>Tipo de cobro seleccionado: </span><b>{{selected_tipo}}</b></p>
             
             <mat-form-field>
                 <input matInput name="correo" [(ngModel)]="correo" placeholder="Correo electronico">
@@ -61,6 +62,9 @@
             <mat-form-field>
                 <input matInput name="contrasena" [(ngModel)]="contrasena" type="password" placeholder="Contraseña">
             </mat-form-field>
+
+            <input (change)="capturarImagen($event)" style="padding:15px" name="imagen" type="file">
+            <img [src]="imageUrl" class="foto">
 
             <form fxLayoutAlign="stretch" fxLayout="column">
                 <button (click)="Registrar()" style="margin: 10px" mat-icon-button class="button-form">
