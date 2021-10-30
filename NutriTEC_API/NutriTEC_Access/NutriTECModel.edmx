@@ -48,10 +48,10 @@
             <PropertyRef Name="cedula" />
           </Key>
           <Property Name="cedula" Type="int" Nullable="false" />
-          <Property Name="nombre" Type="nchar" MaxLength="50" Nullable="false" />
-          <Property Name="correo" Type="nchar" MaxLength="50" Nullable="false" />
-          <Property Name="passw" Type="nchar" MaxLength="50" Nullable="false" />
-          <Property Name="rol" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="correo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="passw" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="rol" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="meta_calorica">
           <Key>
@@ -311,10 +311,10 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
             <PropertyRef Name="cedula" />
           </Key>
           <Property Name="cedula" Type="Int32" Nullable="false" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="correo" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="passw" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="rol" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="correo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="passw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="rol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="database_firewall_rules">
           <Key>
