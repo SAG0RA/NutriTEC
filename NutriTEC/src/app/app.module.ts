@@ -26,6 +26,8 @@ import { AlertaComponent } from './alerta/alerta.component';
 import { ClienteRegistroComponent } from './cliente-registro/cliente-registro.component';
 import { AgregadoComponent } from './agregado/agregado.component';
 import { VistaAdminComponent } from './vista-admin/vista-admin.component';
+import { VistaClienteComponent } from './vista-cliente/vista-cliente.component';
+import { VistaNutriComponent } from './vista-nutri/vista-nutri.component';
 
 
 
@@ -39,6 +41,8 @@ import { VistaAdminComponent } from './vista-admin/vista-admin.component';
     ClienteRegistroComponent,
     AgregadoComponent,
     VistaAdminComponent,
+    VistaClienteComponent,
+    VistaNutriComponent,
   ],
   imports: [
     BrowserModule,

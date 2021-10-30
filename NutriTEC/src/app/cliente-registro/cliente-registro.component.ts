@@ -14,6 +14,7 @@ export class ClienteRegistroComponent implements OnInit {
   public lista_datos_recibidos: any = []
   private lista_usuarios: any = []
   url = '/api/cliente'
+  
 
   edad:number
   data:any
