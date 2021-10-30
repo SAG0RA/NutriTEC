@@ -3,20 +3,20 @@
         <mat-toolbar class="titulo">NutriTEC</mat-toolbar>
         <form fxLayoutAlign="stretch" fxLayout="column" class="login-form">
             <mat-form-field>
-                <input matInput placeholder="Usuario">
+                <input matInput name="Correo" [(ngModel)]="correo" placeholder="Correo">
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput type="password" placeholder="Contraseña">
+                <input matInput name="Contraseña" [(ngModel)]="passw" placeholder="Contraseña">
             </mat-form-field>
 
             <form fxLayoutAlign="stretch" fxLayout="column" class="button-form">
-                <button color="warn" style="background-color:coral" mat-raised-button>Iniciar</button>
+                <button color="warn" style="background-color:coral" (click) = "Autenticar()" mat-raised-button>Iniciar</button>
                 <mat-label class="label">Registrate como:</mat-label>
                 <button (click)="navToRegistroNutri()" mat-raised-button style="margin-top: 10px;" class = "button-registro">Nutricionista</button>
                 <button (click)="navToRegistroCliente()" mat-raised-button class = "button-registro">Cliente</button>
-            
+
             </form>
-        </form>    
+        </form>
     </mat-card>
 </div>

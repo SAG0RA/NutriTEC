@@ -25,6 +25,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { AlertaComponent } from './alerta/alerta.component';
 import { ClienteRegistroComponent } from './cliente-registro/cliente-registro.component';
 import { AgregadoComponent } from './agregado/agregado.component';
+import { VistaAdminComponent } from './vista-admin/vista-admin.component';
 
 
 
@@ -37,6 +38,7 @@ import { AgregadoComponent } from './agregado/agregado.component';
     AlertaComponent,
     ClienteRegistroComponent,
     AgregadoComponent,
+    VistaAdminComponent,
   ],
   imports: [
     BrowserModule,
