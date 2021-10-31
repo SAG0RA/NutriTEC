@@ -1,1 +1,66 @@
 <router-outlet></router-outlet>
+<div class="maindiv">
+
+    <mat-toolbar class="two">
+        <img src="/assets/images/perfil.png" class="profpic">
+        <h1>Bienvenido
+            <span>nombre</span>
+        </h1>
+    </mat-toolbar>
+
+    <form class="panel">
+        <mat-accordion>
+            <!---------------------------------------------->
+            <!-- PANEL DE GESTION DE PRODUCTOS Y PLATILLOS-->
+            <!---------------------------------------------->
+            <mat-expansion-panel class="subpanel">
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="titulo">
+                        Productos y platillos
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Lista de espera de aprobacion
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <!-- Contenido del panel PRODUCTOS-->
+                <mat-expansion-panel style="background-color: rgb(148, 52, 0);">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title class="subtitulo">
+                            Agregar productos
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <!-- Contenido del subpanel AGREGAR PRODUCTOS-->
+                    <form fxLayoutAlign="stretch" fxLayout="column" style="padding: 20px">
+                        <mat-form-field>
+                            <input matInput style="color:white" type="number" placeholder="Tamaño de la porcion (g/ml)">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput style="color:white" type="number" placeholder="energía (Kcal)">
+                        </mat-form-field>
+
+
+                    </form>
+                </mat-expansion-panel>
+                <mat-action-row>
+                    <button mat-button>Cerrar</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel style="margin-top: 20px;">
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="titulo">
+                        Búsqueda y Asociación de clientes
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Asocia tu cliente en tu lista
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <p>Productos</p>
+                <mat-action-row>
+                    <button mat-button>Cerrar</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </form>
+</div>

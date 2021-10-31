@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon'
 import {MatMenuModule} from '@angular/material/menu';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -45,6 +46,7 @@ import { VistaNutriComponent } from './vista-nutri/vista-nutri.component';
     VistaNutriComponent,
   ],
   imports: [
+    MatExpansionModule,
     BrowserModule,
     MatRadioModule,
     MatCheckboxModule,

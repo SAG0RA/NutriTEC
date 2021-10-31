@@ -1,4 +1,4 @@
-import { NutriRegistroComponent } from './../nutri-registro/nutri-registro.component';
+import { NutriRegistroComponent } from '../nutri-registro/nutri-registro.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { APIService } from '../api.service';

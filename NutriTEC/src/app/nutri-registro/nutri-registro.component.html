@@ -6,7 +6,7 @@
         <form fxLayoutAlign="stretch" fxLayout="column" class="registration-form">
 
             <mat-form-field>
-                <input matInput name="cedula" maxlength="9" [(ngModel)]="cedula" type="number" placeholder="Cedula">
+                <input matInput name="cedula" maxlength='8' [(ngModel)]="cedula" type="number" placeholder="Cedula">
             </mat-form-field>
 
             <mat-form-field>
@@ -64,7 +64,7 @@
             </mat-form-field>
 
             <input (change)="capturarImagen($event)" style="padding:15px" name="imagen" type="file">
-            <img [src]="imageUrl" class="foto">
+            <img fxLayoutAlign="stretch" [src]="url_image" class="foto">
 
             <form fxLayoutAlign="stretch" fxLayout="column">
                 <button (click)="Registrar()" style="margin: 10px" mat-icon-button class="button-form">
