@@ -17,9 +17,12 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NutriRegistroComponent } from './nutri-registro/nutri-registro.component';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -46,6 +49,9 @@ import { VistaNutriComponent } from './vista-nutri/vista-nutri.component';
     VistaNutriComponent,
   ],
   imports: [
+    MatTableModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
     MatExpansionModule,
     BrowserModule,
     MatRadioModule,

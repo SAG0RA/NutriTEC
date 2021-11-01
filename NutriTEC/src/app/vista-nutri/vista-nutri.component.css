@@ -3,7 +3,10 @@
     background-color: #3e5f3e;
     background-size: 200px;
 }
-
+.spinner{
+  display: inline-block;
+  vertical-align: middle;
+}
 .titulo{
   text-transform: capitalize;
   color:wheat;
@@ -38,7 +41,7 @@
 }
 
 .subpanel{
-  background-color:peru;
+  background-color:rgb(148, 52, 0);
 }
 
 .profpic{

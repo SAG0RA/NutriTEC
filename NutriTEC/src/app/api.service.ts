@@ -16,4 +16,8 @@ export class APIService {
   public POST(url:string,body: any){
     return this.http.post(url,body)
   }
+
+  public DELETE(url:string){
+    return this.http.delete(url)
+  }
 }

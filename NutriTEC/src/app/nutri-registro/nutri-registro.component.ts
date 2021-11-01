@@ -46,13 +46,13 @@ export class NutriRegistroComponent implements OnInit {
     'Anual'
   ]
 
-  constructor(public dialog: MatDialog, private API: APIService, private sant: DomSanitizer) {
+  constructor(public dialog: MatDialog, private API: APIService) {
     this.data = {}
     this.data.edad = ''
   }
 
   ngOnInit(): void {
-///////////////// GET al iniciar la pagina //////////////////
+///////////////// GET de NUTRICIONISTAS al iniciar la pagina //////////////////
     this.API.GET(this.url)
       .subscribe(response => {
         this.lista_datos_recibidos = response

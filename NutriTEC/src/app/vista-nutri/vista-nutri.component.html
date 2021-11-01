@@ -1,6 +1,6 @@
 <router-outlet></router-outlet>
 <div class="maindiv">
-
+    <mat-progress-bar *ngIf="showSpinner"  mode="query" class="spinner"></mat-progress-bar>
     <mat-toolbar class="two">
         <img src="/assets/images/perfil.png" class="profpic">
         <h1>Bienvenido
@@ -9,45 +9,174 @@
     </mat-toolbar>
 
     <form class="panel">
-        <mat-accordion>
+        <mat-accordion [multi]="true">
             <!---------------------------------------------->
             <!-- PANEL DE GESTION DE PRODUCTOS Y PLATILLOS-->
             <!---------------------------------------------->
             <mat-expansion-panel class="subpanel">
                 <mat-expansion-panel-header>
                     <mat-panel-title class="titulo">
-                        Productos y platillos
+                        Mis Productos y platillos
                     </mat-panel-title>
                     <mat-panel-description>
                         Lista de espera de aprobacion
                     </mat-panel-description>
                 </mat-expansion-panel-header>
+                
+                    <!--//////////////////////////////-->
+                    <!-- Contenido del panel PRODUCTOS-->
+                    <!--//////////////////////////////-->
+                    <!-- SUBPANEL AGREGAR PRODUCTOS -->
+                    <mat-expansion-panel style="background-color:peru;">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title class="subtitulo">
+                                Agregar productos
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <!-- Contenido del subpanel AGREGAR PRODUCTOS-->
+                        <form fxLayoutAlign="stretch" fxLayout="column" style="padding: 20px">
+                            <mat-form-field>
+                                <input matInput name="descripcion" [(ngModel)]="descripcion" style="color:white" type="text" placeholder="Descripción">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput name="porcion" [(ngModel)]="porcion" style="color:white" type="number" placeholder="Tamaño de la porcion (g/ml)">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput name="energia" [(ngModel)]="energia" style="color:white" type="number" placeholder="energía (Kcal)">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput name="grasa" [(ngModel)]="grasa" style="color:white" type="number" placeholder="grasa(g)">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput name="sodio" [(ngModel)]="sodio" style="color:white" type="number" placeholder="sodio(mg)">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput name="carbohidratos" [(ngModel)]="carbohidratos" style="color:white" type="number" placeholder="carbohidratos(g)">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput name="proteina" [(ngModel)]="proteina" style="color:white" type="number" placeholder="proteína (g)">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput name="vitaminas" [(ngModel)]="vitaminas" style="color:white" type="text" placeholder="Vitaminas">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput name="calcio" [(ngModel)]="calcio" style="color:white" type="number" placeholder="Calcio(mg)">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput name="hierro" [(ngModel)]="hierro" style="color:white" type="number" placeholder=" Hierro(mg)">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput name="codigo" [(ngModel)]="codigo_barras" style="color:white" type="number" placeholder="Codigo de barras">
+                            </mat-form-field>
+                            <button color="warn" style="background-color:rgb(148, 52, 0)"
+                                mat-raised-button (click)="agregarProducto()"> Agregar</button>
+                        </form>
+                    </mat-expansion-panel>
+                    <!-- SUBPANEL LISTA DE PRODUCTOS -->
+                    <mat-expansion-panel style="background-color:peru;margin-top: 20px;">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title class="subtitulo">
+                                Lista de productos agregados
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <!-- Contenido del subpanel LISTA DE PRODUCTOS-->
 
-                <!-- Contenido del panel PRODUCTOS-->
-                <mat-expansion-panel style="background-color: rgb(148, 52, 0);">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title class="subtitulo">
-                            Agregar productos
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <!-- Contenido del subpanel AGREGAR PRODUCTOS-->
-                    <form fxLayoutAlign="stretch" fxLayout="column" style="padding: 20px">
-                        <mat-form-field>
-                            <input matInput style="color:white" type="number" placeholder="Tamaño de la porcion (g/ml)">
-                        </mat-form-field>
-                        <mat-form-field>
-                            <input matInput style="color:white" type="number" placeholder="energía (Kcal)">
-                        </mat-form-field>
+                        <table mat-table [dataSource]="dataSource" style="width: 100%;">
 
+                            <!--- TABLA DE PRODUCTOS AGREGADOS -->
 
-                    </form>
-                </mat-expansion-panel>
-                <mat-action-row>
-                    <button mat-button>Cerrar</button>
-                </mat-action-row>
+                            <!-- Columna de codigo -->
+                            <ng-container matColumnDef="codigo_barras">
+                                <th mat-header-cell *matHeaderCellDef> Código </th>
+                                <td mat-cell *matCellDef="let element"> {{element.codigo_barras}} </td>
+                            </ng-container>
+
+                            <!-- Columna de descripcion -->
+                            <ng-container matColumnDef="descripcion">
+                                <th mat-header-cell *matHeaderCellDef> Descripción </th>
+                                <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+                            </ng-container>
+
+                            <!-- Columna de porcion -->
+                            <ng-container matColumnDef="porcion">
+                                <th mat-header-cell *matHeaderCellDef> Porción </th>
+                                <td mat-cell *matCellDef="let element"> {{element.porcion}} </td>
+                            </ng-container>
+
+                            <!-- Columna de energia -->
+                            <ng-container matColumnDef="energia">
+                                <th mat-header-cell *matHeaderCellDef> Energía (Kcal) </th>
+                                <td mat-cell *matCellDef="let element"> {{element.energia}} </td>
+                            </ng-container>
+                            
+                            <!-- Columna de grasa -->
+                            <ng-container matColumnDef="grasa">
+                                <th mat-header-cell *matHeaderCellDef> Grasa (g) </th>
+                                <td mat-cell *matCellDef="let element"> {{element.grasa}} </td>
+                            </ng-container>
+
+                            <!-- Columna de sodio -->
+                            <ng-container matColumnDef="sodio">
+                                <th mat-header-cell *matHeaderCellDef> Sodio (mg) </th>
+                                <td mat-cell *matCellDef="let element"> {{element.sodio}} </td>
+                            </ng-container>
+
+                            <!-- Columna de carbs -->
+                            <ng-container matColumnDef="carbohidratos">
+                                <th mat-header-cell *matHeaderCellDef> Carbohidratos (g) </th>
+                                <td mat-cell *matCellDef="let element"> {{element.carbohidratos}} </td>
+                            </ng-container>
+
+                            <!-- Columna de proteina -->
+                            <ng-container matColumnDef="proteina">
+                                <th mat-header-cell *matHeaderCellDef> Proteína (g) </th>
+                                <td mat-cell *matCellDef="let element"> {{element.proteina}} </td>
+                            </ng-container>
+
+                            <!-- Columna de calcio -->
+                            <ng-container matColumnDef="calcio">
+                                <th mat-header-cell *matHeaderCellDef> Calcio (mg) </th>
+                                <td mat-cell *matCellDef="let element"> {{element.calcio}} </td>
+                            </ng-container>
+
+                            <!-- Columna de hierro -->
+                            <ng-container matColumnDef="hierro">
+                                <th mat-header-cell *matHeaderCellDef> Hierro (mg) </th>
+                                <td mat-cell *matCellDef="let element"> {{element.hierro}} </td>
+                            </ng-container>
+
+                            <!-- Columna de vitas -->
+                            <ng-container matColumnDef="vitaminas">
+                                <th mat-header-cell *matHeaderCellDef> Vitaminas </th>
+                                <td mat-cell *matCellDef="let element"> {{element.vitaminas}} </td>
+                            </ng-container>
+                            
+                            <!-- Columna de vitas -->
+                            <ng-container matColumnDef="estado">
+                                <th mat-header-cell *matHeaderCellDef> Estado </th>
+                                <td mat-cell *matCellDef="let element"> {{estado}} </td>
+                            </ng-container>
+
+                            <!-- Columna de boton eliminar -->
+                            <ng-container matColumnDef="actions">
+                                <mat-header-cell  *matHeaderCellDef style="margin-top:19px;">Eliminar</mat-header-cell>
+                                <mat-cell *matCellDef="let row" >
+                                     <button mat-icon-button [disabled]="!dataSource.length" (click)="eliminarProducto(row)">
+                                        <mat-icon>delete</mat-icon>
+                                     </button>
+                                </mat-cell>
+                            </ng-container>
+                            
+
+                            
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+
+                    </mat-expansion-panel>
             </mat-expansion-panel>
 
-            <mat-expansion-panel style="margin-top: 20px;">
+            <mat-expansion-panel style="margin-top: 20px;background-color:rgb(148, 52, 0)">
                 <mat-expansion-panel-header>
                     <mat-panel-title class="titulo">
                         Búsqueda y Asociación de clientes
@@ -57,9 +186,6 @@
                     </mat-panel-description>
                 </mat-expansion-panel-header>
                 <p>Productos</p>
-                <mat-action-row>
-                    <button mat-button>Cerrar</button>
-                </mat-action-row>
             </mat-expansion-panel>
         </mat-accordion>
     </form>
