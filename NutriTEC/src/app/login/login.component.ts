@@ -1,3 +1,4 @@
+import { DataService } from './../data.service';
 import { NutriRegistroComponent } from '../nutri-registro/nutri-registro.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit {
   lista_nutris:any = []
   lista_nutris_contrasenas:any = []
 
-  constructor(private API: APIService, private router: Router) { }
+  constructor(private API: APIService, private router: Router,private dataService:DataService) { }
 
   ngOnInit(): void {  //Crea una lista que toma todos los datos y los pasa a una lista que toma los correos
     this.API.GET(this.url_empleados)
@@ -43,6 +44,9 @@ export class LoginComponent implements OnInit {
           this.lista_empleados.push(this.lista_datos_recibidos[i]['correo'])
           this.lista_empleados_contrasenas.push(this.lista_datos_recibidos[i]['passw'])
         }
+
+      console.log('Empleados: ' + '['+ this.lista_empleados + ']')
+      console.log('Empleados_passw: ' + '[' + this.lista_empleados_contrasenas + ']') 
       })
 
     this.API.GET(this.url_cliente)
@@ -55,6 +59,8 @@ export class LoginComponent implements OnInit {
           this.lista_clientes.push(this.lista_datos_recibidos[i]['correo'])
           this.lista_clientes_contrasenas.push(this.lista_datos_recibidos[i]['passw'])
         }
+      console.log('Clientes: ' + '[' + this.lista_clientes + ']')
+      console.log('Clientes_passw: ' + '[' + this.lista_clientes_contrasenas + ']')
       })
 
       
@@ -68,12 +74,10 @@ export class LoginComponent implements OnInit {
         this.lista_nutris.push(this.lista_datos_recibidos[i]['correo'])
         this.lista_nutris_contrasenas.push(this.lista_datos_recibidos[i]['passw'])
       }
-      console.log('Clientes: ' + this.lista_clientes)
-      console.log('Clientes_passw: ' + this.lista_clientes_contrasenas)
-      console.log('Nutris: ' + this.lista_nutris)
-      console.log('Nutris_passw: ' + this.lista_nutris_contrasenas)
-      console.log('Empleados: ' + this.lista_empleados)
-      console.log('Empleados_passw: ' + this.lista_empleados_contrasenas)
+
+      console.log('Nutris: ' + '[' + this.lista_nutris + ']')
+      console.log('Nutris_passw: ' + '[' + this.lista_nutris_contrasenas + ']')
+
     })
 
 
@@ -98,6 +102,9 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['vista/nutri'])
       }
     }
+    localStorage.setItem('user',this.correo)
+    const correo_almacenado = localStorage.getItem('user')
+    this.dataService.correo = correo_almacenado
   }
 
   navToRegistroNutri() {

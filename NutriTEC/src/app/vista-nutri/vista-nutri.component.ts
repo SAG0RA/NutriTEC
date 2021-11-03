@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { DataService } from './../data.service';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { APIService } from '../api.service';
 
@@ -29,14 +30,16 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class VistaNutriComponent implements OnInit {
   showSpinner = false;
+  @Input() nombre_usuario: string = 'usuario'
 
 
 ////////// Listas con los datos de PRODUCTOS en API /////////////
   url = '/api/producto'
+  url_nutri = '/api/nutri' 
   lista_datos_recibidos:any = []
   lista_productos: any = []
 
-  
+  lista_productosxusuario = []
 ////////// Gestion de Tabla de productos /////////////
   displayedColumns: string[] =
     ['codigo_barras', 'descripcion', 'porcion', 'energia', 'grasa', 'proteina', 'sodio', 'carbohidratos', 'calcio', 'hierro', 'vitaminas','estado','actions'];
@@ -44,7 +47,8 @@ export class VistaNutriComponent implements OnInit {
   @ViewChild(MatTable) table: MatTable<PeriodicElement>;
 
 ////////// Datos de los inputs /////////////
-  estado = true;
+  estado = 0;
+  correo = localStorage.getItem('user')
 
   codigo_barras: string
   descripcion: string
@@ -58,9 +62,10 @@ export class VistaNutriComponent implements OnInit {
   calcio: string
   vitaminas: string
 
-  constructor( private API: APIService) { }
-
+  constructor( private API: APIService,public dataService:DataService) {}
   ngOnInit(): void {
+    localStorage.setItem('user',this.dataService.correo);
+    console.log(this.correo)
     ///////////////// GET de PRODUCTOS al iniciar la pagina //////////////////
     this.API.GET(this.url)
       .subscribe(response => {
@@ -71,11 +76,28 @@ export class VistaNutriComponent implements OnInit {
         for (var i = 0; i < this.lista_datos_recibidos.length; i++) {
           // Rellena las listas con los datos del API con codigo de barras 
           this.lista_productos.push(this.lista_datos_recibidos[i]['codigo_barras'])
-          ELEMENT_DATA.push(this.lista_datos_recibidos[i])
+          //console.log(this.lista_datos_recibidos.filter())
+          
         }
         console.log('Productos: ' + '[' + this.lista_productos + ']')
-        this.table.renderRows()
+
+        //Filtra los productos segun el usuario ingresado
+        var filtro = this.lista_datos_recibidos.filter(function(el:any){
+          return el.descripcion == 'Manzana'
+        })
+          console.log(filtro)
+
+          for(var i = 0; i < filtro.length;i++){
+            ELEMENT_DATA.push(filtro[i])
+          }
+          
+          this.table.renderRows()
       })
+  }
+
+  set(key:string,data:any){
+    localStorage.setItem(key,data);
+    return localStorage.getItem(key)
   }
 
 
@@ -85,11 +107,7 @@ export class VistaNutriComponent implements OnInit {
 
     this.API.DELETE(this.url + '/' + row.codigo_barras).subscribe(() => console.log("Producto eliminado"))
     
-    this.showSpinner = true;
-    setTimeout(() => {
-      this.showSpinner =  false
-    },3000)
-    
+
     this.API.GET(this.url)
     .subscribe(response => {
       this.lista_datos_recibidos = response
@@ -120,7 +138,7 @@ export class VistaNutriComponent implements OnInit {
         energia: this.energia,
         grasa: this.grasa,
         hierro: this.hierro,
-        // lista_espera: this.estado,
+        lista_espera: this.estado,
         porcion: this.porcion,
         proteina: this.proteina,
         sodio: this.sodio,
@@ -128,7 +146,6 @@ export class VistaNutriComponent implements OnInit {
       }
       
       ELEMENT_DATA.push(lista_elementos)
-      console.log(lista_elementos.toString)
       console.log(ELEMENT_DATA)
       this.table.renderRows();
       
