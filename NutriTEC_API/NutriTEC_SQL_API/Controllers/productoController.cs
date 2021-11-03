@@ -41,8 +41,8 @@ namespace NutriTEC_API.Controllers
                     vitaminas = pr.vitaminas,
                     calcio = pr.calcio,
                     hierro = pr.hierro,
-                    lista_espera = pr.lista_espera
-
+                    lista_espera = pr.lista_espera, 
+                    nutri_cedula = pr.nutri_cedula
                 });
                 entities.SaveChanges();
             }
@@ -72,6 +72,7 @@ namespace NutriTEC_API.Controllers
                     existingProducto.calcio = pr.calcio;
                     existingProducto.hierro = pr.hierro;
                     existingProducto.lista_espera = pr.lista_espera;
+                    existingProducto.nutri_cedula = pr.nutri_cedula;
 
                     entities.SaveChanges();
                 }

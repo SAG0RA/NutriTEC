@@ -14,20 +14,33 @@ namespace NutriTEC_API.Controllers
         {
             using (NutriTECEntities entities = new NutriTECEntities())
                 return entities.cliente.ToList();
+             //var resultado = entities.Database.SqlQuery<string>("USP_GetCliente @cedula", cl.cedula).ToString();
         }
+
         public cliente Get(int id)
         {
             using (NutriTECEntities entities = new NutriTECEntities())
                 return entities.cliente.FirstOrDefault(e => e.cedula == id);
         }
-        
+
+        //uso de stored procedure
+        /*public IEnumerable<USP_GetCliente_Result> Get(int id)
+        {
+            using (NutriTECEntities entities = new NutriTECEntities())
+            {
+                var tt = entities.USP_GetCliente(id);
+                return tt.ToList();
+            }
+        }*/
+
         public IHttpActionResult Post(cliente cl)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Not a valid model");
-
+            USP_GetCliente_Result temp;
             using (NutriTECEntities entities = new NutriTECEntities())
             {
+                
                 entities.cliente.Add(new cliente()
                 {
                     cedula = cl.cedula,
@@ -48,10 +61,40 @@ namespace NutriTEC_API.Controllers
                     correo = cl.correo,
                     passw = cl.passw
                 });
+
+                entities.registro_peso.Add(new registro_peso()
+                {
+
+                    cliente_cedula = cl.cedula,
+                    fecha_del_registro = DateTime.Now,
+                    peso = cl.peso,
+                    IMC = cl.IMC,
+                    cintura = cl.cintura,
+                    cuello = cl.cuello,
+                    caderas = cl.caderas,
+                    porc_musculo = cl.porc_musculo,
+                    porc_grasa = cl.porc_grasa
+
+                }) ;
+
                 entities.SaveChanges();
+                //string DistributionChannelGUID = db.Database.SqlQuery<string>("GetDistributionChannelGUID @DeviceID, @CCCShopID", Parameters).ToString();
             }
+            //var resultado = entities.Database.SqlQuery<string>("USP_GetCliente @cedula", cl.cedula).ToString();
             return Ok();
         }
+
+       /* public IEnumerable<USP_GetCliente_Result> Get(int id)
+        {
+            System.Data.Entity.Core.Objects.ObjectResult tt;
+            using (NutriTECEntities entities = new NutriTECEntities())
+            {
+                tt = entities.USP_GetCliente(id);
+            }
+
+            return (IEnumerable<USP_GetCliente_Result>)tt;
+        }*/
+
         public IHttpActionResult Put(cliente cl)
         {
             if (!ModelState.IsValid)

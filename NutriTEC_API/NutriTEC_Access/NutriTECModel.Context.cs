@@ -12,6 +12,8 @@ namespace NutriTEC_Access
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class NutriTECEntities : DbContext
     {
@@ -20,19 +22,30 @@ namespace NutriTEC_Access
         {
             Configuration.ProxyCreationEnabled = false;
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
     
         public virtual DbSet<cliente> cliente { get; set; }
-        public virtual DbSet<cliente_nutricionista> cliente_nutricionista { get; set; }
-        public virtual DbSet<cuentas> cuentas { get; set; }
+        public virtual DbSet<Empleado> Empleado { get; set; }
         public virtual DbSet<meta_calorica> meta_calorica { get; set; }
         public virtual DbSet<nutricionista> nutricionista { get; set; }
+        public virtual DbSet<paciente> paciente { get; set; }
+        public virtual DbSet<plan_alimenticio> plan_alimenticio { get; set; }
         public virtual DbSet<producto> producto { get; set; }
-        public virtual DbSet<Empleado> Empleado { get; set; }
+        public virtual DbSet<registro_comida> registro_comida { get; set; }
+        public virtual DbSet<registro_peso> registro_peso { get; set; }
         public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
+    
+        public virtual ObjectResult<USP_GetCliente_Result> USP_GetCliente(Nullable<int> cedula)
+        {
+            var cedulaParameter = cedula.HasValue ?
+                new ObjectParameter("cedula", cedula) :
+                new ObjectParameter("cedula", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_GetCliente_Result>("USP_GetCliente", cedulaParameter);
+        }
     }
 }

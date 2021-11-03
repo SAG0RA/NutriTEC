@@ -18,6 +18,9 @@ namespace NutriTEC_Access
         public nutricionista()
         {
             this.meta_calorica = new HashSet<meta_calorica>();
+            this.paciente = new HashSet<paciente>();
+            this.plan_alimenticio = new HashSet<plan_alimenticio>();
+            this.producto = new HashSet<producto>();
         }
     
         public int n_cedula { get; set; }
@@ -38,5 +41,11 @@ namespace NutriTEC_Access
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<meta_calorica> meta_calorica { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<paciente> paciente { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<plan_alimenticio> plan_alimenticio { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<producto> producto { get; set; }
     }
 }

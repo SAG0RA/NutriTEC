@@ -10,19 +10,9 @@
 namespace NutriTEC_Access
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class cliente
+    public partial class USP_GetCliente_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public cliente()
-        {
-            this.meta_calorica = new HashSet<meta_calorica>();
-            this.paciente = new HashSet<paciente>();
-            this.registro_comida = new HashSet<registro_comida>();
-            this.registro_peso = new HashSet<registro_peso>();
-        }
-    
         public int cedula { get; set; }
         public string nombre { get; set; }
         public string p_apellido { get; set; }
@@ -40,14 +30,5 @@ namespace NutriTEC_Access
         public Nullable<int> cdm_calorias { get; set; }
         public string correo { get; set; }
         public string passw { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<meta_calorica> meta_calorica { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<paciente> paciente { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<registro_comida> registro_comida { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<registro_peso> registro_peso { get; set; }
     }
 }

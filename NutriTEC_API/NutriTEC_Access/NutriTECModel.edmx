@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="NutriTECModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="NutriTECModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="cliente">
           <Key>
             <PropertyRef Name="cedula" />
@@ -26,22 +26,6 @@
           <Property Name="cdm_calorias" Type="int" />
           <Property Name="correo" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="passw" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="cliente_nutricionista">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="id_nutricionista" Type="int" />
-          <Property Name="id_cliente" Type="int" />
-        </EntityType>
-        <EntityType Name="cuentas">
-          <Key>
-            <PropertyRef Name="correo" />
-          </Key>
-          <Property Name="correo" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="passw" Type="varchar" MaxLength="50" />
-          <Property Name="rol" Type="int" />
         </EntityType>
         <EntityType Name="Empleado">
           <Key>
@@ -84,6 +68,34 @@
           <Property Name="correo" Type="varchar" MaxLength="100" />
           <Property Name="passw" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="paciente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="n_cedula" Type="int" Nullable="false" />
+          <Property Name="paciente_cedula" Type="int" Nullable="false" />
+          <Property Name="paciente_plan" Type="int" />
+        </EntityType>
+        <EntityType Name="plan_alimenticio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_plan" Type="varchar" MaxLength="50" />
+          <Property Name="tiempo_comida1" Type="varchar" MaxLength="50" />
+          <Property Name="productosTC1" Type="int" />
+          <Property Name="tiempo_comida2" Type="varchar" MaxLength="50" />
+          <Property Name="productosTC2" Type="int" />
+          <Property Name="tiempo_comida3" Type="varchar" MaxLength="50" />
+          <Property Name="productosTC3" Type="int" />
+          <Property Name="tiempo_comida4" Type="varchar" MaxLength="50" />
+          <Property Name="productosTC4" Type="int" />
+          <Property Name="tiempo_comida5" Type="varchar" MaxLength="50" />
+          <Property Name="productosTC5" Type="int" />
+          <Property Name="total_calorias" Type="int" />
+          <Property Name="nutri_al_plan" Type="int" />
+        </EntityType>
         <EntityType Name="producto">
           <Key>
             <PropertyRef Name="codigo_barras" />
@@ -100,6 +112,32 @@
           <Property Name="calcio" Type="int" />
           <Property Name="hierro" Type="int" />
           <Property Name="lista_espera" Type="int" />
+          <Property Name="nutri_cedula" Type="int" />
+        </EntityType>
+        <EntityType Name="registro_comida">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cliente_cedula" Type="int" />
+          <Property Name="fecha_del_registro" Type="date" />
+          <Property Name="productos" Type="int" />
+          <Property Name="total_calorias" Type="int" />
+        </EntityType>
+        <EntityType Name="registro_peso">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cliente_cedula" Type="int" />
+          <Property Name="fecha_del_registro" Type="date" />
+          <Property Name="peso" Type="varchar" MaxLength="50" />
+          <Property Name="IMC" Type="float" />
+          <Property Name="cintura" Type="int" />
+          <Property Name="cuello" Type="int" />
+          <Property Name="caderas" Type="int" />
+          <Property Name="porc_musculo" Type="int" />
+          <Property Name="porc_grasa" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -143,14 +181,103 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__paciente__id_cli__1EA48E88">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+          <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="paciente">
+              <PropertyRef Name="paciente_cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__paciente__id_nut__1DB06A4F">
+          <End Role="nutricionista" Type="Self.nutricionista" Multiplicity="1" />
+          <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nutricionista">
+              <PropertyRef Name="n_cedula" />
+            </Principal>
+            <Dependent Role="paciente">
+              <PropertyRef Name="n_cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__paciente__pacien__2FCF1A8A">
+          <End Role="plan_alimenticio" Type="Self.plan_alimenticio" Multiplicity="0..1" />
+          <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="plan_alimenticio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="paciente">
+              <PropertyRef Name="paciente_plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__plan_alim__nutri__2EDAF651">
+          <End Role="nutricionista" Type="Self.nutricionista" Multiplicity="0..1" />
+          <End Role="plan_alimenticio" Type="Self.plan_alimenticio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nutricionista">
+              <PropertyRef Name="n_cedula" />
+            </Principal>
+            <Dependent Role="plan_alimenticio">
+              <PropertyRef Name="nutri_al_plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__producto__nutri___3493CFA7">
+          <End Role="nutricionista" Type="Self.nutricionista" Multiplicity="0..1" />
+          <End Role="producto" Type="Self.producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nutricionista">
+              <PropertyRef Name="n_cedula" />
+            </Principal>
+            <Dependent Role="producto">
+              <PropertyRef Name="nutri_cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__registro___clien__2B0A656D">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="0..1" />
+          <End Role="registro_comida" Type="Self.registro_comida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="registro_comida">
+              <PropertyRef Name="cliente_cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__registro___clien__2BFE89A6">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="0..1" />
+          <End Role="registro_peso" Type="Self.registro_peso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="registro_peso">
+              <PropertyRef Name="cliente_cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="USP_GetCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cedula" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="NutriTECModelStoreContainer">
           <EntitySet Name="cliente" EntityType="Self.cliente" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="cliente_nutricionista" EntityType="Self.cliente_nutricionista" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="cuentas" EntityType="Self.cuentas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="meta_calorica" EntityType="Self.meta_calorica" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="nutricionista" EntityType="Self.nutricionista" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="paciente" EntityType="Self.paciente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="plan_alimenticio" EntityType="Self.plan_alimenticio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="producto" EntityType="Self.producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="registro_comida" EntityType="Self.registro_comida" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="registro_peso" EntityType="Self.registro_peso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
             <DefiningQuery>SELECT 
     [database_firewall_rules].[id] AS [id], 
@@ -169,8 +296,37 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
             <End Role="nutricionista" EntitySet="nutricionista" />
             <End Role="meta_calorica" EntitySet="meta_calorica" />
           </AssociationSet>
+          <AssociationSet Name="FK__paciente__id_cli__1EA48E88" Association="Self.FK__paciente__id_cli__1EA48E88">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="paciente" EntitySet="paciente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__paciente__id_nut__1DB06A4F" Association="Self.FK__paciente__id_nut__1DB06A4F">
+            <End Role="nutricionista" EntitySet="nutricionista" />
+            <End Role="paciente" EntitySet="paciente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__paciente__pacien__2FCF1A8A" Association="Self.FK__paciente__pacien__2FCF1A8A">
+            <End Role="plan_alimenticio" EntitySet="plan_alimenticio" />
+            <End Role="paciente" EntitySet="paciente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__plan_alim__nutri__2EDAF651" Association="Self.FK__plan_alim__nutri__2EDAF651">
+            <End Role="nutricionista" EntitySet="nutricionista" />
+            <End Role="plan_alimenticio" EntitySet="plan_alimenticio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__producto__nutri___3493CFA7" Association="Self.FK__producto__nutri___3493CFA7">
+            <End Role="nutricionista" EntitySet="nutricionista" />
+            <End Role="producto" EntitySet="producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__registro___clien__2B0A656D" Association="Self.FK__registro___clien__2B0A656D">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="registro_comida" EntitySet="registro_comida" />
+          </AssociationSet>
+          <AssociationSet Name="FK__registro___clien__2BFE89A6" Association="Self.FK__registro___clien__2BFE89A6">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="registro_peso" EntitySet="registro_peso" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NutriTECModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -196,22 +352,19 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
           <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="passw" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="meta_calorica" Relationship="Self.FK__meta_calo__clien__14270015" FromRole="cliente" ToRole="meta_calorica" />
+          <NavigationProperty Name="paciente" Relationship="Self.FK__paciente__id_cli__1EA48E88" FromRole="cliente" ToRole="paciente" />
+          <NavigationProperty Name="registro_comida" Relationship="Self.FK__registro___clien__2B0A656D" FromRole="cliente" ToRole="registro_comida" />
+          <NavigationProperty Name="registro_peso" Relationship="Self.FK__registro___clien__2BFE89A6" FromRole="cliente" ToRole="registro_peso" />
         </EntityType>
-        <EntityType Name="cliente_nutricionista">
+        <EntityType Name="Empleado">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="cedula" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="id_nutricionista" Type="Int32" />
-          <Property Name="id_cliente" Type="Int32" />
-        </EntityType>
-        <EntityType Name="cuentas">
-          <Key>
-            <PropertyRef Name="correo" />
-          </Key>
-          <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="passw" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="rol" Type="Int32" />
+          <Property Name="cedula" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="passw" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="meta_calorica">
           <Key>
@@ -246,6 +399,42 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
           <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="passw" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="meta_calorica" Relationship="Self.FK__meta_calo__nutri__151B244E" FromRole="nutricionista" ToRole="meta_calorica" />
+          <NavigationProperty Name="paciente" Relationship="Self.FK__paciente__id_nut__1DB06A4F" FromRole="nutricionista" ToRole="paciente" />
+          <NavigationProperty Name="plan_alimenticio" Relationship="Self.FK__plan_alim__nutri__2EDAF651" FromRole="nutricionista" ToRole="plan_alimenticio" />
+          <NavigationProperty Name="producto" Relationship="Self.FK__producto__nutri___3493CFA7" FromRole="nutricionista" ToRole="producto" />
+        </EntityType>
+        <EntityType Name="paciente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="n_cedula" Type="Int32" Nullable="false" />
+          <Property Name="paciente_cedula" Type="Int32" Nullable="false" />
+          <Property Name="paciente_plan" Type="Int32" />
+          <NavigationProperty Name="cliente" Relationship="Self.FK__paciente__id_cli__1EA48E88" FromRole="paciente" ToRole="cliente" />
+          <NavigationProperty Name="nutricionista" Relationship="Self.FK__paciente__id_nut__1DB06A4F" FromRole="paciente" ToRole="nutricionista" />
+          <NavigationProperty Name="plan_alimenticio" Relationship="Self.FK__paciente__pacien__2FCF1A8A" FromRole="paciente" ToRole="plan_alimenticio" />
+        </EntityType>
+        <EntityType Name="plan_alimenticio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_plan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tiempo_comida1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="productosTC1" Type="Int32" />
+          <Property Name="tiempo_comida2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="productosTC2" Type="Int32" />
+          <Property Name="tiempo_comida3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="productosTC3" Type="Int32" />
+          <Property Name="tiempo_comida4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="productosTC4" Type="Int32" />
+          <Property Name="tiempo_comida5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="productosTC5" Type="Int32" />
+          <Property Name="total_calorias" Type="Int32" />
+          <Property Name="nutri_al_plan" Type="Int32" />
+          <NavigationProperty Name="nutricionista" Relationship="Self.FK__plan_alim__nutri__2EDAF651" FromRole="plan_alimenticio" ToRole="nutricionista" />
+          <NavigationProperty Name="paciente" Relationship="Self.FK__paciente__pacien__2FCF1A8A" FromRole="plan_alimenticio" ToRole="paciente" />
         </EntityType>
         <EntityType Name="producto">
           <Key>
@@ -263,6 +452,51 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
           <Property Name="calcio" Type="Int32" />
           <Property Name="hierro" Type="Int32" />
           <Property Name="lista_espera" Type="Int32" />
+          <Property Name="nutri_cedula" Type="Int32" />
+          <NavigationProperty Name="nutricionista" Relationship="Self.FK__producto__nutri___3493CFA7" FromRole="producto" ToRole="nutricionista" />
+        </EntityType>
+        <EntityType Name="registro_comida">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cliente_cedula" Type="Int32" />
+          <Property Name="fecha_del_registro" Type="DateTime" Precision="0" />
+          <Property Name="productos" Type="Int32" />
+          <Property Name="total_calorias" Type="Int32" />
+          <NavigationProperty Name="cliente" Relationship="Self.FK__registro___clien__2B0A656D" FromRole="registro_comida" ToRole="cliente" />
+        </EntityType>
+        <EntityType Name="registro_peso">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cliente_cedula" Type="Int32" />
+          <Property Name="fecha_del_registro" Type="DateTime" Precision="0" />
+          <Property Name="peso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IMC" Type="Double" />
+          <Property Name="cintura" Type="Int32" />
+          <Property Name="cuello" Type="Int32" />
+          <Property Name="caderas" Type="Int32" />
+          <Property Name="porc_musculo" Type="Int32" />
+          <Property Name="porc_grasa" Type="Int32" />
+          <NavigationProperty Name="cliente" Relationship="Self.FK__registro___clien__2BFE89A6" FromRole="registro_peso" ToRole="cliente" />
+        </EntityType>
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="start_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="end_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <Association Name="FK__meta_calo__clien__14270015">
           <End Role="cliente" Type="Self.cliente" Multiplicity="0..1" />
@@ -272,6 +506,42 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
               <PropertyRef Name="cedula" />
             </Principal>
             <Dependent Role="meta_calorica">
+              <PropertyRef Name="cliente_cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__paciente__id_cli__1EA48E88">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+          <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="paciente">
+              <PropertyRef Name="paciente_cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__registro___clien__2B0A656D">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="0..1" />
+          <End Role="registro_comida" Type="Self.registro_comida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="registro_comida">
+              <PropertyRef Name="cliente_cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__registro___clien__2BFE89A6">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="0..1" />
+          <End Role="registro_peso" Type="Self.registro_peso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="registro_peso">
               <PropertyRef Name="cliente_cedula" />
             </Dependent>
           </ReferentialConstraint>
@@ -288,50 +558,124 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__paciente__id_nut__1DB06A4F">
+          <End Role="nutricionista" Type="Self.nutricionista" Multiplicity="1" />
+          <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nutricionista">
+              <PropertyRef Name="n_cedula" />
+            </Principal>
+            <Dependent Role="paciente">
+              <PropertyRef Name="n_cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__plan_alim__nutri__2EDAF651">
+          <End Role="nutricionista" Type="Self.nutricionista" Multiplicity="0..1" />
+          <End Role="plan_alimenticio" Type="Self.plan_alimenticio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nutricionista">
+              <PropertyRef Name="n_cedula" />
+            </Principal>
+            <Dependent Role="plan_alimenticio">
+              <PropertyRef Name="nutri_al_plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__producto__nutri___3493CFA7">
+          <End Role="nutricionista" Type="Self.nutricionista" Multiplicity="0..1" />
+          <End Role="producto" Type="Self.producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nutricionista">
+              <PropertyRef Name="n_cedula" />
+            </Principal>
+            <Dependent Role="producto">
+              <PropertyRef Name="nutri_cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__paciente__pacien__2FCF1A8A">
+          <End Role="plan_alimenticio" Type="Self.plan_alimenticio" Multiplicity="0..1" />
+          <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="plan_alimenticio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="paciente">
+              <PropertyRef Name="paciente_plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="NutriTECEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="cliente" EntityType="Self.cliente" />
-          <EntitySet Name="cliente_nutricionista" EntityType="Self.cliente_nutricionista" />
-          <EntitySet Name="cuentas" EntityType="Self.cuentas" />
+          <EntitySet Name="Empleado" EntityType="Self.Empleado" />
           <EntitySet Name="meta_calorica" EntityType="Self.meta_calorica" />
           <EntitySet Name="nutricionista" EntityType="Self.nutricionista" />
+          <EntitySet Name="paciente" EntityType="Self.paciente" />
+          <EntitySet Name="plan_alimenticio" EntityType="Self.plan_alimenticio" />
           <EntitySet Name="producto" EntityType="Self.producto" />
+          <EntitySet Name="registro_comida" EntityType="Self.registro_comida" />
+          <EntitySet Name="registro_peso" EntityType="Self.registro_peso" />
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
           <AssociationSet Name="FK__meta_calo__clien__14270015" Association="Self.FK__meta_calo__clien__14270015">
             <End Role="cliente" EntitySet="cliente" />
             <End Role="meta_calorica" EntitySet="meta_calorica" />
+          </AssociationSet>
+          <AssociationSet Name="FK__paciente__id_cli__1EA48E88" Association="Self.FK__paciente__id_cli__1EA48E88">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="paciente" EntitySet="paciente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__registro___clien__2B0A656D" Association="Self.FK__registro___clien__2B0A656D">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="registro_comida" EntitySet="registro_comida" />
+          </AssociationSet>
+          <AssociationSet Name="FK__registro___clien__2BFE89A6" Association="Self.FK__registro___clien__2BFE89A6">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="registro_peso" EntitySet="registro_peso" />
           </AssociationSet>
           <AssociationSet Name="FK__meta_calo__nutri__151B244E" Association="Self.FK__meta_calo__nutri__151B244E">
             <End Role="nutricionista" EntitySet="nutricionista" />
             <End Role="meta_calorica" EntitySet="meta_calorica" />
           </AssociationSet>
-          <EntitySet Name="Empleado" EntityType="NutriTECModel.Empleado" />
-          <EntitySet Name="database_firewall_rules" EntityType="NutriTECModel.database_firewall_rules" />
+          <AssociationSet Name="FK__paciente__id_nut__1DB06A4F" Association="Self.FK__paciente__id_nut__1DB06A4F">
+            <End Role="nutricionista" EntitySet="nutricionista" />
+            <End Role="paciente" EntitySet="paciente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__plan_alim__nutri__2EDAF651" Association="Self.FK__plan_alim__nutri__2EDAF651">
+            <End Role="nutricionista" EntitySet="nutricionista" />
+            <End Role="plan_alimenticio" EntitySet="plan_alimenticio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__producto__nutri___3493CFA7" Association="Self.FK__producto__nutri___3493CFA7">
+            <End Role="nutricionista" EntitySet="nutricionista" />
+            <End Role="producto" EntitySet="producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__paciente__pacien__2FCF1A8A" Association="Self.FK__paciente__pacien__2FCF1A8A">
+            <End Role="plan_alimenticio" EntitySet="plan_alimenticio" />
+            <End Role="paciente" EntitySet="paciente" />
+          </AssociationSet>
+          <FunctionImport Name="USP_GetCliente" ReturnType="Collection(NutriTECModel.USP_GetCliente_Result)">
+            <Parameter Name="cedula" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
-        <EntityType Name="Empleado">
-          <Key>
-            <PropertyRef Name="cedula" />
-          </Key>
-          <Property Name="cedula" Type="Int32" Nullable="false" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="correo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="passw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="rol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="database_firewall_rules">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="start_ip_address" />
-            <PropertyRef Name="end_ip_address" />
-            <PropertyRef Name="create_date" />
-            <PropertyRef Name="modify_date" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="start_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="end_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
+        <ComplexType Name="USP_GetCliente_Result">
+          <Property Type="Int32" Name="cedula" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="p_apellido" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="s_apellido" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="edad" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_nac" Nullable="true" />
+          <Property Type="String" Name="peso" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="IMC" Nullable="true" />
+          <Property Type="String" Name="pais" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="cintura" Nullable="true" />
+          <Property Type="Int32" Name="cuello" Nullable="true" />
+          <Property Type="Int32" Name="caderas" Nullable="true" />
+          <Property Type="Int32" Name="porc_musculo" Nullable="true" />
+          <Property Type="Int32" Name="porc_grasa" Nullable="true" />
+          <Property Type="Int32" Name="cdm_calorias" Nullable="true" />
+          <Property Type="String" Name="correo" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="passw" Nullable="false" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -361,18 +705,11 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="cliente_nutricionista">
-            <EntityTypeMapping TypeName="NutriTECModel.cliente_nutricionista">
-              <MappingFragment StoreEntitySet="cliente_nutricionista">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="id_nutricionista" ColumnName="id_nutricionista" />
-                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="cuentas">
-            <EntityTypeMapping TypeName="NutriTECModel.cuentas">
-              <MappingFragment StoreEntitySet="cuentas">
+          <EntitySetMapping Name="Empleado">
+            <EntityTypeMapping TypeName="NutriTECModel.Empleado">
+              <MappingFragment StoreEntitySet="Empleado">
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="correo" ColumnName="correo" />
                 <ScalarProperty Name="passw" ColumnName="passw" />
                 <ScalarProperty Name="rol" ColumnName="rol" />
@@ -412,6 +749,36 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="paciente">
+            <EntityTypeMapping TypeName="NutriTECModel.paciente">
+              <MappingFragment StoreEntitySet="paciente">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="n_cedula" ColumnName="n_cedula" />
+                <ScalarProperty Name="paciente_cedula" ColumnName="paciente_cedula" />
+                <ScalarProperty Name="paciente_plan" ColumnName="paciente_plan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="plan_alimenticio">
+            <EntityTypeMapping TypeName="NutriTECModel.plan_alimenticio">
+              <MappingFragment StoreEntitySet="plan_alimenticio">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="nombre_plan" ColumnName="nombre_plan" />
+                <ScalarProperty Name="tiempo_comida1" ColumnName="tiempo_comida1" />
+                <ScalarProperty Name="productosTC1" ColumnName="productosTC1" />
+                <ScalarProperty Name="tiempo_comida2" ColumnName="tiempo_comida2" />
+                <ScalarProperty Name="productosTC2" ColumnName="productosTC2" />
+                <ScalarProperty Name="tiempo_comida3" ColumnName="tiempo_comida3" />
+                <ScalarProperty Name="productosTC3" ColumnName="productosTC3" />
+                <ScalarProperty Name="tiempo_comida4" ColumnName="tiempo_comida4" />
+                <ScalarProperty Name="productosTC4" ColumnName="productosTC4" />
+                <ScalarProperty Name="tiempo_comida5" ColumnName="tiempo_comida5" />
+                <ScalarProperty Name="productosTC5" ColumnName="productosTC5" />
+                <ScalarProperty Name="total_calorias" ColumnName="total_calorias" />
+                <ScalarProperty Name="nutri_al_plan" ColumnName="nutri_al_plan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="producto">
             <EntityTypeMapping TypeName="NutriTECModel.producto">
               <MappingFragment StoreEntitySet="producto">
@@ -427,32 +794,72 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
                 <ScalarProperty Name="calcio" ColumnName="calcio" />
                 <ScalarProperty Name="hierro" ColumnName="hierro" />
                 <ScalarProperty Name="lista_espera" ColumnName="lista_espera" />
+                <ScalarProperty Name="nutri_cedula" ColumnName="nutri_cedula" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Empleado">
-            <EntityTypeMapping TypeName="NutriTECModel.Empleado">
-              <MappingFragment StoreEntitySet="Empleado">
-                <ScalarProperty Name="rol" ColumnName="rol" />
-                <ScalarProperty Name="passw" ColumnName="passw" />
-                <ScalarProperty Name="correo" ColumnName="correo" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="cedula" ColumnName="cedula" />
+          <EntitySetMapping Name="registro_comida">
+            <EntityTypeMapping TypeName="NutriTECModel.registro_comida">
+              <MappingFragment StoreEntitySet="registro_comida">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="cliente_cedula" ColumnName="cliente_cedula" />
+                <ScalarProperty Name="fecha_del_registro" ColumnName="fecha_del_registro" />
+                <ScalarProperty Name="productos" ColumnName="productos" />
+                <ScalarProperty Name="total_calorias" ColumnName="total_calorias" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="registro_peso">
+            <EntityTypeMapping TypeName="NutriTECModel.registro_peso">
+              <MappingFragment StoreEntitySet="registro_peso">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="cliente_cedula" ColumnName="cliente_cedula" />
+                <ScalarProperty Name="fecha_del_registro" ColumnName="fecha_del_registro" />
+                <ScalarProperty Name="peso" ColumnName="peso" />
+                <ScalarProperty Name="IMC" ColumnName="IMC" />
+                <ScalarProperty Name="cintura" ColumnName="cintura" />
+                <ScalarProperty Name="cuello" ColumnName="cuello" />
+                <ScalarProperty Name="caderas" ColumnName="caderas" />
+                <ScalarProperty Name="porc_musculo" ColumnName="porc_musculo" />
+                <ScalarProperty Name="porc_grasa" ColumnName="porc_grasa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="database_firewall_rules">
             <EntityTypeMapping TypeName="NutriTECModel.database_firewall_rules">
               <MappingFragment StoreEntitySet="database_firewall_rules">
-                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
-                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
-                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="USP_GetCliente" FunctionName="NutriTECModel.Store.USP_GetCliente">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NutriTECModel.USP_GetCliente_Result">
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="p_apellido" ColumnName="p_apellido" />
+                <ScalarProperty Name="s_apellido" ColumnName="s_apellido" />
+                <ScalarProperty Name="edad" ColumnName="edad" />
+                <ScalarProperty Name="fecha_nac" ColumnName="fecha_nac" />
+                <ScalarProperty Name="peso" ColumnName="peso" />
+                <ScalarProperty Name="IMC" ColumnName="IMC" />
+                <ScalarProperty Name="pais" ColumnName="pais" />
+                <ScalarProperty Name="cintura" ColumnName="cintura" />
+                <ScalarProperty Name="cuello" ColumnName="cuello" />
+                <ScalarProperty Name="caderas" ColumnName="caderas" />
+                <ScalarProperty Name="porc_musculo" ColumnName="porc_musculo" />
+                <ScalarProperty Name="porc_grasa" ColumnName="porc_grasa" />
+                <ScalarProperty Name="cdm_calorias" ColumnName="cdm_calorias" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="passw" ColumnName="passw" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

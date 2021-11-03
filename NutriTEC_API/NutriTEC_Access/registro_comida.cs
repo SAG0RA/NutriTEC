@@ -12,10 +12,14 @@ namespace NutriTEC_Access
     using System;
     using System.Collections.Generic;
     
-    public partial class cliente_nutricionista
+    public partial class registro_comida
     {
-        public int id { get; set; }
-        public Nullable<int> id_nutricionista { get; set; }
-        public Nullable<int> id_cliente { get; set; }
+        public int Id { get; set; }
+        public Nullable<int> cliente_cedula { get; set; }
+        public Nullable<System.DateTime> fecha_del_registro { get; set; }
+        public Nullable<int> productos { get; set; }
+        public Nullable<int> total_calorias { get; set; }
+    
+        public virtual cliente cliente { get; set; }
     }
 }
