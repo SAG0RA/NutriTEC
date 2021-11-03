@@ -27,6 +27,7 @@ namespace NutriTEC_Access
         public Nullable<int> hierro { get; set; }
         public Nullable<int> lista_espera { get; set; }
         public Nullable<int> nutri_cedula { get; set; }
+        public string nutri_correo { get; set; }
     
         public virtual nutricionista nutricionista { get; set; }
     }

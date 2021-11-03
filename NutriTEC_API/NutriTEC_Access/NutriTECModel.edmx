@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="NutriTECModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="NutriTECModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="cliente">
           <Key>
             <PropertyRef Name="cedula" />
@@ -113,6 +113,7 @@
           <Property Name="hierro" Type="int" />
           <Property Name="lista_espera" Type="int" />
           <Property Name="nutri_cedula" Type="int" />
+          <Property Name="nutri_correo" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="registro_comida">
           <Key>
@@ -325,8 +326,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
             <End Role="registro_peso" EntitySet="registro_peso" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NutriTECModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -454,6 +454,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
           <Property Name="lista_espera" Type="Int32" />
           <Property Name="nutri_cedula" Type="Int32" />
           <NavigationProperty Name="nutricionista" Relationship="Self.FK__producto__nutri___3493CFA7" FromRole="producto" ToRole="nutricionista" />
+          <Property Name="nutri_correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="registro_comida">
           <Key>
@@ -654,7 +655,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
             <End Role="paciente" EntitySet="paciente" />
           </AssociationSet>
           <FunctionImport Name="USP_GetCliente" ReturnType="Collection(NutriTECModel.USP_GetCliente_Result)">
-            <Parameter Name="cedula" Mode="In" Type="Int32" />
+          <Parameter Name="cedula" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="USP_GetCliente_Result">
@@ -782,6 +783,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
           <EntitySetMapping Name="producto">
             <EntityTypeMapping TypeName="NutriTECModel.producto">
               <MappingFragment StoreEntitySet="producto">
+                <ScalarProperty Name="nutri_correo" ColumnName="nutri_correo" />
                 <ScalarProperty Name="codigo_barras" ColumnName="codigo_barras" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="porcion" ColumnName="porcion" />

@@ -42,7 +42,8 @@ namespace NutriTEC_API.Controllers
                     calcio = pr.calcio,
                     hierro = pr.hierro,
                     lista_espera = pr.lista_espera, 
-                    nutri_cedula = pr.nutri_cedula
+                    nutri_cedula = pr.nutri_cedula,
+                    nutri_correo = pr.nutri_correo
                 });
                 entities.SaveChanges();
             }
@@ -73,6 +74,7 @@ namespace NutriTEC_API.Controllers
                     existingProducto.hierro = pr.hierro;
                     existingProducto.lista_espera = pr.lista_espera;
                     existingProducto.nutri_cedula = pr.nutri_cedula;
+                    existingProducto.nutri_correo = pr.nutri_correo;
 
                     entities.SaveChanges();
                 }
