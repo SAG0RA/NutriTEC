@@ -24,14 +24,16 @@ namespace NutriTEC_API.Controllers
         }
 
         //uso de stored procedure
-        /*public IEnumerable<USP_GetCliente_Result> Get(int id)
+        [HttpGet]
+        [Route("api/cliente/spget/{id}")]
+        public IEnumerable<USP_GetCliente_Result> GetSP(int id)
         {
             using (NutriTECEntities entities = new NutriTECEntities())
             {
                 var tt = entities.USP_GetCliente(id);
                 return tt.ToList();
             }
-        }*/
+        }
 
         public IHttpActionResult Post(cliente cl)
         {
