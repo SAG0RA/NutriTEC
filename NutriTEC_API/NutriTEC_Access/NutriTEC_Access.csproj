@@ -53,6 +53,9 @@
     <Compile Include="cliente.cs">
       <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="database_firewall_rules.cs">
+      <DependentUpon>NutriTECModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Empleado.cs">
       <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>

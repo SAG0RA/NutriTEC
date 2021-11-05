@@ -21,7 +21,7 @@
                         Lista de espera de aprobacion
                     </mat-panel-description>
                 </mat-expansion-panel-header>
-                
+
                     <!--//////////////////////////////-->
                     <!-- Contenido del panel PRODUCTOS-->
                     <!--//////////////////////////////-->
@@ -107,7 +107,7 @@
                                 <th mat-header-cell *matHeaderCellDef> Energía (Kcal) </th>
                                 <td mat-cell *matCellDef="let element"> {{element.energia}} </td>
                             </ng-container>
-                            
+
                             <!-- Columna de grasa -->
                             <ng-container matColumnDef="grasa">
                                 <th mat-header-cell *matHeaderCellDef> Grasa (g) </th>
@@ -149,11 +149,11 @@
                                 <th mat-header-cell *matHeaderCellDef> Vitaminas </th>
                                 <td mat-cell *matCellDef="let element"> {{element.vitaminas}} </td>
                             </ng-container>
-                            
-                            <!-- Columna de vitas -->
+
+                            <!-- Columna de estado -->
                             <ng-container matColumnDef="estado">
                                 <th mat-header-cell *matHeaderCellDef> Estado </th>
-                                <td mat-cell *matCellDef="let element"> {{estado}} </td>
+                                <td mat-cell *matCellDef="let element"> {{element.lista_espera}} </td>
                             </ng-container>
 
                             <!-- Columna de boton eliminar -->
@@ -165,9 +165,9 @@
                                      </button>
                                 </mat-cell>
                             </ng-container>
-                            
 
-                            
+
+
                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                         </table>

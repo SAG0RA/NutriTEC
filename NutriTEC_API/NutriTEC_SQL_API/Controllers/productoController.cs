@@ -57,6 +57,26 @@ namespace NutriTEC_API.Controllers
             return Ok();
         }
 
+        [HttpDelete]
+        [Route("api/producto/listaEspera/{id}")]
+        public IHttpActionResult DenegarProducto(int id)
+        {
+            if (id <= 0)
+                return BadRequest("No se encuentra el producto en la lista de espera");
+
+            using (NutriTECEntities entities = new NutriTECEntities())
+            {
+                var producto = entities.producto.Where(e => e.codigo_barras == id)
+                                                        .FirstOrDefault();
+                if (producto == null)
+                    return BadRequest("No se encuentra el producto en la lista de espera");
+
+                entities.Entry(producto).State = System.Data.Entity.EntityState.Deleted;
+                entities.SaveChanges();
+            }
+
+            return Ok();
+        }
 
         public IHttpActionResult Post(producto pr)
         {

@@ -48,7 +48,7 @@ export class VistaNutriComponent implements OnInit {
   lista_datos_recibidos: any = []
   lista_productos: any = []
 
-  
+
    ////////// Listas con los datos de CLIENTES en API /////////////
    url_cliente = '/api/cliente'
    lista_datos_recibidos_cliente:any = []
@@ -88,12 +88,12 @@ export class VistaNutriComponent implements OnInit {
         //Vacia la lista para volverla a llenar luego
         this.lista_productos = []
         for (var i = 0; i < this.lista_datos_recibidos.length; i++) {
-          // Rellena las listas con los datos del API con codigo de barras 
+          // Rellena las listas con los datos del API con codigo de barras
           this.lista_productos.push(this.lista_datos_recibidos[i]['codigo_barras'])
         }
         console.log('Productos: ' + '[' + this.lista_productos + ']')
         this.filtrado(this.correo)
-        this.table.renderRows()
+       // this.table.renderRows()
       })
 
       this.API.GET(this.url_cliente)
@@ -105,7 +105,7 @@ export class VistaNutriComponent implements OnInit {
 
   eliminarProducto(row: any) {
     this.API.DELETE(this.url + '/' + row.codigo_barras).subscribe(() => console.log("Producto eliminado"))
-    
+
     this.dataSource.splice(row,1);
     this.table.renderRows();
 
@@ -116,7 +116,7 @@ export class VistaNutriComponent implements OnInit {
         //Vacia la lista para volverla a llenar luego
         this.lista_productos = []
         for (var i = 0; i < this.lista_datos_recibidos.length; i++) {
-          // Rellena las listas con los datos del API con codigo de barras 
+          // Rellena las listas con los datos del API con codigo de barras
           this.lista_productos.push(this.lista_datos_recibidos[i]['codigo_barras'])
         }
         console.log('Productos: ' + '[' + this.lista_productos + ']')
@@ -192,4 +192,3 @@ export class VistaNutriComponent implements OnInit {
 
 
 
-   

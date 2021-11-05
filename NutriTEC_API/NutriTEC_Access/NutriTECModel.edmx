@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="NutriTECModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="NutriTECModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="cliente">
           <Key>
             <PropertyRef Name="cedula" />
@@ -147,6 +147,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.listaEspera' no tiene definida 
             <PropertyRef Name="codigo_barras" />
           </Key>
           <Property Name="codigo_barras" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" />
           <Property Name="porcion" Type="int" />
           <Property Name="energia" Type="int" />
           <Property Name="grasa" Type="int" />
@@ -158,6 +159,24 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.listaEspera' no tiene definida 
           <Property Name="hierro" Type="int" />
           <Property Name="nutri_correo" Type="varchar" MaxLength="100" />
           <Property Name="lista_espera" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="modify_date" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK__meta_calo__clien__14270015">
           <End Role="cliente" Type="Self.cliente" Multiplicity="0..1" />
@@ -283,6 +302,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.listaEspera' no tiene definida 
           <EntitySet Name="listaEspera" EntityType="Self.listaEspera" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [listaEspera].[codigo_barras] AS [codigo_barras], 
+    [listaEspera].[descripcion] AS [descripcion], 
     [listaEspera].[porcion] AS [porcion], 
     [listaEspera].[energia] AS [energia], 
     [listaEspera].[grasa] AS [grasa], 
@@ -295,6 +315,16 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.listaEspera' no tiene definida 
     [listaEspera].[nutri_correo] AS [nutri_correo], 
     [listaEspera].[lista_espera] AS [lista_espera]
     FROM [dbo].[listaEspera] AS [listaEspera]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+            <DefiningQuery>SELECT 
+    [database_firewall_rules].[id] AS [id], 
+    [database_firewall_rules].[name] AS [name], 
+    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+    [database_firewall_rules].[create_date] AS [create_date], 
+    [database_firewall_rules].[modify_date] AS [modify_date]
+    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__meta_calo__clien__14270015" Association="Self.FK__meta_calo__clien__14270015">
             <End Role="cliente" EntitySet="cliente" />
@@ -333,8 +363,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.listaEspera' no tiene definida 
             <End Role="registro_peso" EntitySet="registro_peso" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NutriTECModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -507,6 +536,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.listaEspera' no tiene definida 
           <Property Name="hierro" Type="Int32" />
           <Property Name="nutri_correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="lista_espera" Type="Int32" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK__meta_calo__clien__14270015">
           <End Role="cliente" Type="Self.cliente" Multiplicity="0..1" />
@@ -664,8 +694,9 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.listaEspera' no tiene definida 
             <End Role="paciente" EntitySet="paciente" />
           </AssociationSet>
           <FunctionImport Name="USP_GetCliente" ReturnType="Collection(NutriTECModel.USP_GetCliente_Result)">
-            <Parameter Name="cedula" Mode="In" Type="Int32" />
+          <Parameter Name="cedula" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="database_firewall_rules" EntityType="NutriTECModel.database_firewall_rules" />
         </EntityContainer>
         <ComplexType Name="USP_GetCliente_Result">
           <Property Type="Int32" Name="cedula" Nullable="false" />
@@ -686,6 +717,22 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.listaEspera' no tiene definida 
           <Property Type="String" Name="correo" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="passw" Nullable="false" MaxLength="50" />
         </ComplexType>
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="start_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="end_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -839,6 +886,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.listaEspera' no tiene definida 
           <EntitySetMapping Name="listaEspera">
             <EntityTypeMapping TypeName="NutriTECModel.listaEspera">
               <MappingFragment StoreEntitySet="listaEspera">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="codigo_barras" ColumnName="codigo_barras" />
                 <ScalarProperty Name="porcion" ColumnName="porcion" />
                 <ScalarProperty Name="energia" ColumnName="energia" />
@@ -877,6 +925,18 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.listaEspera' no tiene definida 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="database_firewall_rules">
+            <EntityTypeMapping TypeName="NutriTECModel.database_firewall_rules">
+              <MappingFragment StoreEntitySet="database_firewall_rules">
+                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
