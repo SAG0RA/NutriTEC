@@ -1,10 +1,9 @@
 <router-outlet></router-outlet>
 <div class="maindiv">
-    <mat-progress-bar *ngIf="showSpinner"  mode="query" class="spinner"></mat-progress-bar>
     <mat-toolbar class="two">
         <img src="/assets/images/perfil.png" class="profpic">
         <h1>Bienvenido
-            <span>nombre</span>
+            <span>{{correo}}</span>
         </h1>
     </mat-toolbar>
 
