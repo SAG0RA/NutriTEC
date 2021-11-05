@@ -53,10 +53,10 @@
     <Compile Include="cliente.cs">
       <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="database_firewall_rules.cs">
+    <Compile Include="Empleado.cs">
       <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Empleado.cs">
+    <Compile Include="listaEspera.cs">
       <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
     <Compile Include="meta_calorica.cs">

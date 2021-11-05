@@ -10,16 +10,53 @@ namespace NutriTEC_API.Controllers
 {
     public class productoController : ApiController
     {
+        
         public IEnumerable<producto> Get()
         {
             using (NutriTECEntities entities = new NutriTECEntities())
                 return entities.producto.ToList();
         }
+
         public producto Get(int id)
         {
             using (NutriTECEntities entities = new NutriTECEntities())
                 return entities.producto.FirstOrDefault(e => e.codigo_barras == id);
         }
+
+        [HttpGet]
+        [Route("api/producto/listaEspera")]
+        public IEnumerable<listaEspera> GetListaEspera()
+        {
+            using (NutriTECEntities entities = new NutriTECEntities())
+                return entities.listaEspera.ToList();
+        }
+
+        [HttpPut]
+        [Route("api/producto/listaEspera")]
+        public IHttpActionResult AceptarProducto(listaEspera pr)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("No se encuentra el producto en la lista de espera");
+
+            using (NutriTECEntities entities = new NutriTECEntities())
+            {
+                var existingProducto = entities.producto.Where(e => e.codigo_barras == pr.codigo_barras)
+                                                        .FirstOrDefault<producto>();
+
+                if (existingProducto != null)
+                {
+                    existingProducto.lista_espera = 1;
+                    entities.SaveChanges();
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+
+            return Ok();
+        }
+
 
         public IHttpActionResult Post(producto pr)
         {

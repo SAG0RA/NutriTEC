@@ -12,7 +12,7 @@ namespace NutriTEC_API.Controllers
     {
         public IEnumerable<Empleado> Get()
         {
-            using (NutriTECEntities entities = new NutriTECEntities())
+            using (NutriTECEntities entities = new NutriTECEntities())              
                 return entities.Empleado.ToList();
         }
         public Empleado Get(int id)

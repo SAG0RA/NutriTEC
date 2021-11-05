@@ -230,6 +230,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\empleado\" />
+    <Folder Include="Views\listaEspera\" />
     <Folder Include="Views\registro_peso\" />
   </ItemGroup>
   <ItemGroup>
