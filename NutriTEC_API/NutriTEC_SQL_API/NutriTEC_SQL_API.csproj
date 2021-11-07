@@ -167,6 +167,7 @@
     <Compile Include="Controllers\empleadoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\nutriController.cs" />
+    <Compile Include="Controllers\pacienteController.cs" />
     <Compile Include="Controllers\productoController.cs" />
     <Compile Include="Controllers\registro_pesoController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />

@@ -92,6 +92,9 @@
     <Compile Include="producto.cs">
       <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="productosCliente.cs">
+      <DependentUpon>NutriTECModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="registro_comida.cs">
       <DependentUpon>NutriTECModel.tt</DependentUpon>

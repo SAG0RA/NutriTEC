@@ -22,7 +22,7 @@ namespace NutriTEC_Access
         {
             Configuration.ProxyCreationEnabled = false;
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -39,6 +39,7 @@ namespace NutriTEC_Access
         public virtual DbSet<registro_peso> registro_peso { get; set; }
         public virtual DbSet<listaEspera> listaEspera { get; set; }
         public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
+        public virtual DbSet<productosCliente> productosCliente { get; set; }
     
         public virtual ObjectResult<USP_GetCliente_Result> USP_GetCliente(Nullable<int> cedula)
         {

@@ -25,6 +25,7 @@
         <AssociationConnector Association="NutriTECModel.FK__producto__nutri___3493CFA7" ManuallyRouted="false" />
         <AssociationConnector Association="NutriTECModel.FK__paciente__pacien__2FCF1A8A" ManuallyRouted="false" />
         <EntityTypeShape EntityType="NutriTECModel.database_firewall_rules" Width="1.5" PointX="7.125" PointY="1.375" />
+        <EntityTypeShape EntityType="NutriTECModel.productosCliente" Width="1.5" PointX="6.75" PointY="4.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

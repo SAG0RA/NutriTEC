@@ -72,7 +72,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="n_cedula" Type="int" Nullable="false" />
           <Property Name="paciente_cedula" Type="int" Nullable="false" />
           <Property Name="paciente_plan" Type="int" />
@@ -161,6 +161,24 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.listaEspera' no tiene definida 
           <Property Name="lista_espera" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosCliente' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="productosCliente">
+          <Key>
+            <PropertyRef Name="codigo_barras" />
+          </Key>
+          <Property Name="codigo_barras" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="porcion" Type="int" />
+          <Property Name="energia" Type="int" />
+          <Property Name="grasa" Type="int" />
+          <Property Name="sodio" Type="int" />
+          <Property Name="carbohidratos" Type="int" />
+          <Property Name="proteina" Type="int" />
+          <Property Name="vitaminas" Type="varchar" MaxLength="50" />
+          <Property Name="calcio" Type="int" />
+          <Property Name="hierro" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="database_firewall_rules">
           <Key>
@@ -202,19 +220,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__paciente__id_cli__1EA48E88">
-          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
-          <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cliente">
-              <PropertyRef Name="cedula" />
-            </Principal>
-            <Dependent Role="paciente">
-              <PropertyRef Name="paciente_cedula" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__paciente__id_nut__1DB06A4F">
+        <Association Name="FK__paciente__n_cedu__3A4CA8FD">
           <End Role="nutricionista" Type="Self.nutricionista" Multiplicity="1" />
           <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
           <ReferentialConstraint>
@@ -226,7 +232,19 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__paciente__pacien__2FCF1A8A">
+        <Association Name="FK__paciente__pacien__3B40CD36">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+          <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="paciente">
+              <PropertyRef Name="paciente_cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__paciente__pacien__3C34F16F">
           <End Role="plan_alimenticio" Type="Self.plan_alimenticio" Multiplicity="0..1" />
           <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
           <ReferentialConstraint>
@@ -316,6 +334,21 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
     [listaEspera].[lista_espera] AS [lista_espera]
     FROM [dbo].[listaEspera] AS [listaEspera]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="productosCliente" EntityType="Self.productosCliente" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [productosCliente].[codigo_barras] AS [codigo_barras], 
+    [productosCliente].[descripcion] AS [descripcion], 
+    [productosCliente].[porcion] AS [porcion], 
+    [productosCliente].[energia] AS [energia], 
+    [productosCliente].[grasa] AS [grasa], 
+    [productosCliente].[sodio] AS [sodio], 
+    [productosCliente].[carbohidratos] AS [carbohidratos], 
+    [productosCliente].[proteina] AS [proteina], 
+    [productosCliente].[vitaminas] AS [vitaminas], 
+    [productosCliente].[calcio] AS [calcio], 
+    [productosCliente].[hierro] AS [hierro]
+    FROM [dbo].[productosCliente] AS [productosCliente]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
             <DefiningQuery>SELECT 
     [database_firewall_rules].[id] AS [id], 
@@ -334,15 +367,15 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
             <End Role="nutricionista" EntitySet="nutricionista" />
             <End Role="meta_calorica" EntitySet="meta_calorica" />
           </AssociationSet>
-          <AssociationSet Name="FK__paciente__id_cli__1EA48E88" Association="Self.FK__paciente__id_cli__1EA48E88">
-            <End Role="cliente" EntitySet="cliente" />
-            <End Role="paciente" EntitySet="paciente" />
-          </AssociationSet>
-          <AssociationSet Name="FK__paciente__id_nut__1DB06A4F" Association="Self.FK__paciente__id_nut__1DB06A4F">
+          <AssociationSet Name="FK__paciente__n_cedu__3A4CA8FD" Association="Self.FK__paciente__n_cedu__3A4CA8FD">
             <End Role="nutricionista" EntitySet="nutricionista" />
             <End Role="paciente" EntitySet="paciente" />
           </AssociationSet>
-          <AssociationSet Name="FK__paciente__pacien__2FCF1A8A" Association="Self.FK__paciente__pacien__2FCF1A8A">
+          <AssociationSet Name="FK__paciente__pacien__3B40CD36" Association="Self.FK__paciente__pacien__3B40CD36">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="paciente" EntitySet="paciente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__paciente__pacien__3C34F16F" Association="Self.FK__paciente__pacien__3C34F16F">
             <End Role="plan_alimenticio" EntitySet="plan_alimenticio" />
             <End Role="paciente" EntitySet="paciente" />
           </AssociationSet>
@@ -697,6 +730,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
           <Parameter Name="cedula" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="database_firewall_rules" EntityType="NutriTECModel.database_firewall_rules" />
+          <EntitySet Name="productosCliente" EntityType="NutriTECModel.productosCliente" />
         </EntityContainer>
         <ComplexType Name="USP_GetCliente_Result">
           <Property Type="Int32" Name="cedula" Nullable="false" />
@@ -732,6 +766,22 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
           <Property Name="end_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="productosCliente">
+          <Key>
+            <PropertyRef Name="codigo_barras" />
+          </Key>
+          <Property Name="codigo_barras" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="porcion" Type="Int32" />
+          <Property Name="energia" Type="Int32" />
+          <Property Name="grasa" Type="Int32" />
+          <Property Name="sodio" Type="Int32" />
+          <Property Name="carbohidratos" Type="Int32" />
+          <Property Name="proteina" Type="Int32" />
+          <Property Name="vitaminas" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="calcio" Type="Int32" />
+          <Property Name="hierro" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -934,6 +984,23 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
                 <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="productosCliente">
+            <EntityTypeMapping TypeName="NutriTECModel.productosCliente">
+              <MappingFragment StoreEntitySet="productosCliente">
+                <ScalarProperty Name="hierro" ColumnName="hierro" />
+                <ScalarProperty Name="calcio" ColumnName="calcio" />
+                <ScalarProperty Name="vitaminas" ColumnName="vitaminas" />
+                <ScalarProperty Name="proteina" ColumnName="proteina" />
+                <ScalarProperty Name="carbohidratos" ColumnName="carbohidratos" />
+                <ScalarProperty Name="sodio" ColumnName="sodio" />
+                <ScalarProperty Name="grasa" ColumnName="grasa" />
+                <ScalarProperty Name="energia" ColumnName="energia" />
+                <ScalarProperty Name="porcion" ColumnName="porcion" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="codigo_barras" ColumnName="codigo_barras" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
