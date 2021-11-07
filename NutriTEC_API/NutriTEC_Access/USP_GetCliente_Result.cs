@@ -19,15 +19,15 @@ namespace NutriTEC_Access
         public string s_apellido { get; set; }
         public Nullable<int> edad { get; set; }
         public Nullable<System.DateTime> fecha_nac { get; set; }
-        public string peso { get; set; }
+        public Nullable<double> peso { get; set; }
         public Nullable<double> IMC { get; set; }
         public string pais { get; set; }
-        public Nullable<int> cintura { get; set; }
-        public Nullable<int> cuello { get; set; }
-        public Nullable<int> caderas { get; set; }
-        public Nullable<int> porc_musculo { get; set; }
-        public Nullable<int> porc_grasa { get; set; }
-        public Nullable<int> cdm_calorias { get; set; }
+        public Nullable<double> cintura { get; set; }
+        public Nullable<double> cuello { get; set; }
+        public Nullable<double> caderas { get; set; }
+        public Nullable<double> porc_musculo { get; set; }
+        public Nullable<double> porc_grasa { get; set; }
+        public Nullable<double> cdm_calorias { get; set; }
         public string correo { get; set; }
         public string passw { get; set; }
     }

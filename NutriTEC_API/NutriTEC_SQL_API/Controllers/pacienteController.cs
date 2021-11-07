@@ -43,17 +43,6 @@ namespace NutriTEC_API.Controllers
             return Ok();
         }
 
-        /* public IEnumerable<USP_GetCliente_Result> Get(int id)
-         {
-             System.Data.Entity.Core.Objects.ObjectResult tt;
-             using (NutriTECEntities entities = new NutriTECEntities())
-             {
-                 tt = entities.USP_GetCliente(id);
-             }
-
-             return (IEnumerable<USP_GetCliente_Result>)tt;
-         }*/
-
         public IHttpActionResult Put(paciente pc)
         {
             if (!ModelState.IsValid)

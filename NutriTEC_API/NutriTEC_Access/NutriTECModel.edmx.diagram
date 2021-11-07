@@ -4,28 +4,32 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6ac18a6890254fda8d9726a47efc8b09" Name="Diagram1">
+      <Diagram DiagramId="b092f6c28c9848c1a2ab7a07e11e9501" Name="Diagram1">
         <EntityTypeShape EntityType="NutriTECModel.cliente" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutriTECModel.Empleado" Width="1.5" PointX="4.5" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutriTECModel.meta_calorica" Width="1.5" PointX="3.25" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutriTECModel.nutricionista" Width="1.5" PointX="0.625" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutriTECModel.paciente" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutriTECModel.plan_alimenticio" Width="1.5" PointX="5" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutriTECModel.producto" Width="1.5" PointX="2.375" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutriTECModel.registro_comida" Width="1.5" PointX="2.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutriTECModel.registro_peso" Width="1.5" PointX="2.625" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutriTECModel.listaEspera" Width="1.5" PointX="4.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutriTECModel.Empleado" Width="1.5" PointX="6" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutriTECModel.meta_calorica" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutriTECModel.nutricionista" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutriTECModel.paciente" Width="1.5" PointX="5.5" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutriTECModel.plan_alimenticio" Width="1.5" PointX="3.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutriTECModel.producto" Width="1.5" PointX="1.5" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutriTECModel.registro_peso" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutriTECModel.listaEspera" Width="1.5" PointX="9.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutriTECModel.productosDisponibles" Width="1.5" PointX="7.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutriTECModel.database_firewall_rules" Width="1.5" PointX="11.375" PointY="1.5" IsExpanded="true" />
         <AssociationConnector Association="NutriTECModel.FK__meta_calo__clien__14270015" ManuallyRouted="false" />
-        <AssociationConnector Association="NutriTECModel.FK__paciente__id_cli__1EA48E88" ManuallyRouted="false" />
-        <AssociationConnector Association="NutriTECModel.FK__registro___clien__2B0A656D" ManuallyRouted="false" />
+        <AssociationConnector Association="NutriTECModel.FK__paciente__pacien__3B40CD36" ManuallyRouted="false" />
         <AssociationConnector Association="NutriTECModel.FK__registro___clien__2BFE89A6" ManuallyRouted="false" />
         <AssociationConnector Association="NutriTECModel.FK__meta_calo__nutri__151B244E" ManuallyRouted="false" />
-        <AssociationConnector Association="NutriTECModel.FK__paciente__id_nut__1DB06A4F" ManuallyRouted="false" />
+        <AssociationConnector Association="NutriTECModel.FK__paciente__n_cedu__3A4CA8FD" ManuallyRouted="false" />
         <AssociationConnector Association="NutriTECModel.FK__plan_alim__nutri__2EDAF651" ManuallyRouted="false" />
-        <AssociationConnector Association="NutriTECModel.FK__producto__nutri___3493CFA7" ManuallyRouted="false" />
-        <AssociationConnector Association="NutriTECModel.FK__paciente__pacien__2FCF1A8A" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="NutriTECModel.database_firewall_rules" Width="1.5" PointX="7.125" PointY="1.375" />
-        <EntityTypeShape EntityType="NutriTECModel.productosCliente" Width="1.5" PointX="6.75" PointY="4.375" />
+        <AssociationConnector Association="NutriTECModel.FK__producto__nutri___40058253" ManuallyRouted="false" />
+        <AssociationConnector Association="NutriTECModel.FK__paciente__pacien__3C34F16F" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="NutriTECModel.productosXplan" Width="1.5" PointX="6.375" PointY="14" />
+        <AssociationConnector Association="NutriTECModel.FK__productos__plan___498EEC8D" />
+        <AssociationConnector Association="NutriTECModel.FK__productos__codig__489AC854" />
+        <EntityTypeShape EntityType="NutriTECModel.registro_comida" Width="1.5" PointX="5.75" PointY="7.5" />
+        <AssociationConnector Association="NutriTECModel.FK__registro___clien__4C6B5938" />
+        <AssociationConnector Association="NutriTECModel.FK__registro___codig__4D5F7D71" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -168,7 +168,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\nutriController.cs" />
     <Compile Include="Controllers\pacienteController.cs" />
+    <Compile Include="Controllers\plan_alimenticioController.cs" />
     <Compile Include="Controllers\productoController.cs" />
+    <Compile Include="Controllers\registro_comidaController.cs" />
     <Compile Include="Controllers\registro_pesoController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -232,6 +234,8 @@
     <Folder Include="Models\" />
     <Folder Include="Views\empleado\" />
     <Folder Include="Views\listaEspera\" />
+    <Folder Include="Views\plan_alimenticio\" />
+    <Folder Include="Views\registro_comida\" />
     <Folder Include="Views\registro_peso\" />
   </ItemGroup>
   <ItemGroup>

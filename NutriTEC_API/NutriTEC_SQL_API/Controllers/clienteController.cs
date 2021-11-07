@@ -71,13 +71,13 @@ namespace NutriTEC_API.Controllers
                     fecha_del_registro = DateTime.Now,
                     peso = cl.peso,
                     IMC = cl.IMC,
-                    cintura = cl.cintura,
-                    cuello = cl.cuello,
-                    caderas = cl.caderas,
-                    porc_musculo = cl.porc_musculo,
-                    porc_grasa = cl.porc_grasa
+                    cintura = (int?)cl.cintura,
+                    cuello = (int?)cl.cuello,
+                    caderas = (int?)cl.caderas,
+                    porc_musculo = (int?)cl.porc_musculo,
+                    porc_grasa = (int?)cl.porc_grasa
 
-                }) ;
+                });
 
                 entities.SaveChanges();
                 //string DistributionChannelGUID = db.Database.SqlQuery<string>("GetDistributionChannelGUID @DeviceID, @CCCShopID", Parameters).ToString();

@@ -17,7 +17,7 @@ namespace NutriTEC_Access
         public int Id { get; set; }
         public Nullable<int> cliente_cedula { get; set; }
         public Nullable<System.DateTime> fecha_del_registro { get; set; }
-        public string peso { get; set; }
+        public Nullable<double> peso { get; set; }
         public Nullable<double> IMC { get; set; }
         public Nullable<int> cintura { get; set; }
         public Nullable<int> cuello { get; set; }

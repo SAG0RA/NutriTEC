@@ -21,8 +21,9 @@ namespace NutriTEC_Access
             : base("name=NutriTECEntities")
         {
             Configuration.ProxyCreationEnabled = false;
+
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -35,11 +36,12 @@ namespace NutriTEC_Access
         public virtual DbSet<paciente> paciente { get; set; }
         public virtual DbSet<plan_alimenticio> plan_alimenticio { get; set; }
         public virtual DbSet<producto> producto { get; set; }
-        public virtual DbSet<registro_comida> registro_comida { get; set; }
         public virtual DbSet<registro_peso> registro_peso { get; set; }
         public virtual DbSet<listaEspera> listaEspera { get; set; }
+        public virtual DbSet<productosDisponibles> productosDisponibles { get; set; }
         public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
-        public virtual DbSet<productosCliente> productosCliente { get; set; }
+        public virtual DbSet<productosXplan> productosXplan { get; set; }
+        public virtual DbSet<registro_comida> registro_comida { get; set; }
     
         public virtual ObjectResult<USP_GetCliente_Result> USP_GetCliente(Nullable<int> cedula)
         {

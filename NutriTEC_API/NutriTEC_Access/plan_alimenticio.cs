@@ -18,25 +18,18 @@ namespace NutriTEC_Access
         public plan_alimenticio()
         {
             this.paciente = new HashSet<paciente>();
+            this.productosXplan = new HashSet<productosXplan>();
         }
     
         public int Id { get; set; }
         public string nombre_plan { get; set; }
-        public string tiempo_comida1 { get; set; }
-        public Nullable<int> productosTC1 { get; set; }
-        public string tiempo_comida2 { get; set; }
-        public Nullable<int> productosTC2 { get; set; }
-        public string tiempo_comida3 { get; set; }
-        public Nullable<int> productosTC3 { get; set; }
-        public string tiempo_comida4 { get; set; }
-        public Nullable<int> productosTC4 { get; set; }
-        public string tiempo_comida5 { get; set; }
-        public Nullable<int> productosTC5 { get; set; }
         public Nullable<int> total_calorias { get; set; }
         public Nullable<int> nutri_al_plan { get; set; }
     
         public virtual nutricionista nutricionista { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<paciente> paciente { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<productosXplan> productosXplan { get; set; }
     }
 }

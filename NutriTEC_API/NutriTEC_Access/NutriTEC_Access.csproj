@@ -92,7 +92,10 @@
     <Compile Include="producto.cs">
       <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="productosCliente.cs">
+    <Compile Include="productosDisponibles.cs">
+      <DependentUpon>NutriTECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="productosXplan.cs">
       <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

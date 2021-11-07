@@ -1,6 +1,6 @@
 .maindiv{
-  background-image: url('/assets/images/aguacate.png');
-  background-color: #3e5f3e;
+  background-image: url('/assets/images/berenjena.png');
+  background-color: #682670;
   background-size: 200px;
 }
 .spinner{
@@ -9,7 +9,7 @@ vertical-align: middle;
 }
 .titulo{
 text-transform: capitalize;
-color:wheat;
+color:rgb(211, 221, 165);
 position: relative;
 padding: 0;
 margin: 0;
@@ -41,7 +41,7 @@ transition: all 0.4s ease 0s;
 }
 
 .subpanel{
-background-color:rgb(148, 52, 0);
+background-color:rgb(237, 18, 245);
 }
 
 .profpic{

@@ -12,13 +12,15 @@ namespace NutriTEC_Access
     using System;
     using System.Collections.Generic;
     
-    public partial class registro_comida
+    public partial class productosXplan
     {
-        public Nullable<int> cliente_cedula { get; set; }
-        public Nullable<System.DateTime> fecha_del_registro { get; set; }
         public long codigo_barras { get; set; }
+        public string descripcion { get; set; }
+        public double energia { get; set; }
+        public string tiempo_comida { get; set; }
+        public Nullable<int> plan_pertenece { get; set; }
     
-        public virtual cliente cliente { get; set; }
+        public virtual plan_alimenticio plan_alimenticio { get; set; }
         public virtual producto producto { get; set; }
     }
 }

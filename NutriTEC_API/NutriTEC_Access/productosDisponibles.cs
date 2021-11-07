@@ -12,18 +12,18 @@ namespace NutriTEC_Access
     using System;
     using System.Collections.Generic;
     
-    public partial class productosCliente
+    public partial class productosDisponibles
     {
-        public int codigo_barras { get; set; }
+        public long codigo_barras { get; set; }
         public string descripcion { get; set; }
-        public Nullable<int> porcion { get; set; }
-        public Nullable<int> energia { get; set; }
-        public Nullable<int> grasa { get; set; }
-        public Nullable<int> sodio { get; set; }
-        public Nullable<int> carbohidratos { get; set; }
-        public Nullable<int> proteina { get; set; }
+        public Nullable<double> porcion { get; set; }
+        public Nullable<double> energia { get; set; }
+        public Nullable<double> grasa { get; set; }
+        public Nullable<double> sodio { get; set; }
+        public Nullable<double> carbohidratos { get; set; }
+        public Nullable<double> proteina { get; set; }
         public string vitaminas { get; set; }
-        public Nullable<int> calcio { get; set; }
-        public Nullable<int> hierro { get; set; }
+        public Nullable<double> calcio { get; set; }
+        public Nullable<double> hierro { get; set; }
     }
 }

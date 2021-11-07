@@ -73,23 +73,23 @@ namespace NutriTEC_API.Controllers
             return Ok();
         }*/
 
-       /* public IHttpActionResult Delete(int id)
+       public IHttpActionResult Delete(int id)
         {
             if (id < 0)
-                return BadRequest("Not a valid employee id");
+                return BadRequest("Not a valid registry id");
 
             using (NutriTECEntities entities = new NutriTECEntities())
             {
-                var emp = entities.Empleado.Where(e => e.cedula == id)
+                var rp = entities.registro_peso.Where(e => e.Id == id)
                                                         .FirstOrDefault();
-                if (emp == null)
-                    return BadRequest("Not a valid rgient id");
+                if (rp == null)
+                    return BadRequest("Not a valid registry id");
 
-                entities.Entry(emp).State = System.Data.Entity.EntityState.Deleted;
+                entities.Entry(rp).State = System.Data.Entity.EntityState.Deleted;
                 entities.SaveChanges();
             }
 
             return Ok();
-        }*/
+        }
     }
 }

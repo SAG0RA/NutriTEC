@@ -14,18 +14,18 @@ namespace NutriTEC_Access
     
     public partial class listaEspera
     {
-        public int codigo_barras { get; set; }
-        public Nullable<int> porcion { get; set; }
-        public Nullable<int> energia { get; set; }
-        public Nullable<int> grasa { get; set; }
-        public Nullable<int> sodio { get; set; }
-        public Nullable<int> carbohidratos { get; set; }
-        public Nullable<int> proteina { get; set; }
+        public long codigo_barras { get; set; }
+        public string descripcion { get; set; }
+        public Nullable<double> porcion { get; set; }
+        public Nullable<double> energia { get; set; }
+        public Nullable<double> grasa { get; set; }
+        public Nullable<double> sodio { get; set; }
+        public Nullable<double> carbohidratos { get; set; }
+        public Nullable<double> proteina { get; set; }
         public string vitaminas { get; set; }
-        public Nullable<int> calcio { get; set; }
-        public Nullable<int> hierro { get; set; }
+        public Nullable<double> calcio { get; set; }
+        public Nullable<double> hierro { get; set; }
         public string nutri_correo { get; set; }
         public Nullable<int> lista_espera { get; set; }
-        public string descripcion { get; set; }
     }
 }
