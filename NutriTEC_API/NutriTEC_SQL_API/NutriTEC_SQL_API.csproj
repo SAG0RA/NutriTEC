@@ -170,6 +170,7 @@
     <Compile Include="Controllers\pacienteController.cs" />
     <Compile Include="Controllers\plan_alimenticioController.cs" />
     <Compile Include="Controllers\productoController.cs" />
+    <Compile Include="Controllers\productosXplanController.cs" />
     <Compile Include="Controllers\registro_comidaController.cs" />
     <Compile Include="Controllers\registro_pesoController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -235,6 +236,7 @@
     <Folder Include="Views\empleado\" />
     <Folder Include="Views\listaEspera\" />
     <Folder Include="Views\plan_alimenticio\" />
+    <Folder Include="Views\productosXplan\" />
     <Folder Include="Views\registro_comida\" />
     <Folder Include="Views\registro_peso\" />
   </ItemGroup>

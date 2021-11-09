@@ -21,27 +21,27 @@ namespace NutriTEC_Access
             : base("name=NutriTECEntities")
         {
             Configuration.ProxyCreationEnabled = false;
-
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
     
         public virtual DbSet<cliente> cliente { get; set; }
+        public virtual DbSet<cobro_nutri> cobro_nutri { get; set; }
         public virtual DbSet<Empleado> Empleado { get; set; }
         public virtual DbSet<meta_calorica> meta_calorica { get; set; }
         public virtual DbSet<nutricionista> nutricionista { get; set; }
         public virtual DbSet<paciente> paciente { get; set; }
         public virtual DbSet<plan_alimenticio> plan_alimenticio { get; set; }
         public virtual DbSet<producto> producto { get; set; }
+        public virtual DbSet<productosXplan> productosXplan { get; set; }
+        public virtual DbSet<registro_comida> registro_comida { get; set; }
         public virtual DbSet<registro_peso> registro_peso { get; set; }
         public virtual DbSet<listaEspera> listaEspera { get; set; }
         public virtual DbSet<productosDisponibles> productosDisponibles { get; set; }
         public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
-        public virtual DbSet<productosXplan> productosXplan { get; set; }
-        public virtual DbSet<registro_comida> registro_comida { get; set; }
     
         public virtual ObjectResult<USP_GetCliente_Result> USP_GetCliente(Nullable<int> cedula)
         {
@@ -50,6 +50,23 @@ namespace NutriTEC_Access
                 new ObjectParameter("cedula", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_GetCliente_Result>("USP_GetCliente", cedulaParameter);
+        }
+    
+        public virtual int USP_insertarProductoPlan(Nullable<long> codigo_barras, string tiempo_comida, Nullable<int> plan_pertenece)
+        {
+            var codigo_barrasParameter = codigo_barras.HasValue ?
+                new ObjectParameter("codigo_barras", codigo_barras) :
+                new ObjectParameter("codigo_barras", typeof(long));
+    
+            var tiempo_comidaParameter = tiempo_comida != null ?
+                new ObjectParameter("tiempo_comida", tiempo_comida) :
+                new ObjectParameter("tiempo_comida", typeof(string));
+    
+            var plan_perteneceParameter = plan_pertenece.HasValue ?
+                new ObjectParameter("plan_pertenece", plan_pertenece) :
+                new ObjectParameter("plan_pertenece", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_insertarProductoPlan", codigo_barrasParameter, tiempo_comidaParameter, plan_perteneceParameter);
         }
     }
 }

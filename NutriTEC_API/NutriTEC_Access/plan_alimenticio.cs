@@ -23,7 +23,7 @@ namespace NutriTEC_Access
     
         public int Id { get; set; }
         public string nombre_plan { get; set; }
-        public Nullable<int> total_calorias { get; set; }
+        public Nullable<double> total_calorias { get; set; }
         public Nullable<int> nutri_al_plan { get; set; }
     
         public virtual nutricionista nutricionista { get; set; }

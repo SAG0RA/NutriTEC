@@ -34,11 +34,12 @@ namespace NutriTEC_Access
         public Nullable<double> IMC { get; set; }
         public string direccion { get; set; }
         public string foto { get; set; }
-        public Nullable<int> tarjetacredito { get; set; }
+        public Nullable<long> tarjetacredito { get; set; }
         public string tipo_cobro { get; set; }
         public string correo { get; set; }
         public string passw { get; set; }
     
+        public virtual cobro_nutri cobro_nutri { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<meta_calorica> meta_calorica { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
