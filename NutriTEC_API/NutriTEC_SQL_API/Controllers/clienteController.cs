@@ -39,7 +39,6 @@ namespace NutriTEC_API.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest("Not a valid model");
-            USP_GetCliente_Result temp;
             using (NutriTECEntities entities = new NutriTECEntities())
             {
                 

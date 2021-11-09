@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="7f36b1a05981410787e1d1c9cce04451" Name="Diagram1">
         <EntityTypeShape EntityType="NutriTECModel.cliente" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutriTECModel.cobro_nutri" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="NutriTECModel.Empleado" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="NutriTECModel.meta_calorica" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="NutriTECModel.nutricionista" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
@@ -23,7 +22,6 @@
         <AssociationConnector Association="NutriTECModel.FK__paciente__pacien__3B40CD36" ManuallyRouted="false" />
         <AssociationConnector Association="NutriTECModel.FK__registro___clien__2BFE89A6" ManuallyRouted="false" />
         <AssociationConnector Association="NutriTECModel.FK__registro___clien__4C6B5938" ManuallyRouted="false" />
-        <AssociationConnector Association="NutriTECModel.FK__cobro_nut__n_ced__55F4C372" ManuallyRouted="false" />
         <AssociationConnector Association="NutriTECModel.FK__meta_calo__nutri__151B244E" ManuallyRouted="false" />
         <AssociationConnector Association="NutriTECModel.FK__paciente__n_cedu__3A4CA8FD" ManuallyRouted="false" />
         <AssociationConnector Association="NutriTECModel.FK__plan_alim__nutri__44CA3770" ManuallyRouted="false" />

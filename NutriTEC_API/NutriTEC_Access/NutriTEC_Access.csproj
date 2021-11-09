@@ -53,9 +53,6 @@
     <Compile Include="cliente.cs">
       <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="cobro_nutri.cs">
-      <DependentUpon>NutriTECModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="database_firewall_rules.cs">
       <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
@@ -109,6 +106,9 @@
       <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
     <Compile Include="USP_GetCliente_Result.cs">
+      <DependentUpon>NutriTECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USP_ReporteCobro_Result.cs">
       <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

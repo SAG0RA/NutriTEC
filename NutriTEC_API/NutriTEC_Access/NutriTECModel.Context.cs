@@ -29,7 +29,6 @@ namespace NutriTEC_Access
         }
     
         public virtual DbSet<cliente> cliente { get; set; }
-        public virtual DbSet<cobro_nutri> cobro_nutri { get; set; }
         public virtual DbSet<Empleado> Empleado { get; set; }
         public virtual DbSet<meta_calorica> meta_calorica { get; set; }
         public virtual DbSet<nutricionista> nutricionista { get; set; }
@@ -67,6 +66,11 @@ namespace NutriTEC_Access
                 new ObjectParameter("plan_pertenece", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_insertarProductoPlan", codigo_barrasParameter, tiempo_comidaParameter, plan_perteneceParameter);
+        }
+    
+        public virtual ObjectResult<USP_ReporteCobro_Result> USP_ReporteCobro()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_ReporteCobro_Result>("USP_ReporteCobro");
         }
     }
 }

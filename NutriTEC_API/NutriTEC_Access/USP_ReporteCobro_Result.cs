@@ -10,19 +10,16 @@
 namespace NutriTEC_Access
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class cobro_nutri
+    public partial class USP_ReporteCobro_Result
     {
-        public int n_cedula { get; set; }
+        public Nullable<int> n_cedula { get; set; }
         public string nombre { get; set; }
         public string p_apellido { get; set; }
         public string s_apellido { get; set; }
         public Nullable<long> tarjetacredito { get; set; }
-        public string tipo_de_cobro { get; set; }
-        public Nullable<int> n_pacientes { get; set; }
-        public Nullable<double> monto { get; set; }
-    
-        public virtual nutricionista nutricionista { get; set; }
+        public string tipo_cobro { get; set; }
+        public Nullable<int> numero_clientes { get; set; }
+        public Nullable<decimal> monto { get; set; }
     }
 }

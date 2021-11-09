@@ -21,6 +21,18 @@ namespace NutriTEC_API.Controllers
                 return entities.nutricionista.FirstOrDefault(e => e.n_cedula == id);
         }
 
+        //get para el reporte de los cobros de los nutricionistas
+        [HttpGet]
+        [Route("api/nutri/reporte_cobro")]
+        public IEnumerable<USP_ReporteCobro_Result> ObtenerReporteCobro()
+        {
+            using (NutriTECEntities entities = new NutriTECEntities())
+            {
+                var tt = entities.USP_ReporteCobro();
+                return tt.ToList();
+            }
+        }
+
         public IHttpActionResult Post(nutricionista nu)
         {
             if (!ModelState.IsValid)
