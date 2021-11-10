@@ -108,6 +108,9 @@
     <Compile Include="USP_GetCliente_Result.cs">
       <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="USP_pacientesXnutri_Result.cs">
+      <DependentUpon>NutriTECModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="USP_ReporteCobro_Result.cs">
       <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>

@@ -33,6 +33,18 @@ namespace NutriTEC_API.Controllers
             }
         }
 
+        //get para los pacientes que el nutri tiene asignados
+        [HttpGet]
+        [Route("api/nutri/misPacientes/{n_cedula}")]
+        public IEnumerable<USP_pacientesXnutri_Result> ObtenerListaPacientes(int n_cedula)
+        {
+            using (NutriTECEntities entities = new NutriTECEntities())
+            {
+                var tt = entities.USP_pacientesXnutri(n_cedula);
+                return tt.ToList();
+            }
+        }
+
         public IHttpActionResult Post(nutricionista nu)
         {
             if (!ModelState.IsValid)

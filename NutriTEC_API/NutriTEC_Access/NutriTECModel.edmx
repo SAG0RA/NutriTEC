@@ -346,6 +346,9 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
           <Parameter Name="tiempo_comida" Type="varchar" Mode="In" />
           <Parameter Name="plan_pertenece" Type="int" Mode="In" />
         </Function>
+        <Function Name="USP_pacientesXnutri" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="n_cedula" Type="int" Mode="In" />
+        </Function>
         <Function Name="USP_ReporteCobro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="NutriTECModelStoreContainer">
           <EntitySet Name="cliente" EntityType="Self.cliente" Schema="dbo" store:Type="Tables" />
@@ -875,6 +878,9 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
             <Parameter Name="plan_pertenece" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="USP_ReporteCobro" ReturnType="Collection(NutriTECModel.USP_ReporteCobro_Result)" />
+          <FunctionImport Name="USP_pacientesXnutri" ReturnType="Collection(NutriTECModel.USP_pacientesXnutri_Result)">
+          <Parameter Name="n_cedula" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="USP_GetCliente_Result">
           <Property Type="Int32" Name="cedula" Nullable="false" />
@@ -904,6 +910,24 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
           <Property Type="String" Name="tipo_cobro" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="numero_clientes" Nullable="true" />
           <Property Type="Decimal" Name="monto" Nullable="true" Precision="22" Scale="6" />
+        </ComplexType>
+        <ComplexType Name="USP_pacientesXnutri_Result">
+          <Property Type="Int32" Name="cedula" Nullable="true" />
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="p_apellido" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="s_apellido" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="edad" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_nac" Nullable="true" />
+          <Property Type="Double" Name="peso" Nullable="true" />
+          <Property Type="String" Name="pais" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="IMC" Nullable="true" />
+          <Property Type="Double" Name="cintura" Nullable="true" />
+          <Property Type="Double" Name="cuello" Nullable="true" />
+          <Property Type="Double" Name="caderas" Nullable="true" />
+          <Property Type="Double" Name="porc_grasa" Nullable="true" />
+          <Property Type="Double" Name="porc_musculo" Nullable="true" />
+          <Property Type="Double" Name="cdm_calorias" Nullable="true" />
+          <Property Type="Int32" Name="plan_suscrito" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1137,6 +1161,28 @@ advertencia 6002: La tabla o vista 'NutriTEC.sys.database_firewall_rules' no tie
                 <ScalarProperty Name="tipo_cobro" ColumnName="tipo_cobro" />
                 <ScalarProperty Name="numero_clientes" ColumnName="numero_clientes" />
                 <ScalarProperty Name="monto" ColumnName="monto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_pacientesXnutri" FunctionName="NutriTECModel.Store.USP_pacientesXnutri">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NutriTECModel.USP_pacientesXnutri_Result">
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="p_apellido" ColumnName="p_apellido" />
+                <ScalarProperty Name="s_apellido" ColumnName="s_apellido" />
+                <ScalarProperty Name="edad" ColumnName="edad" />
+                <ScalarProperty Name="fecha_nac" ColumnName="fecha_nac" />
+                <ScalarProperty Name="peso" ColumnName="peso" />
+                <ScalarProperty Name="pais" ColumnName="pais" />
+                <ScalarProperty Name="IMC" ColumnName="IMC" />
+                <ScalarProperty Name="cintura" ColumnName="cintura" />
+                <ScalarProperty Name="cuello" ColumnName="cuello" />
+                <ScalarProperty Name="caderas" ColumnName="caderas" />
+                <ScalarProperty Name="porc_grasa" ColumnName="porc_grasa" />
+                <ScalarProperty Name="porc_musculo" ColumnName="porc_musculo" />
+                <ScalarProperty Name="cdm_calorias" ColumnName="cdm_calorias" />
+                <ScalarProperty Name="plan_suscrito" ColumnName="plan_suscrito" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

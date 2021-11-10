@@ -72,5 +72,14 @@ namespace NutriTEC_Access
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_ReporteCobro_Result>("USP_ReporteCobro");
         }
+    
+        public virtual ObjectResult<USP_pacientesXnutri_Result> USP_pacientesXnutri(Nullable<int> n_cedula)
+        {
+            var n_cedulaParameter = n_cedula.HasValue ?
+                new ObjectParameter("n_cedula", n_cedula) :
+                new ObjectParameter("n_cedula", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_pacientesXnutri_Result>("USP_pacientesXnutri", n_cedulaParameter);
+        }
     }
 }
