@@ -13,9 +13,9 @@ export interface ProductoElement {
   grasa: string
   hierro: string
   lista_espera: any
-  nutri_correo:string
-  nutri_cedula:string
-  nutricionista:string
+  nutri_correo: string
+  nutri_cedula: string
+  nutricionista: string
   porcion: string
   proteina: string
   sodio: string
@@ -23,11 +23,45 @@ export interface ProductoElement {
 
 }
 
-export interface ClienteElement{
-
+export interface ClientElement {
+  cedula: string,
+  nombre: string,
+  p_apellido: string,
+  s_apellido: string,
+  edad: string,
+  fecha_nac: string,
+  peso: string,
+  IMC: string,
+  pais: string,
+  cintura: string,
+  cuello: string,
+  caderas: string,
+  porc_musculo: string,
+  porc_grasa: string,
+  cdm_calorias: string,
+  correo: string,
+  passw: string,
+  meta_calorica: [],
+  paciente: [],
+  registro_comida: [],
+  registro_peso: []
 }
 
-const ELEMENT_DATA: ProductoElement[] = [
+export interface Paciente_Element {
+  cedula: any,
+  nombre: any,
+  p_apellido: any,
+  pais: any
+}
+
+const PRODUCT_DATA: ProductoElement[] = [
+];
+
+const CLIENT_DATA: ClientElement[] = [
+];
+
+const PACIENTE_DATA: Paciente_Element[] = [
+
 ];
 
 @Component({
@@ -38,27 +72,41 @@ const ELEMENT_DATA: ProductoElement[] = [
 export class VistaNutriComponent implements OnInit {
   @Input() nombre_usuario: string = 'usuario'
 
-   /////////////////////////////////////////////////////////////////////////////////////////////////////
-   /////////////////////////////////////// GESTION DE PRODUCTOS ////////////////////////////////////////
-   /////////////////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////// GESTION DE PRODUCTOS ////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  cedula_nutri: any
 
   ////////// Listas con los datos de PRODUCTOS en API /////////////
   url = '/api/producto'
   url_nutri = '/api/nutri'
-  lista_datos_recibidos: any = []
-  lista_productos: any = []
+  lista_datos_recibidos_producto: any = []
+  lista_productos_codigo: any = []
 
+  ////////// Listas con los datos de CLIENTES y NUTRIS en API /////////////
+  url_cliente = '/api/cliente'
+  url_paciente = '/api/paciente'
+  url_pacientes_asociados = '/api/nutri/misPacientes'
+  lista_datos_recibidos_cliente: any = []
+  lista_datos_recibidos_paciente: any = []
+  lista_datos_recibidos_nutri: any = []
+  lista_pacientes_cedula: any = []
+  lista_pacientes_asociados: any = []
 
-   ////////// Listas con los datos de CLIENTES en API /////////////
-   url_cliente = '/api/cliente'
-   lista_datos_recibidos_cliente:any = []
-
-  lista_productosxusuario = []
   ////////// Gestion de Tabla de productos /////////////
-  displayedColumns: string[] =
+  displayedColumnsProducto: string[] =
     ['codigo_barras', 'descripcion', 'porcion', 'energia', 'grasa', 'proteina', 'sodio', 'carbohidratos', 'calcio', 'hierro', 'vitaminas', 'estado', 'actions'];
-  dataSource = ELEMENT_DATA;
-  @ViewChild(MatTable) table: MatTable<ProductoElement>;
+  displayedColumnsCliente: string[] =
+    ['cedula', 'nombre', 'apellido', 'pais', 'actionss'];
+  dataSourceProducto = PRODUCT_DATA;
+  dataSourceCliente = CLIENT_DATA;
+  dataSourcePaciente = PACIENTE_DATA;
+  @ViewChild('cliente') tablaCliente: MatTable<ClientElement>;
+  @ViewChild('producto') tablaProducto: MatTable<ProductoElement>;
+  @ViewChild('paciente') tablaPaciente: MatTable<Paciente_Element>;
+
+
 
   ////////// Datos de los inputs /////////////
   estado = 0;
@@ -78,72 +126,120 @@ export class VistaNutriComponent implements OnInit {
 
   constructor(private API: APIService, public dataService: DataService) { }
   ngOnInit(): void {
+
     localStorage.setItem('user', this.dataService.correo);
     console.log(this.correo)
+    ///////////////// GET de NUTRIS al iniciar la pagina //////////////////
+    this.API.GET(this.url_nutri).subscribe(response => {
+      this.lista_datos_recibidos_nutri = response
+      this.filtro_nutri(this.correo)
+
+      this.API.GET(this.url_pacientes_asociados + '/' + this.cedula_nutri).subscribe(response => {
+        this.lista_pacientes_asociados = response
+
+
+      })
+    })
+
     ///////////////// GET de PRODUCTOS al iniciar la pagina //////////////////
     this.API.GET(this.url)
       .subscribe(response => {
-        this.lista_datos_recibidos = response
-        console.log(this.lista_datos_recibidos)
+        this.lista_datos_recibidos_producto = response
+        console.log(this.lista_datos_recibidos_producto)
         //Vacia la lista para volverla a llenar luego
-        this.lista_productos = []
-        for (var i = 0; i < this.lista_datos_recibidos.length; i++) {
+        this.lista_productos_codigo = []
+        for (var i = 0; i < this.lista_datos_recibidos_producto.length; i++) {
           // Rellena las listas con los datos del API con codigo de barras
-          this.lista_productos.push(this.lista_datos_recibidos[i]['codigo_barras'])
+          this.lista_productos_codigo.push(this.lista_datos_recibidos_producto[i]['codigo_barras'])
         }
-        console.log('Productos: ' + '[' + this.lista_productos + ']')
-        this.filtrado(this.correo)
-       // this.table.renderRows()
+        console.log('Productos:' + this.lista_productos_codigo)
+        this.filtro_producto(this.correo)
+
       })
 
-      this.API.GET(this.url_cliente)
+    ///////////////// GET de CLIENTES al iniciar la pagina //////////////////
+    this.API.GET(this.url_cliente)
       .subscribe(response => {
         this.lista_datos_recibidos_cliente = response
-        console.log(this.lista_datos_recibidos_cliente)
+
+        this.API.GET(this.url_paciente).subscribe(response => {
+          this.lista_datos_recibidos_paciente = response
+          console.log(this.lista_datos_recibidos_cliente)
+          for (var i = 0; i < this.lista_datos_recibidos_paciente.length; i++) {
+            this.lista_pacientes_cedula.push(this.lista_datos_recibidos_paciente[i]['paciente_cedula'])
+          }
+          console.log('Pacientes: ' + this.lista_pacientes_cedula)
+          this.filtro_cliente(this.lista_pacientes_cedula)
+        })
       })
   }
 
   eliminarProducto(row: any) {
     this.API.DELETE(this.url + '/' + row.codigo_barras).subscribe(() => console.log("Producto eliminado"))
 
-    this.dataSource.splice(row,1);
-    this.table.renderRows();
+    this.dataSourceProducto.splice(row, 1);
+    this.tablaProducto.renderRows();
 
     this.API.GET(this.url)
       .subscribe(response => {
-        this.lista_datos_recibidos = response
-        console.log(this.lista_datos_recibidos)
+        this.lista_datos_recibidos_producto = response
+        console.log(this.lista_datos_recibidos_producto)
         //Vacia la lista para volverla a llenar luego
-        this.lista_productos = []
-        for (var i = 0; i < this.lista_datos_recibidos.length; i++) {
+        this.lista_productos_codigo = []
+        for (var i = 0; i < this.lista_datos_recibidos_producto.length; i++) {
           // Rellena las listas con los datos del API con codigo de barras
-          this.lista_productos.push(this.lista_datos_recibidos[i]['codigo_barras'])
+          this.lista_productos_codigo.push(this.lista_datos_recibidos_producto[i]['codigo_barras'])
         }
-        console.log('Productos: ' + '[' + this.lista_productos + ']')
+        console.log('Productos: ' + this.lista_productos_codigo)
 
       })
   }
 
-  filtrado(correo: any) {
-    ELEMENT_DATA.length = 0
-    console.log(this.lista_datos_recibidos)
+
+
+  filtro_producto(correo: any) {
+    PRODUCT_DATA.length = 0
     //Filtra los productos segun el usuario ingresado
-    var filtro = this.lista_datos_recibidos.filter(function (el: any) {
-      return el.nutri_correo == correo
+    var filtro = this.lista_datos_recibidos_producto.filter(function (el: any) {
+      return el.nutri_correo == correo && el.lista_espera == 0;
     })
-    console.log(filtro)
+    for (var i = 0; i < filtro.length; i++) {
+      PRODUCT_DATA.push(filtro[i])
+    }
+    this.tablaProducto.renderRows()
+  }
+
+
+
+  filtro_cliente(lista_pacientes: any) {
+    CLIENT_DATA.length = 0;
+
+    var filtro = this.lista_datos_recibidos_cliente.filter(function (el: any) {
+      return !lista_pacientes.includes(el.cedula)
+    })
 
     for (var i = 0; i < filtro.length; i++) {
-      ELEMENT_DATA.push(filtro[i])
+      CLIENT_DATA.push(filtro[i])
     }
 
-    this.table.renderRows()
+    console.log(filtro)
+    this.tablaCliente.renderRows
+  }
+
+
+  filtro_nutri(correo: any) {
+    var filtro = this.lista_datos_recibidos_nutri.filter(function (el: any) {
+      return el.correo == correo
+    })
+    console.log(filtro)
+    this.cedula_nutri = filtro[0]['n_cedula']
+
+    console.log(this.cedula_nutri)
   }
 
 
   agregarProducto() {
-
-    if (this.lista_productos.includes(this.codigo_barras) || ELEMENT_DATA.some(e => e.codigo_barras === this.codigo_barras) || !this.codigo_barras || !this.descripcion || !this.porcion || !this.energia || !this.grasa ||
+    if (this.lista_productos_codigo.includes(this.codigo_barras) || PRODUCT_DATA.some(e => e.codigo_barras === this.codigo_barras) || !this.codigo_barras || !this.descripcion || !this.porcion || !this.energia || !this.grasa ||
       !this.proteina || !this.sodio || !this.carbohidratos || !this.hierro || !this.calcio || !this.vitaminas) {
       alert("Error al registrar producto")
     }
@@ -167,26 +263,54 @@ export class VistaNutriComponent implements OnInit {
         vitaminas: this.vitaminas
       }
 
-      ELEMENT_DATA.push(lista_elementos)
-      console.log('Lista en la tabla: ' + ELEMENT_DATA)
-      this.table.renderRows();
+      PRODUCT_DATA.push(lista_elementos)
+      this.tablaProducto.renderRows();
 
       this.API.POST(this.url, lista_elementos).subscribe(response => {
         this.API.GET(this.url)
           .subscribe(response => {
-            this.lista_datos_recibidos = response
-            console.log(this.lista_datos_recibidos)
-            for (var i = 0; i < this.lista_datos_recibidos.length; i++) {
-              this.lista_productos.push(this.lista_datos_recibidos[i]['codigo_barras'])
+            this.lista_datos_recibidos_producto = response
+            console.log(this.lista_datos_recibidos_producto)
+            for (var i = 0; i < this.lista_datos_recibidos_producto.length; i++) {
+              this.lista_productos_codigo.push(this.lista_datos_recibidos_producto[i]['codigo_barras'])
             }
           })
       })
     }
   }
-   /////////////////////////////////////////////////////////////////////////////////////////////////////
-   /////////////////////////////////////// GESTION DE CLIENTES /////////////////////////////////////////
-   /////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  /////////////////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////// GESTION DE CLIENTES /////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  asociarCliente(row: any) {
+
+
+    this.dataSourceCliente.splice(row, 1);
+    this.tablaCliente.renderRows();
+
+    var cliente_agregado = {
+      n_cedula: this.cedula_nutri,
+      paciente_cedula: row.cedula
+    }
+
+
+    var cliente_asociado = {
+      cedula: row.cedula,
+      nombre: row.nombre,
+      p_apellido: row.p_apellido,
+      pais: row.pais,
+    }
+
+    PACIENTE_DATA.push(cliente_asociado)
+    console.log(PACIENTE_DATA)
+    this.tablaPaciente.renderRows()
+
+
+    this.API.POST(this.url_paciente, cliente_agregado).subscribe(response => {
+      console.log('Paciente agregado')
+    })
+  }
 
 }
 

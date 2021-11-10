@@ -3,10 +3,7 @@
     background-color: #3e5f3e;
     background-size: 200px;
 }
-.spinner{
-  display: inline-block;
-  vertical-align: middle;
-}
+
 .titulo{
   text-transform: capitalize;
   color:wheat;
