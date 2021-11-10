@@ -136,8 +136,17 @@ export class VistaNutriComponent implements OnInit {
 
       this.API.GET(this.url_pacientes_asociados + '/' + this.cedula_nutri).subscribe(response => {
         this.lista_pacientes_asociados = response
-
-
+        const propiedades = ['IMC','edad','caderas','cdm_calorias','cintura','cuello','fecha_nac','peso','plan_suscrito','porc_grasa','porc_musculo','s_apellido']
+        for(var i=0;i < this.lista_pacientes_asociados.length;i++){
+          for(var j=0;j<propiedades.length;j++){
+            delete this.lista_pacientes_asociados[i][propiedades[j]]
+          }
+        }
+        console.log(this.lista_pacientes_asociados)
+        for(var i=0;i<this.lista_pacientes_asociados.length;i++){
+          PACIENTE_DATA.push(this.lista_pacientes_asociados[i])
+        }
+        this.tablaPaciente.renderRows()
       })
     })
 

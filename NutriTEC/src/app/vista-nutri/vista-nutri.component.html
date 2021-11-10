@@ -219,7 +219,7 @@
 
                     <!-- Columna de boton eliminar -->
                     <ng-container matColumnDef="actionss">
-                        <mat-header-cell  *matHeaderCellDef style="margin-top:19px;">Eliminar</mat-header-cell>
+                        <mat-header-cell  *matHeaderCellDef style="margin-top:19px;">Asociar</mat-header-cell>
                         <mat-cell *matCellDef="let row" >
                              <button mat-icon-button [disabled]="!dataSourceCliente.length" (click)="asociarCliente(row)">
                                 <mat-icon>add</mat-icon>
@@ -266,7 +266,7 @@
                     <ng-container matColumnDef="actionss">
                         <mat-header-cell  *matHeaderCellDef style="margin-top:19px;">Eliminar</mat-header-cell>
                         <mat-cell *matCellDef="let row" >
-                             <button mat-icon-button [disabled]="!dataSourcePaciente.length" (click)="asociarCliente(row)">
+                             <button mat-icon-button [disabled]="!dataSourcePaciente.length">
                                 <mat-icon>add</mat-icon>
                              </button>
                         </mat-cell>
