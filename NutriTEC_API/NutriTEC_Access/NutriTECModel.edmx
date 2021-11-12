@@ -348,8 +348,16 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="CrearPlanAlimenticio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nutri_cedula" Type="int" Mode="In" />
+          <Parameter Name="nombre_plan" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="USP_CalcularCaloriasDelPlan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_plan" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="USP_CrearPlanAlimenticio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nutri_cedula" Type="int" Mode="In" />
+          <Parameter Name="nombre_plan" Type="varchar" Mode="In" />
         </Function>
         <Function Name="USP_GetProductosDelPlan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_plan" Type="varchar" Mode="In" />
@@ -912,6 +920,14 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
           <Parameter Name="n_cedula" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="USP_ReporteCobro" ReturnType="Collection(NutriTECModel.USP_ReporteCobro_Result)" />
+          <FunctionImport Name="CrearPlanAlimenticio">
+            <Parameter Name="nutri_cedula" Mode="In" Type="Int32" />
+            <Parameter Name="nombre_plan" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USP_CrearPlanAlimenticio">
+            <Parameter Name="nutri_cedula" Mode="In" Type="Int32" />
+            <Parameter Name="nombre_plan" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="USP_GetProductosDelPlan_Result">
           <Property Type="Int64" Name="codigo_barras" Nullable="false" />
@@ -1199,6 +1215,8 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CrearPlanAlimenticio" FunctionName="NutriTECModel.Store.CrearPlanAlimenticio" />
+          <FunctionImportMapping FunctionImportName="USP_CrearPlanAlimenticio" FunctionName="NutriTECModel.Store.USP_CrearPlanAlimenticio" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -21,9 +21,8 @@ namespace NutriTEC_Access
             : base("name=NutriTECEntities")
         {
             Configuration.ProxyCreationEnabled = false;
-
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -94,6 +93,32 @@ namespace NutriTEC_Access
         public virtual ObjectResult<USP_ReporteCobro_Result> USP_ReporteCobro()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_ReporteCobro_Result>("USP_ReporteCobro");
+        }
+    
+        public virtual int CrearPlanAlimenticio(Nullable<int> nutri_cedula, string nombre_plan)
+        {
+            var nutri_cedulaParameter = nutri_cedula.HasValue ?
+                new ObjectParameter("nutri_cedula", nutri_cedula) :
+                new ObjectParameter("nutri_cedula", typeof(int));
+    
+            var nombre_planParameter = nombre_plan != null ?
+                new ObjectParameter("nombre_plan", nombre_plan) :
+                new ObjectParameter("nombre_plan", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CrearPlanAlimenticio", nutri_cedulaParameter, nombre_planParameter);
+        }
+    
+        public virtual int USP_CrearPlanAlimenticio(Nullable<int> nutri_cedula, string nombre_plan)
+        {
+            var nutri_cedulaParameter = nutri_cedula.HasValue ?
+                new ObjectParameter("nutri_cedula", nutri_cedula) :
+                new ObjectParameter("nutri_cedula", typeof(int));
+    
+            var nombre_planParameter = nombre_plan != null ?
+                new ObjectParameter("nombre_plan", nombre_plan) :
+                new ObjectParameter("nombre_plan", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_CrearPlanAlimenticio", nutri_cedulaParameter, nombre_planParameter);
         }
     }
 }

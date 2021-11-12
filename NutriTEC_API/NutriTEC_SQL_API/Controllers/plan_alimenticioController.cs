@@ -51,17 +51,8 @@ namespace NutriTEC_API.Controllers
 
             using (NutriTECEntities entities = new NutriTECEntities())
             {
-
-                entities.plan_alimenticio.Add(new plan_alimenticio()
-                {
-                    Id = pl.Id,
-                    nombre_plan = pl.nombre_plan,
-                    total_calorias = pl.total_calorias,
-                    nutri_al_plan = pl.nutri_al_plan
-                });
-
+                entities.USP_CrearPlanAlimenticio(pl.nutri_al_plan, pl.nombre_plan);
                 entities.SaveChanges();
-
             }
             return Ok();
         }
