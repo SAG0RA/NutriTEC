@@ -23,6 +23,15 @@ export interface ProductoElement {
 
 }
 
+export interface Producto_planElement {
+  codigo_barras: string
+  descripcion: string
+  energia: string
+  tiempo_comida: string
+  plan_pertenece: string
+  cantidad: string
+}
+
 export interface ClientElement {
   cedula: string,
   nombre: string,
@@ -64,6 +73,31 @@ const PACIENTE_DATA: Paciente_Element[] = [
 
 ];
 
+const PLAN_PRODUCT_DATA: ProductoElement[] = [
+
+];
+
+const DESAYUNO_DATA: ProductoElement[] = [
+
+];
+
+const MERIENDA1_DATA: ProductoElement[] = [
+
+];
+
+const ALMUERZO_DATA: ProductoElement[] = [
+
+];
+
+const MERIENDA2_DATA: ProductoElement[] = [
+
+];
+
+const CENA_DATA: ProductoElement[] = [
+
+];
+
+
 @Component({
   selector: 'app-vista-nutri',
   templateUrl: './vista-nutri.component.html',
@@ -96,21 +130,43 @@ export class VistaNutriComponent implements OnInit {
 
   ////////// Gestion de Tabla de productos /////////////
   displayedColumnsProducto: string[] =
-    ['codigo_barras', 'descripcion', 'porcion', 'energia', 'grasa', 'proteina', 'sodio', 'carbohidratos', 'calcio', 'hierro', 'vitaminas', 'estado', 'actions'];
+    ['codigo_barras', 'descripcion', 'porcion', 'energia', 'grasa', 'proteina', 'sodio', 'carbohidratos', 'calcio', 'hierro', 'vitaminas', 'actions'];
   displayedColumnsCliente: string[] =
+    ['cedula', 'nombre', 'apellido', 'pais', 'cintura', 'cuello', 'caderas', '%musculo', '%grasa', 'actionss'];
+  displayedColumnsPaciente: string[] =
     ['cedula', 'nombre', 'apellido', 'pais', 'actionss'];
+  displayedColumnsDesayuno: string[] =
+    ['codigo_barras', 'descripcion', 'energia'];
+
   dataSourceProducto = PRODUCT_DATA;
   dataSourceCliente = CLIENT_DATA;
   dataSourcePaciente = PACIENTE_DATA;
+  dataSourcePlan_Producto = PLAN_PRODUCT_DATA;
+
+  dataSourceDesayuno = DESAYUNO_DATA;
+  dataSourceMerienda1 = MERIENDA1_DATA;
+  dataSourceAlmuerzo = ALMUERZO_DATA;
+  dataSourceMerienda2 = MERIENDA2_DATA;
+  dataSourceCena = CENA_DATA;
+
   @ViewChild('cliente') tablaCliente: MatTable<ClientElement>;
   @ViewChild('producto') tablaProducto: MatTable<ProductoElement>;
   @ViewChild('paciente') tablaPaciente: MatTable<Paciente_Element>;
+  @ViewChild('planxproducto') tablaPlanxproducto: MatTable<ProductoElement>;
 
+
+  @ViewChild('desayuno') tablaDesayuno: MatTable<ProductoElement>;
+  @ViewChild('merienda1') tablaMerienda1: MatTable<ProductoElement>;
+  @ViewChild('almuerzo') tablaAlmuerzo: MatTable<ProductoElement>;
+  @ViewChild('merienda2') tablaMerienda2: MatTable<ProductoElement>;
+  @ViewChild('cena') tablaCena: MatTable<ProductoElement>;
 
 
   ////////// Datos de los inputs /////////////
   estado = 0;
   correo: any = localStorage.getItem('user')
+  
+  nombre_plan: string
 
   codigo_barras: string
   descripcion: string
@@ -135,15 +191,16 @@ export class VistaNutriComponent implements OnInit {
       this.filtro_nutri(this.correo)
 
       this.API.GET(this.url_pacientes_asociados + '/' + this.cedula_nutri).subscribe(response => {
+        PACIENTE_DATA.length = 0;
         this.lista_pacientes_asociados = response
-        const propiedades = ['IMC','edad','caderas','cdm_calorias','cintura','cuello','fecha_nac','peso','plan_suscrito','porc_grasa','porc_musculo','s_apellido']
-        for(var i=0;i < this.lista_pacientes_asociados.length;i++){
-          for(var j=0;j<propiedades.length;j++){
+        const propiedades = ['IMC', 'edad', 'caderas', 'cdm_calorias', 'cintura', 'cuello', 'fecha_nac', 'peso', 'plan_suscrito', 'porc_grasa', 'porc_musculo', 's_apellido']
+        for (var i = 0; i < this.lista_pacientes_asociados.length; i++) {
+          for (var j = 0; j < propiedades.length; j++) {
             delete this.lista_pacientes_asociados[i][propiedades[j]]
           }
         }
         console.log(this.lista_pacientes_asociados)
-        for(var i=0;i<this.lista_pacientes_asociados.length;i++){
+        for (var i = 0; i < this.lista_pacientes_asociados.length; i++) {
           PACIENTE_DATA.push(this.lista_pacientes_asociados[i])
         }
         this.tablaPaciente.renderRows()
@@ -163,6 +220,8 @@ export class VistaNutriComponent implements OnInit {
         }
         console.log('Productos:' + this.lista_productos_codigo)
         this.filtro_producto(this.correo)
+        this.filtro_planxproducto(this.correo)
+
 
       })
 
@@ -204,8 +263,6 @@ export class VistaNutriComponent implements OnInit {
       })
   }
 
-
-
   filtro_producto(correo: any) {
     PRODUCT_DATA.length = 0
     //Filtra los productos segun el usuario ingresado
@@ -218,6 +275,19 @@ export class VistaNutriComponent implements OnInit {
     this.tablaProducto.renderRows()
   }
 
+  filtro_planxproducto(correo: any) {
+    PLAN_PRODUCT_DATA.length = 0
+
+    var filtro = this.lista_datos_recibidos_producto.filter(function (el: any) {
+      return el.lista_espera == 1
+    })
+
+    for (var i = 0; i < filtro.length; i++) {
+      PLAN_PRODUCT_DATA.push(filtro[i])
+    }
+
+    this.tablaPlanxproducto.renderRows()
+  }
 
 
   filtro_cliente(lista_pacientes: any) {
@@ -288,13 +358,8 @@ export class VistaNutriComponent implements OnInit {
     }
   }
 
-  /////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////// GESTION DE CLIENTES /////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////////
 
   asociarCliente(row: any) {
-
-
     this.dataSourceCliente.splice(row, 1);
     this.tablaCliente.renderRows();
 
@@ -302,7 +367,6 @@ export class VistaNutriComponent implements OnInit {
       n_cedula: this.cedula_nutri,
       paciente_cedula: row.cedula
     }
-
 
     var cliente_asociado = {
       cedula: row.cedula,
@@ -315,10 +379,41 @@ export class VistaNutriComponent implements OnInit {
     console.log(PACIENTE_DATA)
     this.tablaPaciente.renderRows()
 
-
     this.API.POST(this.url_paciente, cliente_agregado).subscribe(response => {
       console.log('Paciente agregado')
     })
+  }
+
+
+  //////////////////////// AGREGAR PRODUCTOS A PLAN (FUNCIONES) ///////////////////////
+  crearPlan(){
+    var plan_creado = {
+      nombre_plan: this.nombre_plan,
+      nutri_al_plan: this.cedula_nutri,
+      nutricionista: this.correo,
+      
+    }
+  }
+
+  agregarDesayuno(row: any) {
+    if (!this.nombre_plan) {
+      alert('Registre primero el nombre de su nuevo plan')
+    } else {
+      var producto_agregado_tabla = {
+        codigo_barras: row.codigo_barras,
+        descripcion: row.descripcion,
+        energia: row.energia
+      }
+
+      var producto_agregado_api = {
+        codigo_barras: row.codigo_barras,
+        tiempo_comida: 'desayuno',
+        plan_pertenece: this.nombre_plan,
+        cantidad: 1
+      }
+
+    }
+
   }
 
 }

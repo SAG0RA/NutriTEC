@@ -47,6 +47,7 @@ dataSource = ELEMENT_DATA;
   ngOnInit(): void {
     this.API.GET(this.url)
       .subscribe(response => {
+        ELEMENT_DATA.length = 0
         this.lista_datos_recibidos = response
         console.log(this.lista_datos_recibidos)
         //Vacia la lista para volverla a llenar luego
