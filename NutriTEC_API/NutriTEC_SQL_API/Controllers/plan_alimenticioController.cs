@@ -40,7 +40,7 @@ namespace NutriTEC_API.Controllers
             using (NutriTECEntities entities = new NutriTECEntities())
             {
                 entities.USP_CalcularCaloriasDelPlan(id_plan);
-                return Ok ("Calorias del plan: " + $"{id_plan}" + " actualizadas");
+                return Ok ("Calorias del plan: " + $"{id_plan}" + "actualizadas");
             }
         }
 
