@@ -53,9 +53,6 @@
     <Compile Include="cliente.cs">
       <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="database_firewall_rules.cs">
-      <DependentUpon>NutriTECModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Empleado.cs">
       <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
@@ -99,6 +96,9 @@
       <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recetas.cs">
+      <DependentUpon>NutriTECModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="registro_comida.cs">
       <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>

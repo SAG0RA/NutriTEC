@@ -18,7 +18,8 @@ namespace NutriTEC_Access
         public string descripcion { get; set; }
         public double energia { get; set; }
         public string tiempo_comida { get; set; }
-        public Nullable<int> plan_pertenece { get; set; }
+        public int plan_pertenece { get; set; }
+        public int cantidad { get; set; }
     
         public virtual plan_alimenticio plan_alimenticio { get; set; }
         public virtual producto producto { get; set; }

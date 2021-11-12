@@ -14,6 +14,12 @@ namespace NutriTEC_Access
     
     public partial class producto
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public producto()
+        {
+            this.productosXplan = new HashSet<productosXplan>();
+        }
+    
         public long codigo_barras { get; set; }
         public string descripcion { get; set; }
         public Nullable<double> porcion { get; set; }
@@ -30,7 +36,8 @@ namespace NutriTEC_Access
         public string nutri_correo { get; set; }
     
         public virtual nutricionista nutricionista { get; set; }
-        public virtual productosXplan productosXplan { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<productosXplan> productosXplan { get; set; }
         public virtual registro_comida registro_comida { get; set; }
     }
 }

@@ -12,13 +12,17 @@ namespace NutriTEC_Access
     using System;
     using System.Collections.Generic;
     
-    public partial class database_firewall_rules
+    public partial class Recetas
     {
         public int id { get; set; }
-        public string name { get; set; }
-        public string start_ip_address { get; set; }
-        public string end_ip_address { get; set; }
-        public System.DateTime create_date { get; set; }
-        public System.DateTime modify_date { get; set; }
+        public string nombre_receta { get; set; }
+        public Nullable<double> energía { get; set; }
+        public Nullable<double> grasa { get; set; }
+        public Nullable<double> sodio { get; set; }
+        public Nullable<double> carbohidratos { get; set; }
+        public Nullable<double> proteinas { get; set; }
+        public Nullable<int> cliente_creador { get; set; }
+    
+        public virtual cliente cliente { get; set; }
     }
 }

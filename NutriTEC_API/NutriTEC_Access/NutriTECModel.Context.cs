@@ -21,8 +21,9 @@ namespace NutriTEC_Access
             : base("name=NutriTECEntities")
         {
             Configuration.ProxyCreationEnabled = false;
+
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -36,11 +37,11 @@ namespace NutriTEC_Access
         public virtual DbSet<plan_alimenticio> plan_alimenticio { get; set; }
         public virtual DbSet<producto> producto { get; set; }
         public virtual DbSet<productosXplan> productosXplan { get; set; }
+        public virtual DbSet<Recetas> Recetas { get; set; }
         public virtual DbSet<registro_comida> registro_comida { get; set; }
         public virtual DbSet<registro_peso> registro_peso { get; set; }
         public virtual DbSet<listaEspera> listaEspera { get; set; }
         public virtual DbSet<productosDisponibles> productosDisponibles { get; set; }
-        public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
     
         public virtual ObjectResult<USP_GetCliente_Result> USP_GetCliente(Nullable<int> cedula)
         {
@@ -51,7 +52,7 @@ namespace NutriTEC_Access
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_GetCliente_Result>("USP_GetCliente", cedulaParameter);
         }
     
-        public virtual int USP_insertarProductoPlan(Nullable<long> codigo_barras, string tiempo_comida, Nullable<int> plan_pertenece)
+        public virtual int USP_insertarProductoPlan(Nullable<long> codigo_barras, string tiempo_comida, Nullable<int> plan_pertenece, Nullable<int> cantidad)
         {
             var codigo_barrasParameter = codigo_barras.HasValue ?
                 new ObjectParameter("codigo_barras", codigo_barras) :
@@ -65,12 +66,11 @@ namespace NutriTEC_Access
                 new ObjectParameter("plan_pertenece", plan_pertenece) :
                 new ObjectParameter("plan_pertenece", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_insertarProductoPlan", codigo_barrasParameter, tiempo_comidaParameter, plan_perteneceParameter);
-        }
+            var cantidadParameter = cantidad.HasValue ?
+                new ObjectParameter("cantidad", cantidad) :
+                new ObjectParameter("cantidad", typeof(int));
     
-        public virtual ObjectResult<USP_ReporteCobro_Result> USP_ReporteCobro()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_ReporteCobro_Result>("USP_ReporteCobro");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_insertarProductoPlan", codigo_barrasParameter, tiempo_comidaParameter, plan_perteneceParameter, cantidadParameter);
         }
     
         public virtual ObjectResult<USP_pacientesXnutri_Result> USP_pacientesXnutri(Nullable<int> n_cedula)
@@ -80,6 +80,11 @@ namespace NutriTEC_Access
                 new ObjectParameter("n_cedula", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_pacientesXnutri_Result>("USP_pacientesXnutri", n_cedulaParameter);
+        }
+    
+        public virtual ObjectResult<USP_ReporteCobro_Result> USP_ReporteCobro()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_ReporteCobro_Result>("USP_ReporteCobro");
         }
     }
 }

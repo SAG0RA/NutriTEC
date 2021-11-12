@@ -13,7 +13,7 @@ namespace NutriTEC_Access
     
     public partial class USP_pacientesXnutri_Result
     {
-        public Nullable<int> cedula { get; set; }
+        public int cedula { get; set; }
         public string nombre { get; set; }
         public string p_apellido { get; set; }
         public string s_apellido { get; set; }

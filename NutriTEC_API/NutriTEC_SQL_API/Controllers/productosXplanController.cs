@@ -22,12 +22,12 @@ namespace NutriTEC_API.Controllers
         }
 
         [HttpPost]
-        [Route("api/producto/spget/insertarProductoPlan")]
+        [Route("api/producto/insertarProductoPlan")]
         public IHttpActionResult PostSP(productosXplan pxp)
         {
             using (NutriTECEntities entities = new NutriTECEntities())
             {
-                entities.USP_insertarProductoPlan(pxp.codigo_barras, pxp.tiempo_comida, pxp.plan_pertenece);
+                entities.USP_insertarProductoPlan(pxp.codigo_barras, pxp.tiempo_comida, pxp.plan_pertenece, pxp.cantidad);
             }
             return Ok("si");
         }
