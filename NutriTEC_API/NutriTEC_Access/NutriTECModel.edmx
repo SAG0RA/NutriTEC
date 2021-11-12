@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="NutriTECModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="NutriTECModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="cliente">
           <Key>
             <PropertyRef Name="cedula" />
@@ -75,13 +75,13 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="n_cedula" Type="int" Nullable="false" />
           <Property Name="paciente_cedula" Type="int" Nullable="false" />
-          <Property Name="paciente_plan" Type="int" />
+          <Property Name="paciente_plan" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="plan_alimenticio">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="nombre_plan" Type="varchar" MaxLength="50" />
           <Property Name="total_calorias" Type="float" />
           <Property Name="nutri_al_plan" Type="int" />
@@ -115,7 +115,7 @@
           <Property Name="descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="energia" Type="float" Nullable="false" />
           <Property Name="tiempo_comida" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="plan_pertenece" Type="int" Nullable="false" />
+          <Property Name="plan_pertenece" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="cantidad" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Recetas">
@@ -240,7 +240,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__paciente__pacien__6DCC4D03">
+        <Association Name="FK__paciente__pacien__7E02B4CC">
           <End Role="plan_alimenticio" Type="Self.plan_alimenticio" Multiplicity="0..1" />
           <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
           <ReferentialConstraint>
@@ -252,7 +252,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__plan_alim__nutri__6EC0713C">
+        <Association Name="FK__plan_alim__nutri__7FEAFD3E">
           <End Role="nutricionista" Type="Self.nutricionista" Multiplicity="0..1" />
           <End Role="plan_alimenticio" Type="Self.plan_alimenticio" Multiplicity="*" />
           <ReferentialConstraint>
@@ -276,7 +276,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__productos__codig__662B2B3B">
+        <Association Name="FK__productos__codig__00DF2177">
           <End Role="producto" Type="Self.producto" Multiplicity="1" />
           <End Role="productosXplan" Type="Self.productosXplan" Multiplicity="*" />
           <ReferentialConstraint>
@@ -288,7 +288,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__productos__plan___6FB49575">
+        <Association Name="FK__productos__plan___7EF6D905">
           <End Role="plan_alimenticio" Type="Self.plan_alimenticio" Multiplicity="1" />
           <End Role="productosXplan" Type="Self.productosXplan" Multiplicity="*" />
           <ReferentialConstraint>
@@ -348,13 +348,16 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="USP_GetCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="cedula" Type="int" Mode="In" />
+        <Function Name="USP_CalcularCaloriasDelPlan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_plan" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="USP_GetProductosDelPlan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_plan" Type="varchar" Mode="In" />
         </Function>
         <Function Name="USP_insertarProductoPlan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="codigo_barras" Type="bigint" Mode="In" />
           <Parameter Name="tiempo_comida" Type="varchar" Mode="In" />
-          <Parameter Name="plan_pertenece" Type="int" Mode="In" />
+          <Parameter Name="plan_pertenece" Type="varchar" Mode="In" />
           <Parameter Name="cantidad" Type="int" Mode="In" />
         </Function>
         <Function Name="USP_pacientesXnutri" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -421,11 +424,11 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
             <End Role="cliente" EntitySet="cliente" />
             <End Role="paciente" EntitySet="paciente" />
           </AssociationSet>
-          <AssociationSet Name="FK__paciente__pacien__6DCC4D03" Association="Self.FK__paciente__pacien__6DCC4D03">
+          <AssociationSet Name="FK__paciente__pacien__7E02B4CC" Association="Self.FK__paciente__pacien__7E02B4CC">
             <End Role="plan_alimenticio" EntitySet="plan_alimenticio" />
             <End Role="paciente" EntitySet="paciente" />
           </AssociationSet>
-          <AssociationSet Name="FK__plan_alim__nutri__6EC0713C" Association="Self.FK__plan_alim__nutri__6EC0713C">
+          <AssociationSet Name="FK__plan_alim__nutri__7FEAFD3E" Association="Self.FK__plan_alim__nutri__7FEAFD3E">
             <End Role="nutricionista" EntitySet="nutricionista" />
             <End Role="plan_alimenticio" EntitySet="plan_alimenticio" />
           </AssociationSet>
@@ -433,11 +436,11 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
             <End Role="nutricionista" EntitySet="nutricionista" />
             <End Role="producto" EntitySet="producto" />
           </AssociationSet>
-          <AssociationSet Name="FK__productos__codig__662B2B3B" Association="Self.FK__productos__codig__662B2B3B">
+          <AssociationSet Name="FK__productos__codig__00DF2177" Association="Self.FK__productos__codig__00DF2177">
             <End Role="producto" EntitySet="producto" />
             <End Role="productosXplan" EntitySet="productosXplan" />
           </AssociationSet>
-          <AssociationSet Name="FK__productos__plan___6FB49575" Association="Self.FK__productos__plan___6FB49575">
+          <AssociationSet Name="FK__productos__plan___7EF6D905" Association="Self.FK__productos__plan___7EF6D905">
             <End Role="plan_alimenticio" EntitySet="plan_alimenticio" />
             <End Role="productosXplan" EntitySet="productosXplan" />
           </AssociationSet>
@@ -458,8 +461,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
             <End Role="registro_comida" EntitySet="registro_comida" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NutriTECModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -534,7 +536,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
           <Property Name="passw" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="meta_calorica" Relationship="Self.FK__meta_calo__nutri__151B244E" FromRole="nutricionista" ToRole="meta_calorica" />
           <NavigationProperty Name="paciente" Relationship="Self.FK__paciente__n_cedu__3A4CA8FD" FromRole="nutricionista" ToRole="paciente" />
-          <NavigationProperty Name="plan_alimenticio" Relationship="Self.FK__plan_alim__nutri__6EC0713C" FromRole="nutricionista" ToRole="plan_alimenticio" />
+          <NavigationProperty Name="plan_alimenticio" Relationship="Self.FK__plan_alim__nutri__7FEAFD3E" FromRole="nutricionista" ToRole="plan_alimenticio" />
           <NavigationProperty Name="producto" Relationship="Self.FK__producto__nutri___40058253" FromRole="nutricionista" ToRole="producto" />
         </EntityType>
         <EntityType Name="paciente">
@@ -544,22 +546,22 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="n_cedula" Type="Int32" Nullable="false" />
           <Property Name="paciente_cedula" Type="Int32" Nullable="false" />
-          <Property Name="paciente_plan" Type="Int32" />
+          <Property Name="paciente_plan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="cliente" Relationship="Self.FK__paciente__pacien__3B40CD36" FromRole="paciente" ToRole="cliente" />
           <NavigationProperty Name="nutricionista" Relationship="Self.FK__paciente__n_cedu__3A4CA8FD" FromRole="paciente" ToRole="nutricionista" />
-          <NavigationProperty Name="plan_alimenticio" Relationship="Self.FK__paciente__pacien__6DCC4D03" FromRole="paciente" ToRole="plan_alimenticio" />
+          <NavigationProperty Name="plan_alimenticio" Relationship="Self.FK__paciente__pacien__7E02B4CC" FromRole="paciente" ToRole="plan_alimenticio" />
         </EntityType>
         <EntityType Name="plan_alimenticio">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nombre_plan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="total_calorias" Type="Double" />
           <Property Name="nutri_al_plan" Type="Int32" />
-          <NavigationProperty Name="nutricionista" Relationship="Self.FK__plan_alim__nutri__6EC0713C" FromRole="plan_alimenticio" ToRole="nutricionista" />
-          <NavigationProperty Name="paciente" Relationship="Self.FK__paciente__pacien__6DCC4D03" FromRole="plan_alimenticio" ToRole="paciente" />
-          <NavigationProperty Name="productosXplan" Relationship="Self.FK__productos__plan___6FB49575" FromRole="plan_alimenticio" ToRole="productosXplan" />
+          <NavigationProperty Name="nutricionista" Relationship="Self.FK__plan_alim__nutri__7FEAFD3E" FromRole="plan_alimenticio" ToRole="nutricionista" />
+          <NavigationProperty Name="paciente" Relationship="Self.FK__paciente__pacien__7E02B4CC" FromRole="plan_alimenticio" ToRole="paciente" />
+          <NavigationProperty Name="productosXplan" Relationship="Self.FK__productos__plan___7EF6D905" FromRole="plan_alimenticio" ToRole="productosXplan" />
         </EntityType>
         <EntityType Name="producto">
           <Key>
@@ -580,7 +582,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
           <Property Name="nutri_cedula" Type="Int32" />
           <Property Name="nutri_correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="nutricionista" Relationship="Self.FK__producto__nutri___40058253" FromRole="producto" ToRole="nutricionista" />
-          <NavigationProperty Name="productosXplan" Relationship="Self.FK__productos__codig__662B2B3B" FromRole="producto" ToRole="productosXplan" />
+          <NavigationProperty Name="productosXplan" Relationship="Self.FK__productos__codig__00DF2177" FromRole="producto" ToRole="productosXplan" />
           <NavigationProperty Name="registro_comida" Relationship="Self.FK__registro___codig__4D5F7D71" FromRole="producto" ToRole="registro_comida" />
         </EntityType>
         <EntityType Name="productosXplan">
@@ -593,10 +595,10 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
           <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="energia" Type="Double" Nullable="false" />
           <Property Name="tiempo_comida" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="plan_pertenece" Type="Int32" Nullable="false" />
+          <Property Name="plan_pertenece" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="cantidad" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="plan_alimenticio" Relationship="Self.FK__productos__plan___6FB49575" FromRole="productosXplan" ToRole="plan_alimenticio" />
-          <NavigationProperty Name="producto" Relationship="Self.FK__productos__codig__662B2B3B" FromRole="productosXplan" ToRole="producto" />
+          <NavigationProperty Name="plan_alimenticio" Relationship="Self.FK__productos__plan___7EF6D905" FromRole="productosXplan" ToRole="plan_alimenticio" />
+          <NavigationProperty Name="producto" Relationship="Self.FK__productos__codig__00DF2177" FromRole="productosXplan" ToRole="producto" />
         </EntityType>
         <EntityType Name="Recetas">
           <Key>
@@ -756,7 +758,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__plan_alim__nutri__6EC0713C">
+        <Association Name="FK__plan_alim__nutri__7FEAFD3E">
           <End Role="nutricionista" Type="Self.nutricionista" Multiplicity="0..1" />
           <End Role="plan_alimenticio" Type="Self.plan_alimenticio" Multiplicity="*" />
           <ReferentialConstraint>
@@ -780,7 +782,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__paciente__pacien__6DCC4D03">
+        <Association Name="FK__paciente__pacien__7E02B4CC">
           <End Role="plan_alimenticio" Type="Self.plan_alimenticio" Multiplicity="0..1" />
           <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
           <ReferentialConstraint>
@@ -792,7 +794,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__productos__plan___6FB49575">
+        <Association Name="FK__productos__plan___7EF6D905">
           <End Role="plan_alimenticio" Type="Self.plan_alimenticio" Multiplicity="1" />
           <End Role="productosXplan" Type="Self.productosXplan" Multiplicity="*" />
           <ReferentialConstraint>
@@ -804,7 +806,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__productos__codig__662B2B3B">
+        <Association Name="FK__productos__codig__00DF2177">
           <End Role="producto" Type="Self.producto" Multiplicity="1" />
           <End Role="productosXplan" Type="Self.productosXplan" Multiplicity="*" />
           <ReferentialConstraint>
@@ -870,7 +872,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
             <End Role="nutricionista" EntitySet="nutricionista" />
             <End Role="paciente" EntitySet="paciente" />
           </AssociationSet>
-          <AssociationSet Name="FK__plan_alim__nutri__6EC0713C" Association="Self.FK__plan_alim__nutri__6EC0713C">
+          <AssociationSet Name="FK__plan_alim__nutri__7FEAFD3E" Association="Self.FK__plan_alim__nutri__7FEAFD3E">
             <End Role="nutricionista" EntitySet="nutricionista" />
             <End Role="plan_alimenticio" EntitySet="plan_alimenticio" />
           </AssociationSet>
@@ -878,15 +880,15 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
             <End Role="nutricionista" EntitySet="nutricionista" />
             <End Role="producto" EntitySet="producto" />
           </AssociationSet>
-          <AssociationSet Name="FK__paciente__pacien__6DCC4D03" Association="Self.FK__paciente__pacien__6DCC4D03">
+          <AssociationSet Name="FK__paciente__pacien__7E02B4CC" Association="Self.FK__paciente__pacien__7E02B4CC">
             <End Role="plan_alimenticio" EntitySet="plan_alimenticio" />
             <End Role="paciente" EntitySet="paciente" />
           </AssociationSet>
-          <AssociationSet Name="FK__productos__plan___6FB49575" Association="Self.FK__productos__plan___6FB49575">
+          <AssociationSet Name="FK__productos__plan___7EF6D905" Association="Self.FK__productos__plan___7EF6D905">
             <End Role="plan_alimenticio" EntitySet="plan_alimenticio" />
             <End Role="productosXplan" EntitySet="productosXplan" />
           </AssociationSet>
-          <AssociationSet Name="FK__productos__codig__662B2B3B" Association="Self.FK__productos__codig__662B2B3B">
+          <AssociationSet Name="FK__productos__codig__00DF2177" Association="Self.FK__productos__codig__00DF2177">
             <End Role="producto" EntitySet="producto" />
             <End Role="productosXplan" EntitySet="productosXplan" />
           </AssociationSet>
@@ -894,38 +896,30 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
             <End Role="producto" EntitySet="producto" />
             <End Role="registro_comida" EntitySet="registro_comida" />
           </AssociationSet>
-          <FunctionImport Name="USP_GetCliente" ReturnType="Collection(NutriTECModel.USP_GetCliente_Result)">
-            <Parameter Name="cedula" Mode="In" Type="Int32" />
+          <FunctionImport Name="USP_CalcularCaloriasDelPlan">
+          <Parameter Name="id_plan" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USP_GetProductosDelPlan" ReturnType="Collection(NutriTECModel.USP_GetProductosDelPlan_Result)">
+          <Parameter Name="id_plan" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="USP_insertarProductoPlan">
             <Parameter Name="codigo_barras" Mode="In" Type="Int64" />
             <Parameter Name="tiempo_comida" Mode="In" Type="String" />
-            <Parameter Name="plan_pertenece" Mode="In" Type="Int32" />
+            <Parameter Name="plan_pertenece" Mode="In" Type="String" />
             <Parameter Name="cantidad" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="USP_pacientesXnutri" ReturnType="Collection(NutriTECModel.USP_pacientesXnutri_Result)">
-            <Parameter Name="n_cedula" Mode="In" Type="Int32" />
+          <Parameter Name="n_cedula" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="USP_ReporteCobro" ReturnType="Collection(NutriTECModel.USP_ReporteCobro_Result)" />
         </EntityContainer>
-        <ComplexType Name="USP_GetCliente_Result">
-          <Property Type="Int32" Name="cedula" Nullable="false" />
-          <Property Type="String" Name="nombre" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="p_apellido" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="s_apellido" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="edad" Nullable="true" />
-          <Property Type="DateTime" Name="fecha_nac" Nullable="true" />
-          <Property Type="Double" Name="peso" Nullable="true" />
-          <Property Type="Double" Name="IMC" Nullable="true" />
-          <Property Type="String" Name="pais" Nullable="true" MaxLength="50" />
-          <Property Type="Double" Name="cintura" Nullable="true" />
-          <Property Type="Double" Name="cuello" Nullable="true" />
-          <Property Type="Double" Name="caderas" Nullable="true" />
-          <Property Type="Double" Name="porc_musculo" Nullable="true" />
-          <Property Type="Double" Name="porc_grasa" Nullable="true" />
-          <Property Type="Double" Name="cdm_calorias" Nullable="true" />
-          <Property Type="String" Name="correo" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="passw" Nullable="false" MaxLength="50" />
+        <ComplexType Name="USP_GetProductosDelPlan_Result">
+          <Property Type="Int64" Name="codigo_barras" Nullable="false" />
+          <Property Type="String" Name="descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Double" Name="energia" Nullable="false" />
+          <Property Type="String" Name="tiempo_comida" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="plan_pertenece" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="cantidad" Nullable="false" />
         </ComplexType>
         <ComplexType Name="USP_pacientesXnutri_Result">
           <Property Type="Int32" Name="cedula" Nullable="false" />
@@ -943,7 +937,7 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
           <Property Type="Double" Name="porc_grasa" Nullable="true" />
           <Property Type="Double" Name="porc_musculo" Nullable="true" />
           <Property Type="Double" Name="cdm_calorias" Nullable="true" />
-          <Property Type="Int32" Name="plan_suscrito" Nullable="true" />
+          <Property Type="String" Name="plan_suscrito" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="USP_ReporteCobro_Result">
           <Property Type="Int32" Name="n_cedula" Nullable="true" />
@@ -1155,26 +1149,16 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="USP_GetCliente" FunctionName="NutriTECModel.Store.USP_GetCliente">
+          <FunctionImportMapping FunctionImportName="USP_CalcularCaloriasDelPlan" FunctionName="NutriTECModel.Store.USP_CalcularCaloriasDelPlan" />
+          <FunctionImportMapping FunctionImportName="USP_GetProductosDelPlan" FunctionName="NutriTECModel.Store.USP_GetProductosDelPlan">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="NutriTECModel.USP_GetCliente_Result">
-                <ScalarProperty Name="cedula" ColumnName="cedula" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="p_apellido" ColumnName="p_apellido" />
-                <ScalarProperty Name="s_apellido" ColumnName="s_apellido" />
-                <ScalarProperty Name="edad" ColumnName="edad" />
-                <ScalarProperty Name="fecha_nac" ColumnName="fecha_nac" />
-                <ScalarProperty Name="peso" ColumnName="peso" />
-                <ScalarProperty Name="IMC" ColumnName="IMC" />
-                <ScalarProperty Name="pais" ColumnName="pais" />
-                <ScalarProperty Name="cintura" ColumnName="cintura" />
-                <ScalarProperty Name="cuello" ColumnName="cuello" />
-                <ScalarProperty Name="caderas" ColumnName="caderas" />
-                <ScalarProperty Name="porc_musculo" ColumnName="porc_musculo" />
-                <ScalarProperty Name="porc_grasa" ColumnName="porc_grasa" />
-                <ScalarProperty Name="cdm_calorias" ColumnName="cdm_calorias" />
-                <ScalarProperty Name="correo" ColumnName="correo" />
-                <ScalarProperty Name="passw" ColumnName="passw" />
+              <ComplexTypeMapping TypeName="NutriTECModel.USP_GetProductosDelPlan_Result">
+                <ScalarProperty Name="codigo_barras" ColumnName="codigo_barras" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="energia" ColumnName="energia" />
+                <ScalarProperty Name="tiempo_comida" ColumnName="tiempo_comida" />
+                <ScalarProperty Name="plan_pertenece" ColumnName="plan_pertenece" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

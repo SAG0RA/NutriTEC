@@ -43,16 +43,25 @@ namespace NutriTEC_Access
         public virtual DbSet<listaEspera> listaEspera { get; set; }
         public virtual DbSet<productosDisponibles> productosDisponibles { get; set; }
     
-        public virtual ObjectResult<USP_GetCliente_Result> USP_GetCliente(Nullable<int> cedula)
+        public virtual int USP_CalcularCaloriasDelPlan(string id_plan)
         {
-            var cedulaParameter = cedula.HasValue ?
-                new ObjectParameter("cedula", cedula) :
-                new ObjectParameter("cedula", typeof(int));
+            var id_planParameter = id_plan != null ?
+                new ObjectParameter("id_plan", id_plan) :
+                new ObjectParameter("id_plan", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_GetCliente_Result>("USP_GetCliente", cedulaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_CalcularCaloriasDelPlan", id_planParameter);
         }
     
-        public virtual int USP_insertarProductoPlan(Nullable<long> codigo_barras, string tiempo_comida, Nullable<int> plan_pertenece, Nullable<int> cantidad)
+        public virtual ObjectResult<USP_GetProductosDelPlan_Result> USP_GetProductosDelPlan(string id_plan)
+        {
+            var id_planParameter = id_plan != null ?
+                new ObjectParameter("id_plan", id_plan) :
+                new ObjectParameter("id_plan", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_GetProductosDelPlan_Result>("USP_GetProductosDelPlan", id_planParameter);
+        }
+    
+        public virtual int USP_insertarProductoPlan(Nullable<long> codigo_barras, string tiempo_comida, string plan_pertenece, Nullable<int> cantidad)
         {
             var codigo_barrasParameter = codigo_barras.HasValue ?
                 new ObjectParameter("codigo_barras", codigo_barras) :
@@ -62,9 +71,9 @@ namespace NutriTEC_Access
                 new ObjectParameter("tiempo_comida", tiempo_comida) :
                 new ObjectParameter("tiempo_comida", typeof(string));
     
-            var plan_perteneceParameter = plan_pertenece.HasValue ?
+            var plan_perteneceParameter = plan_pertenece != null ?
                 new ObjectParameter("plan_pertenece", plan_pertenece) :
-                new ObjectParameter("plan_pertenece", typeof(int));
+                new ObjectParameter("plan_pertenece", typeof(string));
     
             var cantidadParameter = cantidad.HasValue ?
                 new ObjectParameter("cantidad", cantidad) :

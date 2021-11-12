@@ -28,6 +28,6 @@ namespace NutriTEC_Access
         public Nullable<double> porc_grasa { get; set; }
         public Nullable<double> porc_musculo { get; set; }
         public Nullable<double> cdm_calorias { get; set; }
-        public Nullable<int> plan_suscrito { get; set; }
+        public string plan_suscrito { get; set; }
     }
 }

@@ -10,17 +10,14 @@
 namespace NutriTEC_Access
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class paciente
+    public partial class USP_GetProductosDelPlan_Result
     {
-        public int id { get; set; }
-        public int n_cedula { get; set; }
-        public int paciente_cedula { get; set; }
-        public string paciente_plan { get; set; }
-    
-        public virtual cliente cliente { get; set; }
-        public virtual nutricionista nutricionista { get; set; }
-        public virtual plan_alimenticio plan_alimenticio { get; set; }
+        public long codigo_barras { get; set; }
+        public string descripcion { get; set; }
+        public double energia { get; set; }
+        public string tiempo_comida { get; set; }
+        public string plan_pertenece { get; set; }
+        public int cantidad { get; set; }
     }
 }

@@ -16,10 +16,32 @@ namespace NutriTEC_API.Controllers
                 return entities.plan_alimenticio.ToList();
         }
 
-        public plan_alimenticio Get(int id)
+        public plan_alimenticio Get(string id)
         {
             using (NutriTECEntities entities = new NutriTECEntities())
                 return entities.plan_alimenticio.FirstOrDefault(e => e.Id == id);
+        }
+
+        [HttpGet] //obtener los productos del plan
+        [Route("api/plan_alimenticio/{id_plan}")]
+        public IEnumerable<USP_GetProductosDelPlan_Result> GetProductosDelPlan(string id_plan)
+        {
+            using (NutriTECEntities entities = new NutriTECEntities())
+            {
+                var tt = entities.USP_GetProductosDelPlan(id_plan);
+                return tt.ToList();
+            }
+        }
+
+        [HttpPost] //calcular calorias del plan
+        [Route("api/CalculoCaloriasPlan/{id_plan}")]
+        public IHttpActionResult CalcularCaloriasPlan(string id_plan)
+        {
+            using (NutriTECEntities entities = new NutriTECEntities())
+            {
+                entities.USP_CalcularCaloriasDelPlan(id_plan);
+                return Ok ("Calorias del plan: " + $"{id_plan}" + " actualizadas");
+            }
         }
 
         public IHttpActionResult Post(plan_alimenticio pl)
@@ -71,11 +93,8 @@ namespace NutriTEC_API.Controllers
             return Ok();
         }
 
-        public IHttpActionResult Delete(int id)
-        {
-            if (id < 0)
-                return BadRequest("Not a plan id");
-
+        public IHttpActionResult Delete(string id)
+        {;
             using (NutriTECEntities entities = new NutriTECEntities())
             {
                 var reg = entities.plan_alimenticio.Where(e => e.Id == id)

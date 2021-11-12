@@ -15,7 +15,7 @@ namespace NutriTEC_API.Controllers
             using (NutriTECEntities entities = new NutriTECEntities())
                 return entities.productosXplan.ToList();
         }
-        public productosXplan Get(int id)
+        public productosXplan Get(long id)
         {
             using (NutriTECEntities entities = new NutriTECEntities())
                 return entities.productosXplan.FirstOrDefault(e => e.codigo_barras == id);

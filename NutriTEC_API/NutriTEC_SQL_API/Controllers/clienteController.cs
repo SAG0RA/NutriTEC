@@ -23,18 +23,6 @@ namespace NutriTEC_API.Controllers
                 return entities.cliente.FirstOrDefault(e => e.cedula == id);
         }
 
-        //uso de stored procedure
-        [HttpGet]
-        [Route("api/cliente/spget/{id}")]
-        public IEnumerable<USP_GetCliente_Result> GetSP(int id)
-        {
-            using (NutriTECEntities entities = new NutriTECEntities())
-            {
-                var tt = entities.USP_GetCliente(id);
-                return tt.ToList();
-            }
-        }
-
         public IHttpActionResult Post(cliente cl)
         {
             if (!ModelState.IsValid)

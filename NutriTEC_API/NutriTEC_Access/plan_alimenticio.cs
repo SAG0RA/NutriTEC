@@ -21,7 +21,7 @@ namespace NutriTEC_Access
             this.productosXplan = new HashSet<productosXplan>();
         }
     
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string nombre_plan { get; set; }
         public Nullable<double> total_calorias { get; set; }
         public Nullable<int> nutri_al_plan { get; set; }
