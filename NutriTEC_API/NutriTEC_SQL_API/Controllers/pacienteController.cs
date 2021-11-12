@@ -77,7 +77,7 @@ namespace NutriTEC_API.Controllers
 
             using (NutriTECEntities entities = new NutriTECEntities())
             {
-                var paciente = entities.paciente.Where(e => e.id == id)
+                var paciente = entities.paciente.Where(e => e.paciente_cedula == id)
                                                         .FirstOrDefault();
                 if (paciente == null)
                     return BadRequest("Not a valid patient id");
