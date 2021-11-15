@@ -60,7 +60,7 @@ export class NutriRegistroComponent implements OnInit {
         //Vacia la lista para volverla a llenar luego
         this.lista_usuarios = []
         for (var i = 0; i < this.lista_datos_recibidos.length; i++) {
-          // Rellena las listas con los datos del API 
+          // Rellena las listas con los datos del API
           this.lista_usuarios.push(this.lista_datos_recibidos[i]['correo'])
         }
         console.log('Nutricionistas: ' + '[' + this.lista_usuarios + ']')
@@ -108,9 +108,9 @@ export class NutriRegistroComponent implements OnInit {
 
 /**
  * Funcion encargada de asignar un codigo al nutricionista
- * @param min 
- * @param max 
- * @returns 
+ * @param min
+ * @param max
+ * @returns
  */
   random(min: any, max: any) {
     return Math.floor((Math.random() * (max - min + 1)) + min);
@@ -135,7 +135,7 @@ export class NutriRegistroComponent implements OnInit {
       const md5 = new Md5();
       const encrypt = md5.appendStr(this.contrasena).end();
       /////////////////////////////////////////////////////
-      
+
       var lista_datos =
       {
         IMC: this.imc,

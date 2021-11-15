@@ -348,10 +348,6 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="CrearPlanAlimenticio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="nutri_cedula" Type="int" Mode="In" />
-          <Parameter Name="nombre_plan" Type="varchar" Mode="In" />
-        </Function>
         <Function Name="USP_CalcularCaloriasDelPlan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_plan" Type="varchar" Mode="In" />
         </Function>
@@ -1215,7 +1211,6 @@ advertencia 6002: La tabla o vista 'NutriTEC.dbo.productosDisponibles' no tiene 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CrearPlanAlimenticio" FunctionName="NutriTECModel.Store.CrearPlanAlimenticio" />
           <FunctionImportMapping FunctionImportName="USP_CrearPlanAlimenticio" FunctionName="NutriTECModel.Store.USP_CrearPlanAlimenticio" />
         </EntityContainerMapping>
       </Mapping>

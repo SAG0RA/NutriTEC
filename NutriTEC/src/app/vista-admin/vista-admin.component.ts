@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild} from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { APIService } from '../api.service';
 
+
 export interface ProductoElement {
   calcio: string
   carbohidratos: string
@@ -21,7 +22,22 @@ export interface ProductoElement {
 
 }
 
+export interface CobroElement {
+  n_cedula: string
+  nombre: string
+  p_apellido: string
+  s_apellido: string
+  tarjetacredito: string
+  tipo_cobro: string
+  numero_clientes: string
+  monto: any
+
+}
+
 const ELEMENT_DATA: ProductoElement[] = [
+];
+
+const COBRO_DATA: CobroElement[] = [
 ];
 
 @Component({
@@ -36,11 +52,20 @@ export class VistaAdminComponent implements OnInit {
 ////////// Gestion de Tabla de productos /////////////
 displayedColumns: string[] =
 ['codigo_barras', 'descripcion', 'porcion', 'energia', 'grasa', 'proteina', 'sodio', 'carbohidratos', 'calcio', 'hierro', 'vitaminas', 'estado', 'actions'];
+
+displayedColumnsCobro: string[] =
+  ['n_cedula', 'nombre', 'p_apellido', 's_apellido', 'tarjetacredito', 'tipo_cobro', 'numero_clientes', 'monto'];
+
 dataSource = ELEMENT_DATA;
-@ViewChild(MatTable) table: MatTable<ProductoElement>;
+dataSourceCobros = COBRO_DATA;
+
+@ViewChild('productos') table: MatTable<ProductoElement>;
+@ViewChild('cobros') reporte: MatTable<CobroElement>;
 
   url = '/api/producto/listaEspera'
+  cobros = '/api/nutri/reporte_cobro'
   lista_datos_recibidos: any = [];
+  lista_cobros: any = [];
 
   constructor(private API: APIService) { }
 
@@ -56,6 +81,19 @@ dataSource = ELEMENT_DATA;
           ELEMENT_DATA.push(this.lista_datos_recibidos[i])
         }
       this.table.renderRows()
+      })
+
+      this.API.GET(this.cobros)
+      .subscribe(response => {
+        COBRO_DATA.length = 0
+        this.lista_cobros = response
+        console.log(this.lista_cobros)
+        //Vacia la lista para volverla a llenar luego
+        for (var i = 0; i < this.lista_cobros.length; i++) {
+          // Rellena las listas con los datos del API con codigo de barras
+          COBRO_DATA.push(this.lista_cobros[i])
+        }
+      this.reporte.renderRows()
       })
   }
 

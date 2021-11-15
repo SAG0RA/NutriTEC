@@ -6,18 +6,18 @@
     <edmx:Diagrams>
       <Diagram DiagramId="ad21dc7674674751a91be7eb676f7af7" Name="Diagram1">
         <EntityTypeShape EntityType="NutriTECModel.cliente" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutriTECModel.Empleado" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutriTECModel.Empleado" Width="1.5" PointX="8.75" PointY="1.625" IsExpanded="true" />
         <EntityTypeShape EntityType="NutriTECModel.meta_calorica" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutriTECModel.nutricionista" Width="1.5" PointX="1.5" PointY="23.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutriTECModel.paciente" Width="1.5" PointX="6" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutriTECModel.plan_alimenticio" Width="1.5" PointX="3.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutriTECModel.nutricionista" Width="1.5" PointX="1.375" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutriTECModel.paciente" Width="1.5" PointX="5.875" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutriTECModel.plan_alimenticio" Width="1.5" PointX="4" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="NutriTECModel.producto" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="NutriTECModel.productosXplan" Width="1.5" PointX="6" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutriTECModel.Recetas" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutriTECModel.Recetas" Width="1.5" PointX="2.875" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="NutriTECModel.registro_comida" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutriTECModel.registro_peso" Width="1.5" PointX="3" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutriTECModel.registro_peso" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
         <EntityTypeShape EntityType="NutriTECModel.listaEspera" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutriTECModel.productosDisponibles" Width="1.5" PointX="8.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutriTECModel.productosDisponibles" Width="1.5" PointX="10.375" PointY="2.625" IsExpanded="true" />
         <AssociationConnector Association="NutriTECModel.FK__meta_calo__clien__14270015" ManuallyRouted="false" />
         <AssociationConnector Association="NutriTECModel.FK__paciente__pacien__3B40CD36" ManuallyRouted="false" />
         <AssociationConnector Association="NutriTECModel.FK__Recetas__cliente__69FBBC1F" ManuallyRouted="false" />

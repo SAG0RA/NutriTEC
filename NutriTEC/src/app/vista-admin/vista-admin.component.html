@@ -13,7 +13,7 @@
         </mat-expansion-panel-header>
 
 
-        <table mat-table [dataSource]="dataSource" style="width: 100%;">
+        <table mat-table #productos [dataSource]="dataSource" style="width: 100%;">
 
           <!--- TABLA DE PRODUCTOS AGREGADOS -->
 
@@ -116,6 +116,64 @@
                 Lista de nutricionistas asociados a NutriTEC
             </mat-panel-description>
         </mat-expansion-panel-header>
+
+        <table mat-table #cobros [dataSource]="dataSourceCobros" style="width: 100%;">
+
+          <!--- REPORTE DE COBROS A LOS NUTRICIONISTAS  -->
+
+          <!-- Columna de n_cedula -->
+          <ng-container matColumnDef="n_cedula">
+              <th mat-header-cell *matHeaderCellDef> Cédula </th>
+              <td mat-cell *matCellDef="let element"> {{element.n_cedula}} </td>
+          </ng-container>
+
+          <!-- Columna de nombre -->
+          <ng-container matColumnDef="nombre">
+              <th mat-header-cell *matHeaderCellDef> Nombre </th>
+              <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+          </ng-container>
+
+          <!-- Columna de p_apellido -->
+          <ng-container matColumnDef="p_apellido">
+              <th mat-header-cell *matHeaderCellDef> 1er Apellido </th>
+              <td mat-cell *matCellDef="let element"> {{element.p_apellido}} </td>
+          </ng-container>
+
+          <!-- Columna de s_apellido -->
+          <ng-container matColumnDef="s_apellido">
+              <th mat-header-cell *matHeaderCellDef> 2do Apellido </th>
+              <td mat-cell *matCellDef="let element"> {{element.s_apellido}} </td>
+          </ng-container>
+
+          <!-- Columna de tarjetacredito -->
+          <ng-container matColumnDef="tarjetacredito">
+              <th mat-header-cell *matHeaderCellDef> N° Tarjeta </th>
+              <td mat-cell *matCellDef="let element"> {{element.tarjetacredito}} </td>
+          </ng-container>
+
+          <!-- Columna de tipo_cobro -->
+          <ng-container matColumnDef="tipo_cobro">
+              <th mat-header-cell *matHeaderCellDef> Tipo de cobro </th>
+              <td mat-cell *matCellDef="let element"> {{element.tipo_cobro}} </td>
+          </ng-container>
+
+          <!-- Columna de numero_clientes -->
+          <ng-container matColumnDef="numero_clientes">
+              <th mat-header-cell *matHeaderCellDef> N° clientes asociados </th>
+              <td mat-cell *matCellDef="let element"> {{element.numero_clientes}} </td>
+          </ng-container>
+
+          <!-- Columna de monto -->
+          <ng-container matColumnDef="monto">
+              <th mat-header-cell *matHeaderCellDef> Monto a pagar ($)</th>
+              <td mat-cell *matCellDef="let element"> {{element.monto}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsCobro"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsCobro;"></tr>
+      </table>
+
+
     </mat-expansion-panel>
     </mat-accordion>
   </form>

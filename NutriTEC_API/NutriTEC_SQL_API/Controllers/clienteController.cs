@@ -14,7 +14,6 @@ namespace NutriTEC_API.Controllers
         {
             using (NutriTECEntities entities = new NutriTECEntities())
                 return entities.cliente.ToList();
-             //var resultado = entities.Database.SqlQuery<string>("USP_GetCliente @cedula", cl.cedula).ToString();
         }
 
         public cliente Get(int id)
@@ -49,21 +48,6 @@ namespace NutriTEC_API.Controllers
                     cdm_calorias = cl.cdm_calorias,
                     correo = cl.correo,
                     passw = cl.passw
-                });
-
-                entities.registro_peso.Add(new registro_peso()
-                {
-
-                    cliente_cedula = cl.cedula,
-                    fecha_del_registro = DateTime.Now,
-                    peso = cl.peso,
-                    IMC = cl.IMC,
-                    cintura = (int?)cl.cintura,
-                    cuello = (int?)cl.cuello,
-                    caderas = (int?)cl.caderas,
-                    porc_musculo = (int?)cl.porc_musculo,
-                    porc_grasa = (int?)cl.porc_grasa
-
                 });
 
                 entities.SaveChanges();
