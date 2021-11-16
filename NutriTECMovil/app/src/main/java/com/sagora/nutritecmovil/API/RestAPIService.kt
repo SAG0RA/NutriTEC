@@ -27,7 +27,7 @@ class RestAPIService {
                     Log.d(
                         "CLIENTE: ",
                         "Cedula: ${c.cedula} " +
-                                "\n Nombre: ${c.nombre} " +
+                                "\n Nombre: ${c.correo} " +
                                 "\n Apellido: ${c.p_apellido}" +
                                 "\n Passw: ${c.passw}"
                     )

@@ -411,8 +411,11 @@
 
                     <!-- Columna de boton eliminar -->
                     <ng-container matColumnDef="actions">
-                        <mat-header-cell *matHeaderCellDef style="margin-top:19px;">Desayuno - Merienda - Almuerzo - Merienda - Cena</mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef style="margin-top:19px;"> Desayuno - Merienda - Almuerzo - Merienda - Cena</mat-header-cell>
                         <mat-cell *matCellDef="let row">
+                            <mat-form-field>
+                                <input matInput name="cantidad" [(ngModel)]="cantidad" style="color:black" type="number" placeholder="Cantidad">
+                            </mat-form-field>
                             <button mat-icon-button [disabled]="!dataSourcePlan_Producto.length" style='margin-left: 15px;'>
                                 <mat-icon>free_breakfast</mat-icon>
                              </button>

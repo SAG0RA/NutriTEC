@@ -111,6 +111,7 @@ export class VistaNutriComponent implements OnInit {
   /////////////////////////////////////////////////////////////////////////////////////////////////////
 
   cedula_nutri: any
+  cantidad: any
 
   ////////// Listas con los datos de PRODUCTOS en API /////////////
   url = '/api/producto'
