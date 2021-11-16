@@ -14,6 +14,12 @@ namespace NutriTEC_Access
     
     public partial class Recetas
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Recetas()
+        {
+            this.productosXreceta = new HashSet<productosXreceta>();
+        }
+    
         public int id { get; set; }
         public string nombre_receta { get; set; }
         public Nullable<double> energía { get; set; }
@@ -24,5 +30,7 @@ namespace NutriTEC_Access
         public Nullable<int> cliente_creador { get; set; }
     
         public virtual cliente cliente { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<productosXreceta> productosXreceta { get; set; }
     }
 }

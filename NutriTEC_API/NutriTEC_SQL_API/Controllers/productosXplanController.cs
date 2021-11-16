@@ -32,6 +32,20 @@ namespace NutriTEC_API.Controllers
             return Ok("si");
         }
 
+        [HttpGet]
+        [Route("api/producto/GetProductosDelPlan/{id_plan}")]
+        public IHttpActionResult GetSP(string id_plan)
+        {
+            using (NutriTECEntities entities = new NutriTECEntities())
+            {
+                entities.USP_GetProductosDelPlan(id_plan);
+            }
+            return Ok("si");
+        }
+
+
+
+
         public IHttpActionResult Post(productosXplan pxp)
         {
             if (!ModelState.IsValid)

@@ -165,7 +165,7 @@ export class VistaNutriComponent implements OnInit {
   ////////// Datos de los inputs /////////////
   estado = 0;
   correo: any = localStorage.getItem('user')
-  
+
   nombre_plan: string
 
   codigo_barras: string
@@ -391,7 +391,7 @@ export class VistaNutriComponent implements OnInit {
       nombre_plan: this.nombre_plan,
       nutri_al_plan: this.cedula_nutri,
       nutricionista: this.correo,
-      
+
     }
   }
 

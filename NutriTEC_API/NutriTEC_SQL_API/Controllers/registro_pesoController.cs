@@ -21,6 +21,7 @@ namespace NutriTEC_API.Controllers
                 return entities.registro_peso.FirstOrDefault(e => e.Id == id);
         }
 
+        
         public IHttpActionResult Post(registro_peso rg)
         {
             if (!ModelState.IsValid)
@@ -30,8 +31,8 @@ namespace NutriTEC_API.Controllers
             {
                 entities.registro_peso.Add(new registro_peso()
                 {
-
-                    fecha_del_registro = DateTime.Now,
+                    cliente_cedula = rg.cliente_cedula,
+                    fecha_del_registro = rg.fecha_del_registro,
                     peso = rg.peso,
                     IMC = rg.IMC,
                     cintura = rg.cintura,

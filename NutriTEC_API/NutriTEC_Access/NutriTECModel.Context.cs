@@ -41,6 +41,7 @@ namespace NutriTEC_Access
         public virtual DbSet<registro_peso> registro_peso { get; set; }
         public virtual DbSet<listaEspera> listaEspera { get; set; }
         public virtual DbSet<productosDisponibles> productosDisponibles { get; set; }
+        public virtual DbSet<productosXreceta> productosXreceta { get; set; }
     
         public virtual int USP_CalcularCaloriasDelPlan(string id_plan)
         {
@@ -119,6 +120,15 @@ namespace NutriTEC_Access
                 new ObjectParameter("nombre_plan", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_CrearPlanAlimenticio", nutri_cedulaParameter, nombre_planParameter);
+        }
+    
+        public virtual ObjectResult<USP_Registro_Peso_Result> USP_Registro_Peso(Nullable<int> cedula_cliente)
+        {
+            var cedula_clienteParameter = cedula_cliente.HasValue ?
+                new ObjectParameter("cedula_cliente", cedula_cliente) :
+                new ObjectParameter("cedula_cliente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_Registro_Peso_Result>("USP_Registro_Peso", cedula_clienteParameter);
         }
     }
 }

@@ -31,6 +31,14 @@ namespace NutriTEC_API.Controllers
                 return entities.listaEspera.ToList();
         }
 
+        [HttpGet]
+        [Route("api/producto/productosDisponibles")]
+        public IEnumerable<productosDisponibles> GetProductosDisponibles()
+        {
+            using (NutriTECEntities entities = new NutriTECEntities())
+                return entities.productosDisponibles.ToList();
+        }
+
         [HttpPut]
         [Route("api/producto/listaEspera")]
         public IHttpActionResult AceptarProducto(listaEspera pr)

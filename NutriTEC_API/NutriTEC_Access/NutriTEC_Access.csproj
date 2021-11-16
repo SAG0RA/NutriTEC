@@ -95,6 +95,9 @@
     <Compile Include="productosXplan.cs">
       <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="productosXreceta.cs">
+      <DependentUpon>NutriTECModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Recetas.cs">
       <DependentUpon>NutriTECModel.tt</DependentUpon>
@@ -109,6 +112,9 @@
       <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
     <Compile Include="USP_pacientesXnutri_Result.cs">
+      <DependentUpon>NutriTECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USP_Registro_Peso_Result.cs">
       <DependentUpon>NutriTECModel.tt</DependentUpon>
     </Compile>
     <Compile Include="USP_ReporteCobro_Result.cs">

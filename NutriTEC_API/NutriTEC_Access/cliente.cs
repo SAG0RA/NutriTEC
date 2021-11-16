@@ -22,6 +22,7 @@ namespace NutriTEC_Access
             this.Recetas = new HashSet<Recetas>();
             this.registro_peso = new HashSet<registro_peso>();
             this.registro_comida = new HashSet<registro_comida>();
+            this.productosXreceta = new HashSet<productosXreceta>();
         }
     
         public int cedula { get; set; }
@@ -52,5 +53,7 @@ namespace NutriTEC_Access
         public virtual ICollection<registro_peso> registro_peso { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<registro_comida> registro_comida { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<productosXreceta> productosXreceta { get; set; }
     }
 }

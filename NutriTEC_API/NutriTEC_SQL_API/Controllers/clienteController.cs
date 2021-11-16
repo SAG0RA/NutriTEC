@@ -22,6 +22,18 @@ namespace NutriTEC_API.Controllers
                 return entities.cliente.FirstOrDefault(e => e.cedula == id);
         }
 
+        //get para el reporte del peso del cliente
+        [HttpGet]
+        [Route("api/cliente/registro_peso/{cedula}")]
+        public IEnumerable<USP_Registro_Peso_Result> ObtenerRegistroPeso(int cedula)
+        {
+            using (NutriTECEntities entities = new NutriTECEntities())
+            {
+                var tt = entities.USP_Registro_Peso(cedula);
+                return tt.ToList();
+            }
+        }
+
         public IHttpActionResult Post(cliente cl)
         {
             if (!ModelState.IsValid)
