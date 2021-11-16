@@ -10,19 +10,30 @@ namespace NutriTEC_API.Controllers
 {
     public class clienteController : ApiController
     {
+        /// <summary>
+        /// Obtiene todos los datos de 
+        /// todos los clientes
+        /// </summary>
         public IEnumerable<cliente> Get()
         {
             using (NutriTECEntities entities = new NutriTECEntities())
                 return entities.cliente.ToList();
         }
 
+        /// <summary>
+        /// Obtiene todos los datos de 
+        /// un cliente según el id especificada
+        /// </summary>
         public cliente Get(int id)
         {
             using (NutriTECEntities entities = new NutriTECEntities())
                 return entities.cliente.FirstOrDefault(e => e.cedula == id);
         }
 
-        //get para el reporte del peso del cliente
+        /// <summary>
+        /// Obtiene el reporte del peso del cliente 
+        /// de la cédula
+        /// </summary>
         [HttpGet]
         [Route("api/cliente/registro_peso/{cedula}")]
         public IEnumerable<USP_Registro_Peso_Result> ObtenerRegistroPeso(int cedula)
@@ -34,6 +45,10 @@ namespace NutriTEC_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Postea un nuevo cliente
+        /// Se entrega la información del nuevo cliente en JSON
+        /// </summary>
         public IHttpActionResult Post(cliente cl)
         {
             if (!ModelState.IsValid)
@@ -63,23 +78,13 @@ namespace NutriTEC_API.Controllers
                 });
 
                 entities.SaveChanges();
-                //string DistributionChannelGUID = db.Database.SqlQuery<string>("GetDistributionChannelGUID @DeviceID, @CCCShopID", Parameters).ToString();
             }
-            //var resultado = entities.Database.SqlQuery<string>("USP_GetCliente @cedula", cl.cedula).ToString();
             return Ok();
         }
 
-       /* public IEnumerable<USP_GetCliente_Result> Get(int id)
-        {
-            System.Data.Entity.Core.Objects.ObjectResult tt;
-            using (NutriTECEntities entities = new NutriTECEntities())
-            {
-                tt = entities.USP_GetCliente(id);
-            }
-
-            return (IEnumerable<USP_GetCliente_Result>)tt;
-        }*/
-
+        /// <summary>
+        /// Actualiza la información de un cliente
+        /// </summary>
         public IHttpActionResult Put(cliente cl)
         {
             if (!ModelState.IsValid)
@@ -119,6 +124,11 @@ namespace NutriTEC_API.Controllers
 
             return Ok();
         }
+
+        /// <summary>
+        /// Borra la entrada de un cliente
+        /// de la cédula especificada 
+        /// </summary>
         public IHttpActionResult Delete(int id)
         {
             if (id < 0)

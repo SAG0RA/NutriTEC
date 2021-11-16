@@ -10,17 +10,29 @@ namespace NutriTEC_API.Controllers
 {
     public class empleadoController : ApiController
     {
+        /// <summary>
+        /// Obtiene todos los datos de 
+        /// todo los empleados 
+        /// </summary>
         public IEnumerable<Empleado> Get()
         {
             using (NutriTECEntities entities = new NutriTECEntities())              
                 return entities.Empleado.ToList();
         }
+
+        /// <summary>
+        /// Obtiene todos los datos de 
+        /// un empledo según su id
+        /// </summary>
         public Empleado Get(int id)
         {
             using (NutriTECEntities entities = new NutriTECEntities())
                 return entities.Empleado.FirstOrDefault(e => e.cedula == id);
         }
 
+        /// <summary>
+        /// Postea un nuevo empleado
+        /// </summary>
         public IHttpActionResult Post(Empleado el)
         {
             if (!ModelState.IsValid)
@@ -40,6 +52,10 @@ namespace NutriTEC_API.Controllers
             }
             return Ok();
         }
+
+        /// <summary>
+        /// Actualiza una entrada de empleado
+        /// </summary>
         public IHttpActionResult Put(Empleado el)
         {
             if (!ModelState.IsValid)
@@ -68,6 +84,10 @@ namespace NutriTEC_API.Controllers
 
             return Ok();
         }
+
+        /// <summary>
+        /// Borra una entrada de empleado
+        /// </summary>
         public IHttpActionResult Delete(int id)
         {
             if (id < 0)

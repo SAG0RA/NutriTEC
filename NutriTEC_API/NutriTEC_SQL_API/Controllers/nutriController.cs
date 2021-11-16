@@ -10,18 +10,32 @@ namespace NutriTEC_API.Controllers
 {
     public class nutriController : ApiController
     {
+
+        /// <summary>
+        /// Obtiene todos los datos de todos
+        /// los nutricionistas
+        /// </summary>
         public IEnumerable<nutricionista> Get()
         {
             using (NutriTECEntities entities = new NutriTECEntities())
                 return entities.nutricionista.ToList();
         }
+
+        /// <summary>
+        /// Obtiene todos los datos de 1 
+        /// nutricionista según su id
+        /// </summary>
         public nutricionista Get(int id)
         {
             using (NutriTECEntities entities = new NutriTECEntities())
                 return entities.nutricionista.FirstOrDefault(e => e.n_cedula == id);
         }
 
-        //get para el reporte de los cobros de los nutricionistas
+
+        /// <summary>
+        /// Obtiene el reporte de cobro para los nutricionistas
+        /// con pacientes asignados
+        /// </summary>
         [HttpGet]
         [Route("api/nutri/reporte_cobro")]
         public IEnumerable<USP_ReporteCobro_Result> ObtenerReporteCobro()
@@ -33,7 +47,10 @@ namespace NutriTEC_API.Controllers
             }
         }
 
-        //get para los pacientes que el nutri tiene asignados
+        /// <summary>
+        /// Obtiene la lista de pacientes que tiene asignado 
+        /// el nutri dando su cédula
+        /// </summary>
         [HttpGet]
         [Route("api/nutri/misPacientes/{n_cedula}")]
         public IEnumerable<USP_pacientesXnutri_Result> ObtenerListaPacientes(int n_cedula)
@@ -45,6 +62,10 @@ namespace NutriTEC_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Postea un nuevo nutricionista
+        /// en formato JSON
+        /// </summary>
         public IHttpActionResult Post(nutricionista nu)
         {
             if (!ModelState.IsValid)
@@ -74,6 +95,10 @@ namespace NutriTEC_API.Controllers
             }
             return Ok();
         }
+        /// <summary>
+        /// Actualiza los datos de un nutricionista
+        /// dada su cédula
+        /// </summary>
         public IHttpActionResult Put(nutricionista nu)
         {
             if (!ModelState.IsValid)
@@ -112,6 +137,10 @@ namespace NutriTEC_API.Controllers
 
             return Ok();
         }
+        /// <summary>
+        /// Borra la entrada de un 
+        /// nutricionista
+        /// </summary>
         public IHttpActionResult Delete(int id)
         {
             if (id < 0)

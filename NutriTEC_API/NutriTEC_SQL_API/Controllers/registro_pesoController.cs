@@ -10,18 +10,29 @@ namespace NutriTEC_API.Controllers
 {
     public class registro_pesoController : ApiController
     {
+        /// <summary>
+        /// Obtiene todos los registos de peso 
+        /// de todos los clientes 
+        /// </summary>
         public IEnumerable<registro_peso> Get()
         {
             using (NutriTECEntities entities = new NutriTECEntities())
                 return entities.registro_peso.ToList();
         }
+
+        /// <summary>
+        /// Obtiene todos los registros de peso de 
+        /// un cliente dado su cédula
+        /// </summary>
         public registro_peso Get(int id)
         {
             using (NutriTECEntities entities = new NutriTECEntities())
                 return entities.registro_peso.FirstOrDefault(e => e.Id == id);
         }
 
-        
+        /// <summary>
+        /// Postea un nuevo registro de peso
+        /// </summary>
         public IHttpActionResult Post(registro_peso rg)
         {
             if (!ModelState.IsValid)
@@ -45,36 +56,12 @@ namespace NutriTEC_API.Controllers
             }
             return Ok();
         }
-        /*public IHttpActionResult Put(Empleado el)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest("Not a valid model");
 
-            using (NutriTECEntities entities = new NutriTECEntities())
-            {
-                var existingEmp = entities.Empleado.Where(e => e.cedula == el.cedula)
-                                                        .FirstOrDefault<Empleado>();
+        /// <summary>
+        /// Borra un registro de peso dado su id
+        /// </summary>
 
-                if (existingEmp != null)
-                {
-                    existingEmp.cedula = el.cedula;
-                    existingEmp.nombre = el.nombre;
-                    existingEmp.correo = el.correo;
-                    existingEmp.passw = el.passw;
-                    existingEmp.rol = el.rol;
-
-                    entities.SaveChanges();
-                }
-                else
-                {
-                    return NotFound();
-                }
-            }
-
-            return Ok();
-        }*/
-
-       public IHttpActionResult Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
             if (id < 0)
                 return BadRequest("Not a valid registry id");

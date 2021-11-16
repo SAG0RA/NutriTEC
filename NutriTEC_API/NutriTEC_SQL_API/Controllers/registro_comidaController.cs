@@ -10,18 +10,28 @@ namespace NutriTEC_API.Controllers
 {
     public class registro_comidaController : ApiController
     {
+        /// <summary>
+        /// Obtiene todos los registros de comida de 
+        /// todos los clientes
+        /// </summary>
         public IEnumerable<registro_comida> Get()
         {
             using (NutriTECEntities entities = new NutriTECEntities())
                 return entities.registro_comida.ToList();
         }
 
+        /// <summary>
+        /// Obtiene todos los registros de comida de un cliente
+        /// </summary>
         public registro_comida Get(int id)
         {
             using (NutriTECEntities entities = new NutriTECEntities())
                 return entities.registro_comida.FirstOrDefault(e => e.codigo_barras == id);
         }
 
+        /// <summary>
+        /// Postea un nuevo registro de comida
+        /// </summary>
         public IHttpActionResult Post(registro_comida rg)
         {
             if (!ModelState.IsValid)
@@ -43,33 +53,9 @@ namespace NutriTEC_API.Controllers
             return Ok();
         }
 
-
-        /*public IHttpActionResult Put(registro_comida rg)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest("Not a valid model");
-
-            using (NutriTECEntities entities = new NutriTECEntities())
-            {
-                var existingClient = entities.cliente.Where(e => e.cedula == cl.cedula)
-                                                        .FirstOrDefault<cliente>();
-
-                if (existingClient != null)
-                {
-                    existingClient.nombre = cl.nombre;
-                    
-
-                    entities.SaveChanges();
-                }
-                else
-                {
-                    return NotFound();
-                }
-            }
-
-            return Ok();
-        }*/
-
+        /// <summary>
+        /// Borra un registro de comida
+        /// </summary>
         public IHttpActionResult Delete(int id)
         {
             if (id < 0)

@@ -10,17 +10,30 @@ namespace NutriTEC_API.Controllers
 {
     public class productosXplanController : ApiController
     {
+
+        /// <summary>
+        /// Obtiene todos los productos que están 
+        /// dentro de todos los planes
+        /// </summary>
         public IEnumerable<productosXplan> Get()
         {
             using (NutriTECEntities entities = new NutriTECEntities())
                 return entities.productosXplan.ToList();
         }
+
+        /// <summary>
+        /// Obtiene un producto dentro de un plan 
+        /// dado su código de barras 
+        /// </summary>
         public productosXplan Get(long id)
         {
             using (NutriTECEntities entities = new NutriTECEntities())
                 return entities.productosXplan.FirstOrDefault(e => e.codigo_barras == id);
         }
 
+        /// <summary>
+        /// Postea un producto dentro de un plan alimenticio
+        /// </summary>
         [HttpPost]
         [Route("api/producto/insertarProductoPlan")]
         public IHttpActionResult PostSP(productosXplan pxp)
@@ -32,6 +45,10 @@ namespace NutriTEC_API.Controllers
             return Ok("si");
         }
 
+        /// <summary>
+        /// Obtiene todos los productos del 
+        /// plan especificado 
+        /// </summary>
         [HttpGet]
         [Route("api/producto/GetProductosDelPlan/{id_plan}")]
         public IHttpActionResult GetSP(string id_plan)
@@ -43,9 +60,11 @@ namespace NutriTEC_API.Controllers
             return Ok("si");
         }
 
-
-
-
+        /// <summary>
+        /// Postea un producto dentro de un plan
+        /// Aviso: este método no se usa en el frontend, en su lugar es para testeo
+        /// de las tablas
+        /// </summary>
         public IHttpActionResult Post(productosXplan pxp)
         {
             if (!ModelState.IsValid)
@@ -65,6 +84,10 @@ namespace NutriTEC_API.Controllers
             }
             return Ok();
         }
+
+        /// <summary>
+        /// Actualiza la info de un producto dentro de un plan
+        /// </summary>
         public IHttpActionResult Put(productosXplan pxp)
         {
             if (!ModelState.IsValid)
@@ -93,6 +116,10 @@ namespace NutriTEC_API.Controllers
 
             return Ok();
         }
+
+        /// <summary>
+        /// Borra un producto de un plan 
+        /// </summary>
         public IHttpActionResult Delete(int id)
         {
             if (id < 0)

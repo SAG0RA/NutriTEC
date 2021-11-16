@@ -10,19 +10,30 @@ namespace NutriTEC_API.Controllers
 {
     public class productoController : ApiController
     {
-        
+        /// <summary>
+        /// Obtiene todos los datos de 
+        /// todos los productos 
+        /// </summary>
         public IEnumerable<producto> Get()
         {
             using (NutriTECEntities entities = new NutriTECEntities())
                 return entities.producto.ToList();
         }
 
-        public producto Get(int id)
+        /// <summary>
+        /// Obtiene todos los datos de un producto 
+        /// especificando su codigo de barras 
+        /// </summary>
+        public producto Get(long id)
         {
             using (NutriTECEntities entities = new NutriTECEntities())
                 return entities.producto.FirstOrDefault(e => e.codigo_barras == id);
         }
 
+        /// <summary>
+        /// Obtiene la lista de espera de los 
+        /// productos
+        /// </summary>
         [HttpGet]
         [Route("api/producto/listaEspera")]
         public IEnumerable<listaEspera> GetListaEspera()
@@ -31,6 +42,10 @@ namespace NutriTEC_API.Controllers
                 return entities.listaEspera.ToList();
         }
 
+        /// <summary>
+        /// Obtiene los productos que ya fueron 
+        /// admitidos de la lista de espera
+        /// </summary>
         [HttpGet]
         [Route("api/producto/productosDisponibles")]
         public IEnumerable<productosDisponibles> GetProductosDisponibles()
@@ -39,6 +54,10 @@ namespace NutriTEC_API.Controllers
                 return entities.productosDisponibles.ToList();
         }
 
+        /// <summary>
+        /// Actualiza el valor de lista de espera de 
+        /// un producto para ser aceptado en la lista de productos disponibles
+        /// </summary>
         [HttpPut]
         [Route("api/producto/listaEspera")]
         public IHttpActionResult AceptarProducto(listaEspera pr)
@@ -65,6 +84,10 @@ namespace NutriTEC_API.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Actualiza el valor de lista de espera de 
+        /// un producto para ser denegado de la lista de productos disponibles
+        /// </summary>
         [HttpDelete]
         [Route("api/producto/listaEspera/{id}")]
         public IHttpActionResult DenegarProducto(int id)
@@ -86,6 +109,9 @@ namespace NutriTEC_API.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Agrega un nuevo producto a la tabla
+        /// </summary>
         public IHttpActionResult Post(producto pr)
         {
             if (!ModelState.IsValid)
@@ -114,6 +140,10 @@ namespace NutriTEC_API.Controllers
             }
             return Ok();
         }
+
+        /// <summary>
+        /// Actualiza la información de un producto 
+        /// </summary>
         public IHttpActionResult Put(producto pr)
         {
             if (!ModelState.IsValid)
@@ -151,6 +181,10 @@ namespace NutriTEC_API.Controllers
 
             return Ok();
         }
+
+        /// <summary>
+        /// Borra los datos de un producto
+        /// </summary>
         public IHttpActionResult Delete(int id)
         {
             if (id <= 0)

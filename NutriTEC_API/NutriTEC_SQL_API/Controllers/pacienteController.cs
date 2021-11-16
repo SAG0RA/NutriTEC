@@ -10,19 +10,31 @@ namespace NutriTEC_API.Controllers
 {
     public class pacienteController : ApiController
     {
+
+        /// <summary>
+        /// Obtiene todos los datos de 
+        /// todos los pacientes
+        /// </summary>
         public IEnumerable<paciente> Get()
         {
             using (NutriTECEntities entities = new NutriTECEntities())
                 return entities.paciente.ToList();
         }
 
+        /// <summary>
+        /// Obtiene todos los datos de 
+        /// un paciente según su id
+        /// </summary>
         public paciente Get(int id)
         {
             using (NutriTECEntities entities = new NutriTECEntities())
                 return entities.paciente.FirstOrDefault(e => e.id == id);
         }
 
-
+        /// <summary>
+        /// Postea un nuevo paciente 
+        /// recibe el post en JSON
+        /// </summary>
         public IHttpActionResult Post(paciente pc)
         {
             if (!ModelState.IsValid)
@@ -43,6 +55,10 @@ namespace NutriTEC_API.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Actualiza una entrada de 
+        /// paciente
+        /// </summary>
         public IHttpActionResult Put(paciente pc)
         {
             if (!ModelState.IsValid)
@@ -70,6 +86,10 @@ namespace NutriTEC_API.Controllers
 
             return Ok();
         }
+
+        /// <summary>
+        /// Borra una entrada de paciente según su cédula
+        /// </summary>
         public IHttpActionResult Delete(int id)
         {
             if (id < 0)
