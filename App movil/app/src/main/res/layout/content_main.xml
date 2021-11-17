@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Funciones.Login"
+    tools:showIn="@layout/activity_main">
+
+    <TextView
+        android:id="@+id/lblCineTECxD"
+        android:layout_width="372dp"
+        android:layout_height="55dp"
+        android:gravity="center"
+        android:text="Bienvenido a NutriTEC"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="30sp"
+        app:fontFamily="@font/cairo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.039" />
+
+    <TextView
+        android:id="@+id/lblCineTEC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Usuario"
+        android:textColor="@android:color/holo_orange_light"
+        android:textSize="24sp"
+        app:fontFamily="@font/cairo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.382" />
+
+    <EditText
+        android:id="@+id/inputusuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="22dp"
+        android:background="@android:color/holo_orange_dark"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.455" />
+
+    <EditText
+        android:id="@+id/inputcontrasena"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_dark"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.579" />
+
+    <TextView
+        android:id="@+id/lblCineTEC2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contraseña"
+        android:textColor="@android:color/holo_orange_light"
+        android:textSize="24sp"
+        app:fontFamily="@font/cairo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.527" />
+
+    <Button
+        android:id="@+id/btnentrar"
+        android:layout_width="201dp"
+        android:layout_height="59dp"
+        android:text="Entrar"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.523"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.962" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="114dp"
+        android:layout_height="102dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.203"
+        app:srcCompat="@drawable/zanahoria" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

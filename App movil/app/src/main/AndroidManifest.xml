@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.app">
+    
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:usesCleartextTraffic="true"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="NutriTEC"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        <activity
+            android:name=".Funciones.Login"
+            android:label="CineTEC"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity android:name=".Funciones.Menu" />
+        <activity android:name=".Funciones.Consumo" />
+        <activity android:name=".Funciones.Recetas" />
+        <activity android:name=".Funciones.Boletos" />
+        <activity android:name=".Funciones.Factura" />
+
+
+        <activity android:name=".Funciones.Inicio"
+            android:theme="@style/AppTheme.NoActionBar">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>
