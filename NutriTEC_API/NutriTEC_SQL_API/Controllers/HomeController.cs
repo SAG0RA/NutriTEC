@@ -10,7 +10,7 @@ namespace NutriTEC_SQL_API.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "NutriTEC API";
 
             return View();
         }
