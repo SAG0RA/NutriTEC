@@ -21,8 +21,9 @@ namespace NutriTEC_Access
             : base("name=NutriTECEntities")
         {
             Configuration.ProxyCreationEnabled = false;
+
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -36,12 +37,12 @@ namespace NutriTEC_Access
         public virtual DbSet<plan_alimenticio> plan_alimenticio { get; set; }
         public virtual DbSet<producto> producto { get; set; }
         public virtual DbSet<productosXplan> productosXplan { get; set; }
+        public virtual DbSet<productosXreceta> productosXreceta { get; set; }
         public virtual DbSet<Recetas> Recetas { get; set; }
         public virtual DbSet<registro_comida> registro_comida { get; set; }
         public virtual DbSet<registro_peso> registro_peso { get; set; }
         public virtual DbSet<listaEspera> listaEspera { get; set; }
         public virtual DbSet<productosDisponibles> productosDisponibles { get; set; }
-        public virtual DbSet<productosXreceta> productosXreceta { get; set; }
     
         public virtual int USP_CalcularCaloriasDelPlan(string id_plan)
         {
@@ -50,6 +51,19 @@ namespace NutriTEC_Access
                 new ObjectParameter("id_plan", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_CalcularCaloriasDelPlan", id_planParameter);
+        }
+    
+        public virtual int USP_CrearPlanAlimenticio(Nullable<int> nutri_cedula, string nombre_plan)
+        {
+            var nutri_cedulaParameter = nutri_cedula.HasValue ?
+                new ObjectParameter("nutri_cedula", nutri_cedula) :
+                new ObjectParameter("nutri_cedula", typeof(int));
+    
+            var nombre_planParameter = nombre_plan != null ?
+                new ObjectParameter("nombre_plan", nombre_plan) :
+                new ObjectParameter("nombre_plan", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_CrearPlanAlimenticio", nutri_cedulaParameter, nombre_planParameter);
         }
     
         public virtual ObjectResult<USP_GetProductosDelPlan_Result> USP_GetProductosDelPlan(string id_plan)
@@ -91,37 +105,6 @@ namespace NutriTEC_Access
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_pacientesXnutri_Result>("USP_pacientesXnutri", n_cedulaParameter);
         }
     
-        public virtual ObjectResult<USP_ReporteCobro_Result> USP_ReporteCobro()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_ReporteCobro_Result>("USP_ReporteCobro");
-        }
-    
-        public virtual int CrearPlanAlimenticio(Nullable<int> nutri_cedula, string nombre_plan)
-        {
-            var nutri_cedulaParameter = nutri_cedula.HasValue ?
-                new ObjectParameter("nutri_cedula", nutri_cedula) :
-                new ObjectParameter("nutri_cedula", typeof(int));
-    
-            var nombre_planParameter = nombre_plan != null ?
-                new ObjectParameter("nombre_plan", nombre_plan) :
-                new ObjectParameter("nombre_plan", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CrearPlanAlimenticio", nutri_cedulaParameter, nombre_planParameter);
-        }
-    
-        public virtual int USP_CrearPlanAlimenticio(Nullable<int> nutri_cedula, string nombre_plan)
-        {
-            var nutri_cedulaParameter = nutri_cedula.HasValue ?
-                new ObjectParameter("nutri_cedula", nutri_cedula) :
-                new ObjectParameter("nutri_cedula", typeof(int));
-    
-            var nombre_planParameter = nombre_plan != null ?
-                new ObjectParameter("nombre_plan", nombre_plan) :
-                new ObjectParameter("nombre_plan", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_CrearPlanAlimenticio", nutri_cedulaParameter, nombre_planParameter);
-        }
-    
         public virtual ObjectResult<USP_Registro_Peso_Result> USP_Registro_Peso(Nullable<int> cedula_cliente)
         {
             var cedula_clienteParameter = cedula_cliente.HasValue ?
@@ -129,6 +112,11 @@ namespace NutriTEC_Access
                 new ObjectParameter("cedula_cliente", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_Registro_Peso_Result>("USP_Registro_Peso", cedula_clienteParameter);
+        }
+    
+        public virtual ObjectResult<USP_ReporteCobro_Result> USP_ReporteCobro()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_ReporteCobro_Result>("USP_ReporteCobro");
         }
     }
 }

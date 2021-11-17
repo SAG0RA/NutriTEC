@@ -19,10 +19,10 @@ namespace NutriTEC_Access
         {
             this.meta_calorica = new HashSet<meta_calorica>();
             this.paciente = new HashSet<paciente>();
+            this.productosXreceta = new HashSet<productosXreceta>();
             this.Recetas = new HashSet<Recetas>();
             this.registro_peso = new HashSet<registro_peso>();
             this.registro_comida = new HashSet<registro_comida>();
-            this.productosXreceta = new HashSet<productosXreceta>();
         }
     
         public int cedula { get; set; }
@@ -48,12 +48,12 @@ namespace NutriTEC_Access
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<paciente> paciente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<productosXreceta> productosXreceta { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Recetas> Recetas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<registro_peso> registro_peso { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<registro_comida> registro_comida { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<productosXreceta> productosXreceta { get; set; }
     }
 }
